@@ -5,3 +5,6 @@ from django.http import HttpResponse
 
 def principalHub(request):
     return render(request, 'hub.html')
+
+def about(request):
+    return render(request, 'about.html')
