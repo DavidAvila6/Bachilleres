@@ -8,3 +8,6 @@ def principalHub(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def recursos(request):
+    return render(request, 'recursos.html')
