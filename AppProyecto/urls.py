@@ -19,5 +19,6 @@ from mainPage import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.principalHub)
+    path('', views.principalHub),
+    path('about/', views.about)
 ]
