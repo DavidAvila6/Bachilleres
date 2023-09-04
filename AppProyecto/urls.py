@@ -21,5 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.principalHub),
     path('about/', views.about),
-    path('recursos/', views.recursos)
+    path('recursos/', views.recursos),
+    path('descargar/', views.descargar_archivo, name = "descargar")
+    
 ]
