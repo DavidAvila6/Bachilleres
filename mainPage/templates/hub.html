@@ -1,6 +1,56 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>pagina principal</h1>
+<style>
+    /* Estilo para las secciones */
+    body {
+        background: linear-gradient(to bottom, #99f2c8, #1f4037); /* Cambia los colores según tu preferencia */
+        color: #fff; /* Color del texto en el cuerpo */
+    }
+    section {
+        background-color: #093637; /* Color gris claro */
+        padding: 20px; /* Espaciado interno para separar el contenido del fondo */
+        margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
+    }
+</style>
+<div class="container mt-5">
+    <section>
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="display-4">Bienvenido a Nuestra Empresa</h1>
+                <p>Somos una empresa dedicada a brindar apoyo y orientación a bachilleres en su camino educativo y profesional. Nuestra misión es ayudarte a alcanzar tus metas académicas y profesionales.</p>
+                <p>Ofrecemos servicios de tutoría personalizada, acceso a recursos educativos de calidad y asesoramiento experto para ayudarte a tomar decisiones informadas sobre tu futuro.</p>
+                <a href="#" class="btn btn-primary">Descubre nuestros servicios</a>
+            </div>
+            <div class="col-md-6">
+                <img src="https://www.lanacion.com.py/resizer/tCBe6A1ygXy-CQyX7oq0_YPAlUc=/1016x0/smart/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/lanacionpy/6TPIMM2E6RGY7OD3ZBODGM5VI4.jpg" alt="Imagen de bienvenida" class="img-fluid rounded float-right">
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <h2>Nuestros Servicios</h2>
+        <p>En Nuestra Empresa, te ofrecemos una variedad de servicios diseñados para ayudarte en tu viaje educativo y profesional. Algunos de nuestros servicios incluyen:</p>
+        <ul>
+            <li>Asesoramiento académico personalizado</li>
+            <li>Tutoría en materias específicas</li>
+            <li>Acceso a recursos educativos en línea</li>
+            <li>Orientación profesional y consejos de carrera</li>
+            <li>Apoyo financiero</li>
+        </ul>
+        <p>Estamos comprometidos a apoyarte en cada paso del camino y a ayudarte a alcanzar tus objetivos académicos y profesionales.</p>
+    </section>
+
+    <section>
+        <h2>Contáctanos</h2>
+        <p>¿Tienes preguntas o deseas obtener más información sobre nuestros servicios? No dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte.</p>
+        <p>Puedes contactarnos a través del siguiente correo electrónico: <a href="mailto:info@bachilleresempresa.com">info@nuestraempresa.com</a>.</p>
+    </section>
+</div>
+
+
+
+
+
 {% endblock %}
 
