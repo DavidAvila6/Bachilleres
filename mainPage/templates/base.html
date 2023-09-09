@@ -1,0 +1,80 @@
+<!doctype html>
+<style>
+  /* Estilo para las secciones */
+  body {
+      background: linear-gradient(to bottom, #99f2c8, #1f4037); /* Cambia los colores según tu preferencia */
+      color: #fff; /* Color del texto en el cuerpo */
+  }
+  section {
+      background-color: #093637; /* Color gris claro */
+      padding: 20px; /* Espaciado interno para separar el contenido del fondo */
+      margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
+  }
+</style>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>INGENIERIA DE SOFTWARE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="containerNavBar">
+        <nav class="navbar navbar-expand-lg bg-success p-3 bg-gradient navbar-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">BACHILLERES</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-link" href="/about">¿Quienes Somos?</a>
+                  <a class="nav-link" href="#">Novedades</a>
+                  <a class="nav-link" href="/recursos">Recursos</a>
+                  <a class="nav-link" href="#">Contactanos</a>                          
+                </div>
+              </div>
+            </div>
+          </nav>
+    </div>
+    <div>
+        {% block content %}
+        {% endblock %}
+
+        
+        
+    </div> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+  <footer >
+    <div class="container-fluid">
+
+      <div class="row p-5 pb-2 bg-dark text-white">
+
+        <div class="col-xs-12 col-md-6 col-lg-3">
+          <p class="h3">BACHILLERES</p>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-3">
+          <p class="h5">Contacto</p>
+          <div>
+            <div><a  class="text-secondary text-decoration-none" href="https://www.instagram.com/el_flow_quelos_educa/">instagram</a></div>
+            <div><a  class="text-secondary text-decoration-none" href="https://www.instagram.com/el_flow_quelos_educa/">LinkedIn</a></div>
+          </div>    
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-3">
+          <p class="h5">Links</p>
+          <div><a class="text-secondary text-decoration-none" href="">Terms & conditions</a></div>
+          <div><a class="text-secondary text-decoration-none" href="">Privacy Policy</a></div>      
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-3">
+          <p class="h5"></p>
+          <a href=""></a>
+        </div>
+        <div class="col-xs-12 pt-4 ">
+          <p class="text-white text-center">Copyrigth-All rigths reserved© 2023 - USA</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</html>
+
