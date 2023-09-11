@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 import mimetypes
 import os
+
+
 
 # Create your views here.
 
@@ -20,6 +22,9 @@ def download(request):
     response['Content-Disposition'] = 'attachment; filename="recursos.pdf"'
 
     return response
+
+def novedades(request):
+    return render(request, 'novedades.html')
 
 def descargar_archivo(request): 
  
