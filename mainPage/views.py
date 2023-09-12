@@ -13,6 +13,8 @@ def about(request):
 
 def recursos(request):
     return render(request, 'recursos.html')
+def novedades(request):
+    return render(request, 'novedades.html')
 
 def faq(request):
     return render(request, 'faq.html')
