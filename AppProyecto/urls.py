@@ -24,6 +24,7 @@ urlpatterns = [
     path('recursos/', views.recursos),
     path('novedades/', views.novedades),
     path('faq/', views.faq),
+    path('Secciones/', views.Secciones ),
     
     path('descargar/', views.descargar_archivo, name = "descargar")
     
