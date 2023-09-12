@@ -14,6 +14,9 @@ def about(request):
 def recursos(request):
     return render(request, 'recursos.html')
 
+def faq(request):
+    return render(request, 'faq.html')
+
 
 
 
