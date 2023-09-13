@@ -1,4 +1,128 @@
+{%load static%}
 <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bachilleres</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link type="text/css" href="{% static "css/base.css" %}" rel="stylesheet">
+  </head>
+  
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary pt-4">
+            <div class="container-fluid ms-5">
+                <a class="navbar-brand" href="#">Bachilleres</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item pe-4">
+                            <a class="nav-link active" aria-current="page" href="quienes.html">¿Quienes Somos</a>
+                        </li>
+                        <li class="nav-item pe-4">
+                            <a class="nav-link" href="#">Novedades</a>
+                        </li>
+                        <li class="nav-item pe-4">
+                            <a class="nav-link" href="#">Recursos</a>
+                        </li>
+                        <li class="nav-item pe-4">
+                            <a class="nav-link disabled" aria-disabled="true">Contactanos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="imgbienbenidos row justify-content-center">
+            
+            <div class="col-md-8 ">
+                <div class="position-relative">
+                    <img src="{% static 'img/grad2.jpg' %}" class="img-fluid  my-4" alt="..." id="ImgBienvenida">
+                    <h1 class="position-absolute top-50 end-0 translate-middle-y"> Bienvenidos a nuestra empresa </h1>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="Servicios row mt-5 pt-5 justify-content-center text-center">
+            <div class="col-8">
+                <h3>Nuestros Servicios</h3>
+                <p class="">
+                    En Nuestra Empresa, te ofrecemos una variedad de servicios diseñados para ayudarte en tu viaje
+                    educativo y profesional.
+                    <br> Algunos de nuestros servicios incluyen:
+                </p>
+                <div class="lista">
+                    <ul>
+                        <li>Asesoramiento académico personalizado</li>
+                        <li>Tutoría en materias específicas</li>
+                        <li>Acceso a recursos educativos en línea</li>
+                        <li>Orientación profesional y consejos de carrera</li>
+                        <li>Apoyo financiero</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="imgservicios col-8">
+                <img src="{% static 'img/junta.jpg' %}" class=" mx-auto d-block" alt="..." id="ImgNuestroservicos">
+            </div>
+
+        </div>
+
+        </div>
+        <div class="Contactanos row g-0 my-5 justify-content-center">
+            <div class="texto_contacto col-md-4 text-center my-auto">
+                <h5>Registrate</h5>
+            </div>
+            <div class="FormRegistro col-md-4">
+                <form>
+                    <div class="FormLabels my-3">
+                        <label for="FormNombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="FormNombre" placeholder="Nombre">
+                    </div>
+                    <div class="FormLabels my-3">
+                        <label for="FormApellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="FormApellido" placeholder="Apellido">
+                    </div>
+                    <div class="FormLabels my-3">
+                        <label for="FormCiudad" class="form-label">Ciudad</label>
+                        <input type="text" class="form-control" id="FormCiudad" placeholder="Ciudad">
+                    </div>
+                    <div class="FormLabels my-3">
+                        <label for="formemail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="formemail" placeholder="name@example.com">
+                    </div>
+                    <button type="button" class="btn btn-success my-3">Enviar</button>
+            </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="row g-0 text-center py-1">
+        <h1>Bachilleres</h1>
+        <div class="FooterIconos col">
+            <a href="http:google.com"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+
+<!--
+
 <style>
   /* Estilo para las secciones */
   body {
@@ -10,14 +134,12 @@
       padding: 20px; /* Espaciado interno para separar el contenido del fondo */
       margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
   }
-</style>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>INGENIERIA DE SOFTWARE</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  </head>
+  </style>
+
+-->
+
+<!--
+
   <body>
     <div class="containerNavBar">
         <nav class="navbar navbar-expand-lg bg-success p-3 bg-gradient navbar-dark">
@@ -79,5 +201,5 @@
       </div>
     </div>
   </footer>
-</html>
 
+-->
