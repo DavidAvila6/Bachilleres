@@ -22,6 +22,10 @@ urlpatterns = [
     path('', views.principalHub),
     path('about/', views.about),
     path('recursos/', views.recursos),
+    path('novedades/', views.novedades),
+    path('faq/', views.faq),
+    
     path('descargar/', views.descargar_archivo, name = "descargar")
+    
     
 ]
