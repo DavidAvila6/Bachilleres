@@ -14,13 +14,14 @@ def about(request):
 
 def recursos(request):
     return render(request, 'recursos.html')
+def novedades(request):
+    return render(request, 'novedades.html')
 
-def download(request):
-    pdf = open('recursos.pdf', 'rb')
-    response = HttpResponse(pdf, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="recursos.pdf"'
+def faq(request):
+    return render(request, 'faq.html')
 
-    return response
+
+
 
 def descargar_archivo(request): 
  
@@ -39,4 +40,6 @@ def descargar_archivo(request):
     response['Content-Disposition'] = f"attachment; filename={filename}"
  
     return response
+
+
 

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    /* Estilo para las secciones */
+    body {
+        background: linear-gradient(to bottom, #6D6656, #E4DBC5 ); /* Cambia los colores según tu preferencia */
+        color: #fff; /* Color del texto en el cuerpo */
+    }
+    section {
+        background-color: #46443F ; /* Color gris claro */
+        padding: 20px; /* Espaciado interno para separar el contenido del fondo */
+        margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
+    }
+</style>
+
+<div class="container mt-5">
+    <section >
+        <h2 class="mb-4">Preguntas Frecuentes (FAQ)</h2>
+<!---------------------Busqueda de preguntas-------------------------------------------->
+        <input type="text" id="searchInput" placeholder="Buscar preguntas...">
+        <button onclick="searchFAQ()">Buscar</button>
+        <button onclick="resetPage()">Reiniciar</button>
+
+        <div id="searchResults"></div>
+        <div class="accordion" id="faqAccordion" >
+            <br>
+<!---------------------FAQ1-------------------------------------------->
+            <div class="accordion-item" >
+                <h3 class="accordion-header" id="faqHeading1" >
+                    <button class="accordion-button" type="button" 
+                    style="background-color:#6D6656; color: white; font-size: 18px; font-weight: bold;" 
+                    data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" 
+                    aria-controls="faqCollapse1" >
+                        Pregunta N°1: ¿Cuáles son los servicios que ofrecen? 
+                    </button>
+                </h3>
+                <div id="faqCollapse1" style="background-color: #646158 ; color: white;"
+                 class="accordion-collapse collapse " 
+                 aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Ofrecemos una variedad de servicios, que incluyen tutoría personalizada, asesoramiento académico y profesional, acceso a recursos educativos y más. Nuestro objetivo es apoyarte en tu camino educativo y profesional.
+                    </div>
+                </div>
+            </div>
+<!---------------------FAQ2-------------------------------------------->
+            <div class="accordion-item" >
+                <h3 class="accordion-header" id="faqHeading3" >
+                    <button class="accordion-button collapsed" 
+                    style="background-color: #646158 ; color: white; font-size: 18px; font-weight: bold;" 
+                    type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                    Pregunta N°2:  ¿Cómo puedo registrarme para obtener sus servicios?
+                    </button>
+                </h3>
+                <div id="faqCollapse3" style="background-color: #6D6656; color: white;" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                          El proceso de registro es simple. Visita nuestra página de registro en línea y completa el formulario con tus datos. Una vez registrado, un miembro de nuestro equipo se pondrá en contacto contigo para iniciar el proceso.
+                    </div>
+                </div>
+            </div>
+<!---------------------FAQ3-------------------------------------------->
+            <div class="accordion-item" >
+                <h3 class="accordion-header" id="faqHeading4" color=white>
+                    <button class="accordion-button" type="button" 
+                    style="background-color:#6D6656; color: white; font-size: 18px; font-weight: bold;" 
+                    data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="true" 
+                    aria-controls="faqCollapse4" >
+                    Pregunta N°3: ¿Cuáles son los beneficios de la tutoría personalizada?
+                    </button>
+                </h3>
+                <div id="faqCollapse4" style="background-color: #646158 ; color: white;" 
+                class="accordion-collapse collapse " aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        La tutoría personalizada te brinda atención individualizada y 
+                        un enfoque adaptado a tus necesidades específicas. 
+                        Esto significa que puedes obtener ayuda en áreas en las que tengas dificultades y avanzar a tu propio ritmo. 
+                        Nuestros tutores están altamente calificados para ofrecerte orientación 
+                        y apoyo personalizado en tu camino académico.
+                    </div>
+                </div>
+            </div>
+<!---------------------FAQ4-------------------------------------------->
+            <div class="accordion-item" >
+                <h3 class="accordion-header" id="faqHeading5" >
+                    <button class="accordion-button collapsed" 
+                    style="background-color: #646158 ; color: white; font-size: 18px; font-weight: bold;" 
+                    type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
+                    Pregunta N°4: ¿Cómo puedo acceder a los recursos educativos?
+                    </button>
+                </h3>
+                <div id="faqCollapse5" style="background-color: #6D6656; color: white;" 
+                class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Los recursos educativos están disponibles para todos nuestros estudiantes registrados. 
+                        Después de registrarte en nuestra plataforma, 
+                        tendrás acceso a una variedad de materiales educativos, 
+                        que incluyen documentos, videos, tutoriales y más. Puedes encontrar estos recursos en tu área de usuario.
+                    </div>
+                </div>
+            </div>
+<!---------------------FAQ5-------------------------------------------->
+            <div class="accordion-item" s>
+                <h3 class="accordion-header" id="faqHeading1" color=white>
+                    <button class="accordion-button" type="button" 
+                    style="background-color:#6D6656; color: white; font-size: 18px; font-weight: bold;" 
+                    data-bs-toggle="collapse" data-bs-target="#faqCollapse6" aria-expanded="true" 
+                    aria-controls="faqCollapse6" >
+                    Pregunta N°5: ¿Ofrecen servicios de asesoramiento profesional?
+                    </button>
+                </h3>
+                <div id="faqCollapse6" style="background-color: #646158 ; color: white;" 
+                class="accordion-collapse collapse " aria-labelledby="faqHeading6" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Sí, 
+                        ofrecemos servicios de asesoramiento profesional para ayudarte a tomar decisiones 
+                        informadas sobre tu futuro profesional. Nuestros asesores te guiarán en la elección de carreras, 
+                        la búsqueda de empleo y la planificación de tu desarrollo profesional.
+                    </div>
+                </div>
+            </div>
+<!---------------------FAQ6-------------------------------------------->
+            <div class="accordion-item" >
+                <h3 class="accordion-header" id="faqHeading2" >
+                    <button class="accordion-button collapsed" 
+                    style="background-color: #646158 ; color: white; font-size: 18px; font-weight: bold;" 
+                    type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                    Pregunta N°6: ¿Cuáles son las opciones de pago disponibles?
+                    </button>
+                </h3>
+                <div id="faqCollapse2" style="background-color: #6D6656; color: white;" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Ofrecemos diversas opciones de pago para adaptarnos a tus necesidades. 
+                        Puedes pagar por nuestros servicios de forma mensual, trimestral o anual. 
+                        Aceptamos pagos con tarjeta de crédito, transferencia bancaria y otros métodos de pago seguros.
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</div>
+<br>
+
+{% endblock %}
