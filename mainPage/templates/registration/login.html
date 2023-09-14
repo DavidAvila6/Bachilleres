@@ -22,9 +22,10 @@
                         <form action="" method="post">
                             
                             {% csrf_token %}
-                            {{ form }}
+                            {{ form.as_p }}
                             <a href="">ir al home</a>
-                            <input type="submit" value="Ingresar" class="btn btn-success">
+                            
+                            <input type="submit" value="Ingresar" class="btn btn-success float-right">
 
                         </form>
                     </div>
