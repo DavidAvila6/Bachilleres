@@ -2,20 +2,28 @@
 
 {% block content %}
 <style>
-    /* styles.css */
 
     body {
         margin: 0;
         padding: 0;
-        font-family: Arial, sans-serif; /* Cambia la fuente según tus preferencias */
+        font-family: Arial, sans-serif;
     }
     
-    .navbar {
-        width: 250px;
-        background-color: #333; /* Cambia el color de fondo según tu preferencia */
-        color: #fff; /* Cambia el color del texto según tu preferencia */
+    .top-navbar {
+        background-color: #333;
+        color: #fff;
+        /* Añade estilos adicionales para el navbar superior según tus preferencias */
+    }
+    
+    .right-navbar {
+        width: 250px; /* Ancho del navbar lateral derecho */
+        background-color: #333;
+        color: #fff;
         position: fixed;
+        top: 80px; /* Desplazado 200px desde la parte superior */
+        left: 0; /* Alineado a la izquierda */
         height: 100%;
+        /* Añade estilos adicionales para el navbar lateral derecho según tus preferencias */
     }
     
     .navbar-list {
@@ -34,21 +42,91 @@
     }
     
     .content {
-        margin-left: 250px; /* Ancho del navbar lateral */
+        margin-left: 250px; /* Ancho del navbar lateral derecho */
         padding: 20px;
+        /* Añade estilos adicionales para el área de contenido según tus preferencias */
     }
     
-    /* Añade estilos adicionales según tus preferencias */
     
 </style>
 
-    <nav class="navbar">
-        <ul class="navbar-list">
-            <li class="navbar-item"><a href="#">Botón 1</a></li>
-            <li class="navbar-item"><a href="#">Botón 2</a></li>
-            <li class="navbar-item"><a href="#">Botón 3</a></li>
-        </ul>
-    </nav>
-        <h1>Bienvenido al contenido central</h1>
+<nav class="right-navbar">
+    <ul class="navbar-list">
+        <li class="navbar-item"><a href="#mate">Matematicas</a></li>
+        <li class="navbar-item"><a href="#ciencias">Ciencias2</a></li>
+        <li class="navbar-item"><a href="#otro">Otro 1</a></li>
+        <li class="navbar-item"><a href="#otro2">Otro 2</a></li>
+        <li class="navbar-item"><a href="#otro3">Otro 3</a></li>
+    </ul>
+</nav>
+<main class="content">
+    <!-- Contenido de tu página va aquí ---------------------------------->
+    <section id="mate">
+    <h1>Matematicas</h1>
+    DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
+    The Dual Degrees at IE University offer students 
+    the opportunity to graduate with two bachelor’s 
+    degrees by completing an additional year of academic studies. 
+    These prestigious programs are a great option for students 
+    who want to focus their careers in two distinct yet connected fields of study. 
+    By combining two diverse subject areas, our Dual Degree students develop a 
+    multidisciplinary profile, enabling them to play important roles in solving 
+    complex global issues where boundaries between disciplines continue to disappear.
+    </section>
+    <!-- Contenido de tu página va aquí ---------------------------------->
+    <section id="ciencias">
+    <h1>Ciencias</h1>
+    DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
+    The Dual Degrees at IE University offer students 
+    the opportunity to graduate with two bachelor’s 
+    degrees by completing an additional year of academic studies. 
+    These prestigious programs are a great option for students 
+    who want to focus their careers in two distinct yet connected fields of study. 
+    By combining two diverse subject areas, our Dual Degree students develop a 
+    multidisciplinary profile, enabling them to play important roles in solving 
+    complex global issues where boundaries between disciplines continue to disappear.
+    </section>
+    <!-- Contenido de tu página va aquí ---------------------------------->
+    <section id="otro">
+    <h1>Otro1</h1>
+    DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
+    The Dual Degrees at IE University offer students 
+    the opportunity to graduate with two bachelor’s 
+    degrees by completing an additional year of academic studies. 
+    These prestigious programs are a great option for students 
+    who want to focus their careers in two distinct yet connected fields of study. 
+    By combining two diverse subject areas, our Dual Degree students develop a 
+    multidisciplinary profile, enabling them to play important roles in solving 
+    complex global issues where boundaries between disciplines continue to disappear.
+    </section>
+    <!-- Contenido de tu página va aquí ---------------------------------->
+    <section id="otro2">
+        <h1>Otro2</h1>
+        DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
+        The Dual Degrees at IE University offer students 
+        the opportunity to graduate with two bachelor’s 
+        degrees by completing an additional year of academic studies. 
+        These prestigious programs are a great option for students 
+        who want to focus their careers in two distinct yet connected fields of study. 
+        By combining two diverse subject areas, our Dual Degree students develop a 
+        multidisciplinary profile, enabling them to play important roles in solving 
+        complex global issues where boundaries between disciplines continue to disappear.
+    </section>
+    <!-- Contenido de tu página va aquí ---------------------------------->
+    <section id="otro3">
+            <h1>Otro3</h1>
+            DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
+            The Dual Degrees at IE University offer students 
+            the opportunity to graduate with two bachelor’s 
+            degrees by completing an additional year of academic studies. 
+            These prestigious programs are a great option for students 
+            who want to focus their careers in two distinct yet connected fields of study. 
+            By combining two diverse subject areas, our Dual Degree students develop a 
+            multidisciplinary profile, enabling them to play important roles in solving 
+            complex global issues where boundaries between disciplines continue to disappear.
+    </section>
+            <!-- Contenido de tu página va aquí ---------------------------------->
+
+</main>
 <br>
 {% endblock %}

@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+body{
+    font-family: oswal;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Source Serif";
+}
+#ImgBienvenida {
+  width: 40vmax;
+  height: 700px;
+}
+
+.imgbienbenidos h1{
+  background-color:#243328 ;
+  color: white;
+  margin-right: 8vmax;
+  padding:10vmax 2vmax;
+  font-size: 2.5rem;}
+.Servicios {
+  background-color: #ebeadf;
+}
+.Servicios h3{
+    font-size: 3rem;
+}
+.Servicios p{
+    font-size: 1rem
+}
+.lista{
+    text-align: center;
+}
+.Servicios ul{
+    text-align: left;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.imgservicios img{
+  max-width: 100%;
+}
+.Contactanos h5{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+footer{
+    background-color: #ebeadf;
+    font-size: 3rem;
+}
+footer h1{
+    font-family: "Source Serif";
+}
+footer a{
+    color: black;
+}

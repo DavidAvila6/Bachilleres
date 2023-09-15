@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+*{
+    font-family: oswal;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Source Serif";
+}
+
+.Acerca{
+    color: white;
+    background-color: #243328; 
+}
+.Acerca p{
+    font-size: 1.1rem;
+    align-items: flex-end;
+}
+.Acerca h2{
+    font-size: 3rem;
+}
+.Acerca img{
+    max-width: fit-content;
+}
+.Principios h5{
+    font-size: 2rem;
+    min-height: 2vmax;
+}
+.Asesores{
+    background-color: #ebeadf ;
+}
+.Asesores h3{
+    font-size: 1.5rem;
+}
+.Asesores p{
+    font-size: 1rem;
+}
+.Asesores img{
+    max-width:80%;
+}
+.spanp{
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+footer{
+    background-color: #ebeadf;
+    font-size: 3vmax;
+}
+footer h1{
+    font-family: "Source Serif";
+}
+footer a{
+    color: black;
+}
