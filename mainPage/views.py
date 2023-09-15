@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import mimetypes
 import os
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -43,4 +44,6 @@ def descargar_archivo(request):
     response['Content-Disposition'] = f"attachment; filename={filename}"
  
     return response
+
+
 
