@@ -19,7 +19,6 @@ from django.urls import path, include
 from mainPage import views
 from AppProyecto.settings import BASE_DIR
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.principalHub),
