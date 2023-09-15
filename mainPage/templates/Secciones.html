@@ -2,34 +2,53 @@
 
 {% block content %}
 <style>
-    /* Estilo para las secciones */
+    /* styles.css */
+
     body {
-        background: linear-gradient(to bottom, #99f2c8, #1f4037); /* Cambia los colores según tu preferencia */
-        color: #fff; /* Color del texto en el cuerpo */
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif; /* Cambia la fuente según tus preferencias */
     }
-    section {
-        background-color: #093637; /* Color gris claro */
-        padding: 20px; /* Espaciado interno para separar el contenido del fondo */
-        margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
+    
+    .navbar {
+        width: 250px;
+        background-color: #333; /* Cambia el color de fondo según tu preferencia */
+        color: #fff; /* Cambia el color del texto según tu preferencia */
+        position: fixed;
+        height: 100%;
     }
+    
+    .navbar-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .navbar-item {
+        padding: 10px;
+    }
+    
+    .navbar-item a {
+        text-decoration: none;
+        color: #fff;
+        display: block;
+    }
+    
+    .content {
+        margin-left: 250px; /* Ancho del navbar lateral */
+        padding: 20px;
+    }
+    
+    /* Añade estilos adicionales según tus preferencias */
+    
 </style>
 
-<div class="container mt-5">
-    <section>
-        <h1 class="display-4"> Secciones </h1>
-        <p>Bienvenido a nuestro apartado de secciones donde podras encontrar informacion acerca del ambito laboral al cual puedes acceder!</p>
-        <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Objetivos</h2>
-                <p>El principal obejtivo del apartado es que nuestros usuarios se interesen por su mundo laboral conociendo las nuevas oportunidades del mundo laboral:</p>
-                <ul>
-            </div>
-       
-    </section>
-
-    
-
-</div>
+    <nav class="navbar">
+        <ul class="navbar-list">
+            <li class="navbar-item"><a href="#">Botón 1</a></li>
+            <li class="navbar-item"><a href="#">Botón 2</a></li>
+            <li class="navbar-item"><a href="#">Botón 3</a></li>
+        </ul>
+    </nav>
+        <h1>Bienvenido al contenido central</h1>
 <br>
 {% endblock %}
