@@ -1,63 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>bachilleres</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link type="text/css" href="../static/css/base.css"  rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link type="text/css" href="../static/css/base.css" rel="stylesheet" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary pt-4">
       <div class="container-fluid ms-5">
-          <a class="navbar-brand" href="/">Bachilleres</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse " id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                  <li class="nav-item pe-4">
-                      <a class="nav-link active" aria-current="page" href="/about">¿Quienes Somos</a>
-                  </li>
-                  <li class="nav-item pe-4">
-                      <a class="nav-link" href="/novedades">Novedades</a>
-                  </li>
-                  <li class="nav-item pe-4">
-                      <a class="nav-link" href="/recursos">Recursos</a>
-                  </li>
-                  <li class="nav-item pe-4">
-                    <a class="nav-link" href="/section">Secciones</a>
-                </li>
-                  <li class="nav-item pe-4">
-                    <a class="nav-link" href="/faq">FAQ</a>
-                </li>
-              </ul>
-          </div>
-      </div>
-  </nav>
-    <div>
-        {% block content %}
-        {% endblock %}
-
-        
-        
-      </div> 
-      <script src="../static/js/faqs.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  </body>
-
-    <footer class="row g-0 text-center py-1">
-        <h1>Bachilleres</h1>
-        <div class="FooterIconos col">
-            <a href="http:google.com"><i class="bi bi-instagram"></i></a>
-            <a href="#"><i class="bi bi-linkedin"></i></a>
+        <a class="navbar-brand" href="/">Bachilleres</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item pe-4">
+              <a class="nav-link active" aria-current="page" href="/about"
+                >¿Quienes Somos
+              </a>
+            </li>
+            <li class="nav-item pe-4">
+              <a class="nav-link" href="/novedades">Novedades</a>
+            </li>
+            <li class="nav-item pe-4">
+              <a class="nav-link" href="/recursos">Recursos</a>
+            </li>
+            <li class="nav-item pe-4">
+              <a class="nav-link" href="/section">Secciones</a>
+            </li>
+            <li class="nav-item pe-4">
+              <a class="nav-link" href="/faq">FAQ</a>
+            </li>
+          </ul>
         </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
+      </div>
+    </nav>
+    <div>{% block content %} {% endblock %}</div>
+  </body>
+  <footer class="row g-0 text-center py-1 mt-5 ">
+    <h1>Bachilleres</h1>
+    <div class="FooterIconos col ">
+      <a href="http:google.com"><i class="bi bi-instagram"></i></a>
+      <a href="#"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </html>
