@@ -1,0 +1,140 @@
+{% extends 'base.html' %} {% block content %} {%load static%}
+
+<head>
+  <link href="../css/section.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="SeccionTexto row g-0 justify-content-center">
+    <h2 class="col-8">Secciones de interes</h2>
+    <p class="col-8">
+      Aca podras ver toda la informacion que tenemos disponible para ti
+      dependiendo tu area de interes
+    </p>
+  </div>
+
+  <div class="MedicinaGeneral row g-0 justify-content-center my-5">
+    <h3 class="text-center py-3">
+      Beca de la Universidad de La Sabana la excelencia
+    </h3>
+    <div class="foto col-3">aca foto de la sabana</div>
+
+    <div class="accordion accordion-flush col-4" id="accordionFlushExample">
+      <p class="pb-4">
+        La Universidad de La Sabana impulsa este programa para captar aquellos
+        estudiantes que se destacaron en los estudios de bachillerato,
+        ofreciendo la beca para los dos estudiantes destacados en el primer
+        semestre del curso de Medicina.
+      </p>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne"
+            aria-expanded="false"
+            aria-controls="flush-collapseOne"
+          >
+            Requisitos
+          </button>
+        </h2>
+        <div
+          id="flush-collapseOne"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionFlushExample"
+        >
+          <div class="accordion-body">
+            <ul>
+              <li>El solicitante debe ser recomendado por el colegio.</li>
+              <li>ser de nuevo ingreso al programa</li>
+              <li>Buenos resultados en el proceso de ingreso</li>
+              <li>Alto nivel académico durante la etapa de bachillerato</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseTwo"
+            aria-expanded="false"
+            aria-controls="flush-collapseTwo"
+          >
+            Valor y duracion de la beca
+          </button>
+        </h2>
+        <div
+          id="flush-collapseTwo"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionFlushExample"
+        >
+          <div class="accordion-body">
+            <p>
+              El programa de beca de Medicina ofrece dos cupos, uno que cubre la
+              totalidad de la matrícula y otro en 70 % y se otorgan
+              semestralmente. Así mismo, los beneficiarios de la beca quedarán
+              libres del pago de derechos de grado como beneficio al final del
+              programa.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseThree"
+            aria-expanded="false"
+            aria-controls="flush-collapseThree"
+          >
+            Como Aplicar
+          </button>
+        </h2>
+        <div
+          id="flush-collapseThree"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionFlushExample"
+        >
+          <div class="accordion-body">
+            Para aplicar debes estar inscrito en el programa de educación
+            superior de la facultad de Medicina y cumplir los requisitos.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseThree"
+            aria-expanded="false"
+            aria-controls="flush-collapseThree"
+          >
+            Que documentos necesitas
+          </button>
+        </h2>
+        <div
+          id="flush-collapseThree"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionFlushExample"
+        >
+          <div class="accordion-body">
+            <ul>
+              <li>Carta de postulacion del colegio</li>
+              <li>Carta de admonistracion del programa</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

@@ -17,8 +17,13 @@ def recursos(request):
 def novedades(request):
     return render(request, 'novedades.html')
 
+def section(request):
+    return render(request, 'section.html')
+
 def faq(request):
     return render(request, 'faq.html')
+
+
 
 
 
