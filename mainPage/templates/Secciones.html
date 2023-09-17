@@ -1,52 +1,136 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<style>
 
+    <style>
+    /* Estilo para las secciones */
     body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #6D6656, #E4DBC5 ); /* Cambia los colores según tu preferencia */
+        color: #fff; /* Color del texto en el cuerpo */
     }
-    
-    .top-navbar {
-        background-color: #333;
-        color: #fff;
-        /* Añade estilos adicionales para el navbar superior según tus preferencias */
+    section {
+        background-color: #46443F ; /* Color gris claro */
+        padding: 20px; /* Espaciado interno para separar el contenido del fondo */
+        margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
     }
+</style>
+<div class="container mt-5">
+    <section>
+        <h1 class="display-4"> Secciones </h1>
+        <section class="section-description">
+            <h2 class="section-title">Vida Educativa y Laboral</h2>
+            <p>
+                La sección de "Vida Educativa y Laboral" es un espacio dedicado a explorar la intersección entre la formación académica y el mundo laboral. En nuestra institución, comprendemos que la educación es un puente esencial hacia el éxito profesional y personal. Esta sección se erige como un faro de orientación para estudiantes y profesionales que desean navegar el complejo y emocionante viaje de la educación superior y su impacto en la carrera laboral.
+            </p>
+            <p>
+                Aquí, encontrarás reflexiones profundas sobre cómo las elecciones educativas pueden influir en tus oportunidades laborales y cómo las experiencias laborales pueden enriquecer tu desarrollo académico. Exploraremos las tendencias actuales en la educación superior, desde programas de doble titulación hasta modalidades de aprendizaje en línea, y discutiremos cómo estas opciones pueden impulsar tu crecimiento y competencias.
+            </p>
+            <p>
+                Además, examinaremos estrategias para la planificación de la carrera, consejos para el desarrollo profesional y testimonios de individuos que han forjado caminos exitosos mediante la sinergia entre su formación académica y sus logros laborales. Esta sección está diseñada para empoderarte con conocimiento y perspicacia, ayudándote a tomar decisiones informadas para tu futuro educativo y profesional.
+            </p>
+            <p>
+                Te invitamos a explorar, aprender y compartir tus propias historias y perspectivas. La educación y la carrera son viajes personales y únicos, y aquí encontrarás la inspiración y el apoyo que necesitas para alcanzar tus metas y aspiraciones.
+            </p>
+        </section>
+        
+        <h2 class="display-5"> Apartado Laboral </h2>
+                <h2 class="section-title">Transición a la Vida Laboral</h2>
+                    <p>
+                        La sección "Transición a la Vida Laboral" es el puente entre tu educación y tu carrera profesional. Comprender cómo aplicar tus conocimientos y habilidades adquiridos durante tu formación académica es esencial para una transición exitosa al mundo laboral.
+                    </p>
+                    <p>
+                        Aquí, te proporcionamos recursos valiosos y consejos prácticos sobre cómo dar tus primeros pasos en el ámbito laboral. Desde la elaboración de un currículum efectivo hasta la preparación de entrevistas de trabajo, te ayudamos a perfeccionar las habilidades necesarias para destacar en el mercado laboral actual.
+                    </p>
+                    <p>
+                        Además, exploramos las oportunidades de prácticas profesionales y pasantías que te permiten aplicar tus conocimientos en un entorno real y establecer conexiones profesionales valiosas. También analizamos tendencias laborales, consejos para el crecimiento profesional y la importancia de la adaptabilidad en una carrera en constante evolución.
+                    </p>
+                    <p>
+                        Nuestra misión es apoyarte en la transición educativa a laboral, brindándote las herramientas y la orientación necesarias para avanzar hacia una carrera satisfactoria y significativa. La sección "Transición a la Vida Laboral" es tu recurso confiable para navegar este emocionante nuevo capítulo en tu vida.
+                    </p>
+        
+       
+    </section>
+
     
+
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rightNavbar = document.querySelector('.right-navbar');
+
+        // Agregar evento hover
+        rightNavbar.addEventListener('mouseenter', function() {
+            // Cambiar la anchura del menú en hover
+            this.style.width = '250px'; // O el ancho deseado en hover
+        });
+
+        // Agregar evento de salida del hover
+        rightNavbar.addEventListener('mouseleave', function() {
+            // Cambiar la anchura del menú cuando se sale del hover
+            this.style.width = '50px'; // Anchura mínima cuando no está en hover
+        });
+    });
+</script>
+
+<style>
+    /* Estilos para el menú lateral */
     .right-navbar {
-        width: 250px; /* Ancho del navbar lateral derecho */
+        width: 250px;
         background-color: #333;
         color: #fff;
         position: fixed;
-        top: 80px; /* Desplazado 200px desde la parte superior */
-        left: 0; /* Alineado a la izquierda */
+        top: 80px;
+        left: 0;
         height: 100%;
-        /* Añade estilos adicionales para el navbar lateral derecho según tus preferencias */
+        overflow-y: auto; /* Agregamos desplazamiento vertical */
+        transition: width 0.3s; /* Transición suave para el ancho */
     }
-    
+
     .navbar-list {
         list-style: none;
         padding: 0;
     }
-    
+
     .navbar-item {
         padding: 10px;
+        transition: background-color 0.3s; /* Transición suave para el fondo */
     }
-    
+
     .navbar-item a {
         text-decoration: none;
         color: #fff;
         display: block;
+        padding: 10px 20px; /* Espaciado en el enlace */
     }
+
+    /* Estilo para el enlace activo */
+    .navbar-item.active {
+        background-color: #555;
+    }
+
+    /* Estilos para el hover */
+    .navbar-item:hover {
+        background-color: #555;
+    }
+
+    /* Estilos para el título del menú */
+    .navbar-title {
+        font-size: 18px;
+        padding: 15px 20px;
+    }
+
+    /* Añadir sombra al menú */
+    .right-navbar {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     
+    }
     .content {
         margin-left: 250px; /* Ancho del navbar lateral derecho */
         padding: 20px;
         /* Añade estilos adicionales para el área de contenido según tus preferencias */
     }
-    
     
 </style>
 
@@ -60,73 +144,41 @@
     </ul>
 </nav>
 <main class="content">
-    <!-- Contenido de tu página va aquí ---------------------------------->
     <section id="mate">
-    <h1>Matematicas</h1>
-    DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
-    The Dual Degrees at IE University offer students 
-    the opportunity to graduate with two bachelor’s 
-    degrees by completing an additional year of academic studies. 
-    These prestigious programs are a great option for students 
-    who want to focus their careers in two distinct yet connected fields of study. 
-    By combining two diverse subject areas, our Dual Degree students develop a 
-    multidisciplinary profile, enabling them to play important roles in solving 
-    complex global issues where boundaries between disciplines continue to disappear.
+        <h1>Matematicas</h1>
+        <p>
+            Dual Degrees at IE University offer students the opportunity to graduate with two bachelor’s degrees by completing an additional year of academic studies. These programs are a great option for students who want to focus their careers in two distinct yet connected fields of study.
+        </p>
     </section>
-    <!-- Contenido de tu página va aquí ---------------------------------->
+
     <section id="ciencias">
-    <h1>Ciencias</h1>
-    DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
-    The Dual Degrees at IE University offer students 
-    the opportunity to graduate with two bachelor’s 
-    degrees by completing an additional year of academic studies. 
-    These prestigious programs are a great option for students 
-    who want to focus their careers in two distinct yet connected fields of study. 
-    By combining two diverse subject areas, our Dual Degree students develop a 
-    multidisciplinary profile, enabling them to play important roles in solving 
-    complex global issues where boundaries between disciplines continue to disappear.
+        <h1>Ciencias</h1>
+        <p>
+            Dual Degrees at IE University offer students the opportunity to graduate with two bachelor’s degrees by completing an additional year of academic studies. These programs are a great option for students who want to focus their careers in two distinct yet connected fields of study.
+        </p>
     </section>
-    <!-- Contenido de tu página va aquí ---------------------------------->
+
     <section id="otro">
-    <h1>Otro1</h1>
-    DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
-    The Dual Degrees at IE University offer students 
-    the opportunity to graduate with two bachelor’s 
-    degrees by completing an additional year of academic studies. 
-    These prestigious programs are a great option for students 
-    who want to focus their careers in two distinct yet connected fields of study. 
-    By combining two diverse subject areas, our Dual Degree students develop a 
-    multidisciplinary profile, enabling them to play important roles in solving 
-    complex global issues where boundaries between disciplines continue to disappear.
+        <h1>Otro1</h1>
+        <p>
+            Dual Degrees at IE University offer students the opportunity to graduate with two bachelor’s degrees by completing an additional year of academic studies. These programs are a great option for students who want to focus their careers in two distinct yet connected fields of study.
+        </p>
     </section>
-    <!-- Contenido de tu página va aquí ---------------------------------->
+
     <section id="otro2">
         <h1>Otro2</h1>
-        DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
-        The Dual Degrees at IE University offer students 
-        the opportunity to graduate with two bachelor’s 
-        degrees by completing an additional year of academic studies. 
-        These prestigious programs are a great option for students 
-        who want to focus their careers in two distinct yet connected fields of study. 
-        By combining two diverse subject areas, our Dual Degree students develop a 
-        multidisciplinary profile, enabling them to play important roles in solving 
-        complex global issues where boundaries between disciplines continue to disappear.
+        <p>
+            Dual Degrees at IE University offer students the opportunity to graduate with two bachelor’s degrees by completing an additional year of academic studies. These programs are a great option for students who want to focus their careers in two distinct yet connected fields of study.
+        </p>
     </section>
-    <!-- Contenido de tu página va aquí ---------------------------------->
-    <section id="otro3">
-            <h1>Otro3</h1>
-            DUAL DEGREES WITH BACHELOR IN APPLIED MATHEMATICS
-            The Dual Degrees at IE University offer students 
-            the opportunity to graduate with two bachelor’s 
-            degrees by completing an additional year of academic studies. 
-            These prestigious programs are a great option for students 
-            who want to focus their careers in two distinct yet connected fields of study. 
-            By combining two diverse subject areas, our Dual Degree students develop a 
-            multidisciplinary profile, enabling them to play important roles in solving 
-            complex global issues where boundaries between disciplines continue to disappear.
-    </section>
-            <!-- Contenido de tu página va aquí ---------------------------------->
 
+    <section id="otro3">
+        <h1>Otro3</h1>
+        <p>
+            Dual Degrees at IE University offer students the opportunity to graduate with two bachelor’s degrees by completing an additional year of academic studies. These programs are a great option for students who want to focus their careers in two distinct yet connected fields of study.
+        </p>
+    </section>
 </main>
+
 <br>
 {% endblock %}
