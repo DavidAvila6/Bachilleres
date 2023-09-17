@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 import mimetypes
 import os
 from django.contrib.auth.decorators import login_required
+from .forms import customUserCreationForm
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 # Create your views here.
 
@@ -41,5 +44,21 @@ def descargar_archivo(request):
  
     return response
 
+def registro(request):
+    data = {
+        'form': customUserCreationForm()
+    }
 
+    if request.method == 'POST':
+        formulario = customUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"] )
+            login(request, user)
+            
+            messages.success(request, "Registro exitoso, bienvenido")
+            return redirect(to="/")
+            
+        data["form"] = formulario
+    return render(request, 'registration/registro.html', data)
 
