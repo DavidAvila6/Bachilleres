@@ -4,19 +4,36 @@
 <link type="text/css" href="../static/css/sect.css" rel="stylesheet" />
 
 <body>
-  <div class="SeccionTexto row g-0 justify-content-center">
+  <div class="SeccionTexto row g-0 justify-content-center ">
     <h2 class="col-8 my-3">Secciones de interes</h2>
     <p class="col-8 my-2">
       Aca podras ver toda la informacion que tenemos disponible para ti
       dependiendo tu area de interes
     </p>
   </div>
-  <div class="filtros row g-0 justify-content-center">
+  <div class="row justify-content-center">
+    <div class="Acordeon col-2">
+      <dic class="AcordeonContainer ms-auto">
+        <div class="AcordeonLabel">
+          <h2>Areas</h2>
+          <div class="AcordeonContent">
+            <ul>
+              <hr>
+              <li><a class="dropdown-item" href="#Medicna">Medicina</a></li>
+              <hr>
+              <li><a class="dropdown-item" href="#Enfermeria">Enfermeria</a></li>
+            </ul>
+          </div>
+        </div>
+      </dic>
+    </div>
+  </div>
 
+  <div class="filtros row g-0 justify-content-center">
 
     <div class="Becas">
 
-      <div class="MedicinaGeneral row g-0 mt-3">
+      <div id="Medicina" class="MedicinaGeneral row g-0 mt-3">
 
         <h2 class="text-center">Medicina</h2>
 
@@ -225,94 +242,75 @@
 
       </div>
 
-      <div class="Enfermeria row g-0">
+      <div id="Enfermeria" class="Enfermeria row g-0">
         <h2 class="text-center">Enfermeria</h2>
 
         <div class="EnfermeriaPost row g-0 justify-content-center">
-          <h3 class="text-center py-3">Beca de la Universidad de La Sabana</h3>
-          <div class="foto col-3 text-center px-3">
-            <img src="../static/img/sabana.png" class="img-fluid" />
-          </div>
-          <div class="accordion col-4" id="beca-4">
-            <p class="pb-4">
-              La Beca Excelencia que ofrece la Universidad de la Sabana está
-              dirigida a estudiantes de nuevo ingreso en pregrado, que estén
-              dispuestos a completar sus estudios en esta universidad de manera
-              semestral. Puedes utilizar esta beca para estudiar Enfermería en
-              Colombia, en esta prestigiosa universidad.
-            </p>
-
-            <div class="accordion-item">
-              <h3 id="head-2-1" class="accordion-header">
-                <button class="accordion-button border-0" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#requisito2-1" aria-expanded="false" aria-controls="requisito2-1">
-                  Requisitos
-                </button>
-              </h3>
-            </div>
-            <div id="requisito2-1" class="accordion-collapse collapse" aria-labelledby="head-2-1"
-              data-bs-parent="#beca-4">
-              <div class="accordion-body">
-                <p>Para optar a la beca debes:</p>
-                <ul>
-                  <li>Tener excelentes notas.</li>
-                  <li>Buen dominio del idioma inglés.</li>
-                  <li>Excelente puntuación en examen de admisión.</li>
-                </ul>
+          <div class="card col-8 border-0">
+            <h2 class="text-center py-2 ">Beca de la Universidad de La Sabana</h2>
+            <div class="div row align-content-center justify-content-center">
+              <div class="col pt-5 text-center">
+                <img src="../static/img/sabana.png" class="img-fluid">
               </div>
-            </div>
-            <div class="accordion-item">
-              <h3 id="head-2-2" class="accordion-header">
-                <button class="accordion-button border-0" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#requisito2-2" aria-expanded="false" aria-controls="requisito2-2">
-                  Valor y duracion de la Beca
-                </button>
-              </h3>
-            </div>
-            <div id="requisito2-2" class="accordion-collapse collapse" aria-labelledby="head-2-2"
-              data-bs-parent="#beca-4">
-              <div class="accordion-body">
-                <p>
-                  Esta beca Excelencia presenta dos opciones, puede cubrir tanto
-                  el 100 % como el 60 % de la matrícula de la carrera que desees
-                  estudiar.
-                </p>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 id="head-2-3" class="accordion-header">
-                <button class="accordion-button border-0" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#requisito2-3" aria-expanded="false" aria-controls="requisito2-3">
-                  Como Aplicar
-                </button>
-              </h3>
-            </div>
-            <div id="requisito2-3" class="accordion-collapse collapse" aria-labelledby="head-2-3"
-              data-bs-parent="#beca-4">
-              <div class="accordion-body">
-                <p>
-                  La postulación debe ser enviada por uno de los colegios
-                  invitados a participar de las becas por su excelencia académica.
-                </p>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 id="head-2-4" class="accordion-header">
-                <button class="accordion-button border-0" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#requisito2-4" aria-expanded="false" aria-controls="requisito2-4">
-                  Que documentos necesitas
-                </button>
-              </h3>
-            </div>
-            <div id="requisito2-4" class="accordion-collapse collapse" aria-labelledby="head-2-4"
-              data-bs-parent="#beca-4">
-              <div class="accordion-body">
-                <p>Se solicitan directamente al colegio postulante.</p>
+              <div class="col px-5 py-3">
+                <div class="Acordeon">
+                  <p>
+                    La Beca Excelencia que ofrece la Universidad de la Sabana está
+                    dirigida a estudiantes de nuevo ingreso en pregrado, que estén
+                    dispuestos a completar sus estudios en esta universidad de manera
+                    semestral. Puedes utilizar esta beca para estudiar Enfermería en
+                    Colombia, en esta prestigiosa universidad.
+                  </p>
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <div class="AcordeonLabel">Requisitos</div>
+                    <div class="AcordeonContent">
+                      <p>Para optar a la beca debes:</p>
+                      <ul>
+                        <li>Tener excelentes notas.</li>
+                        <li>Buen dominio del idioma inglés.</li>
+                        <li>Excelente puntuación en examen de admisión.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
+                    <div class="AcordeonContent">
+                      <p>
+                        Esta beca Excelencia presenta dos opciones, puede cubrir tanto
+                        el 100 % como el 60 % de la matrícula de la carrera que desees
+                        estudiar.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <div class="AcordeonLabel">Cómo aplicar</div>
+                    <div class="AcordeonContent">
+                      <p>
+                        La postulación debe ser enviada por uno de los colegios
+                        invitados a participar de las becas por su excelencia académica.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <div class="AcordeonLabel">Qué documentos necesitas</div>
+                    <div class="AcordeonContent">
+                      <p>
+                        Se solicitan directamente al colegio postulante.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+
 </body>
 >
 
