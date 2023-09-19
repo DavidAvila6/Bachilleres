@@ -14,6 +14,11 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary pt-4">
       <div class="container-fluid ms-5">
           <a class="navbar-brand" href="/">Bachilleres</a>
+          {% if user.is_authenticated  %}
+          <li>
+            <a href="#"> @{{ user.username }}</a>
+          </li>
+          {% endif  %}
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -32,6 +37,15 @@
                   <li class="nav-item pe-4">
                     <a class="nav-link" href="/faq">FAQ</a>
                 </li>
+                {% if user.is_authenticated  %}
+                <li>
+                  <a type="button" class="btn btn-outline-danger" aria-current="page" href="{% url 'logout' %}">Cerrar Sesion</a>
+                </li>                              
+                {% else %}
+                <li>                
+                  <a type="button" class="btn btn-outline-success" aria-current="page" href="{% url 'login' %}">Iniciar Sesion</a>
+                </li>
+                {% endif  %}
               </ul>
           </div>
       </div>
