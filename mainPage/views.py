@@ -20,6 +20,10 @@ def novedades(request):
 def faq(request):
     return render(request, 'faq.html')
 
+def Secciones(request):
+    return render(request, 'Secciones.html')
+
+
 
 
 
