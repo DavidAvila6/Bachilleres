@@ -1,0 +1,92 @@
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ font-family: sans-serif;
+}
+
+main{
+
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 50px;
+    position: relative;
+}
+main h1{
+    text-align: left;
+    font-size: 40px;
+}
+
+.line{
+    width: 540px;
+    height: 2px;
+    border-style: none;
+    margin-top: 20px;
+    background: #010101;
+ }
+ .container-comments{
+    margin-left: 550px;
+    margin-top: 20px;
+}
+
+
+.comments{
+    display: flex;
+}
+.fotoDesarrollador{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.fotoDesarrollador img{
+    width: 100%;
+    height: 100%;
+}
+.infoComment{
+    margin-left: 20px;
+    background-color: #6D6656;
+    transition: all 300ms;
+    margin-top: 20px;
+    
+}
+
+.infoComment:hover{
+    border-bottom: 5px solid black;
+}
+
+.infoComment .header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background:#605b4f;
+}
+
+.infoComment p{
+    padding: 20px;
+}
+
+.infoComment .footer{
+    width: 100%;
+    background: #605b4f;
+    padding: 10px;
+    color: aliceblue;
+    display: flex;
+    justify-content: right;
+}
+.infoComment .footer h5{
+    font-size: 15px;
+    cursor: pointer;
+}
+.infoComment .icon-rebel{
+    color:grey;
+    transition: all 300ms;
+    font-size: 20px;
+}
+.infoComment .icon-rebel:hover{
+    color:orange;
+    cursor: pointer;
+}
+
