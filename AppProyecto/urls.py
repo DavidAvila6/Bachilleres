@@ -28,7 +28,8 @@ urlpatterns = [
     path('faq/', views.faq),
     path('accounts/', include('django.contrib.auth.urls')),
     path('Secciones/', views.Secciones ),
-    path('descargar/', views.descargar_archivo, name = "descargar")
+    path('descargar/', views.descargar_archivo, name = "descargar"),
+    path('registro/', views.registro, name="regsitro")
     
     
 ]
