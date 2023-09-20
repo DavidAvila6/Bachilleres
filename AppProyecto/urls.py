@@ -19,7 +19,6 @@ from django.urls import path, include
 from mainPage import views
 from AppProyecto.settings import BASE_DIR
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.principalHub),
@@ -28,7 +27,9 @@ urlpatterns = [
     path('novedades/', views.novedades),
     path('faq/', views.faq),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('descargar/', views.descargar_archivo, name = "descargar")
+    path('Secciones/', views.Secciones ),
+    path('descargar/', views.descargar_archivo, name = "descargar"),
+    path('registro/', views.registro, name="regsitro")
     
     
 ]
