@@ -1,17 +1,8 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link type="text/css" href="../static/css/base.css"  rel="stylesheet">
+{% extends 'base.html' %}
 
-    <title>Register</title>
-</head>
-<body>  
+{% block content %}
+{% load crispy_forms_tags %}
     <div class="container mt-5">
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3">
@@ -22,22 +13,21 @@
                         <form action="" method="post">
                             
                             {% csrf_token %}
-                            {{ form.as_p }}
-                            <a href="/">ir al home</a>
+                            {{ form | crispy }}
+                            <!--<a href="/">ir al home</a>-->
                             <br>
-                            <a href="{% url 'login' %}">inciar sesion</a>
+                            <p>Si ya estas registrado, Logueate:</p>
+                            <a href="{% url 'login' %}" class="btn btn-success float-right">Login</a>  
+                            
                             <br>
-                            <input type="submit" value="Registrar" class="btn btn-success float-right">
+                            <!--<input type="submit" value="Registrar" class="btn btn-success float-right">-->
 
                         </form>  
                     </div>
-                </div>
+                    <br>
+                </div><br>
             </div>
         </div>
     </div>
-    
-</body>
-
-</html>
-
+    {% endblock %}
 

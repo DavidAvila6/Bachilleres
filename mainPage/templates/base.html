@@ -50,9 +50,15 @@
                   <li class="nav-item pe-4">
                       <a class="nav-link" href="/recursos">Recursos</a>
                   </li>
-                  <li class="nav-item pe-4">
-                    <a class="nav-link" href="/faq">FAQ</a>
+                {% if user.is_authenticated  %}
+                <li class="nav-item pe-4">
+                    <a class="nav-link" href="/perfil">Perfil</a>
                 </li>
+                {% else %}
+                <li class="nav-item pe-4">
+                  <a class="nav-link" href="/faq">FAQ</a>
+              </li>
+                {% endif  %}
                 <li class="nav-item pe-4">
                     <a class="nav-link" href="/Secciones">Secciones</a>
                 </li>
