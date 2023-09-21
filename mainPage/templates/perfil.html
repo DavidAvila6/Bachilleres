@@ -20,8 +20,12 @@
     <section class="perfil">
         <!--<img src="imagen-de-perfil.jpg" alt="Imagen de perfil">-->
         <h2>{{ user.username }}</h2>
+        <p>Nombre: {{ user.first_name}}</p>
+        <p>Apellido: {{ user.last_name}}</p>
         <p>Correo Electrónico: {{ user.email }}</p>
         <p>Fecha de Nacimiento: 01 de enero de 1990</p>
+        <br><br>
+        <a href="{% url 'edit_perfil' %}" class="btn btn-primary">Editar Perfil</a> 
     </section>
 
     <section class="actividades">
