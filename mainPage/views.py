@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import EmailForm
+from django.core.mail import send_mail
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
@@ -133,6 +134,8 @@ def enviar_correo(request):
             
             # Obtén la lista de usuarios registrados
             usuarios_registrados = User.objects.all()
+
+            to_email = [usuario.email for usuario in usuarios_registrados]
             
             # Configura el servidor de correo saliente (SMTP)
             smtp_server = 'smtp.gmail.com'  # Cambia esto si estás usando otro proveedor de correo
@@ -148,19 +151,8 @@ def enviar_correo(request):
             
             # Inicia la conexión con el servidor SMTP de Gmail
             try:
-                server = smtplib.SMTP(smtp_server, smtp_port)
-                server.starttls()
-                server.login(smtp_username, smtp_password)
-                
-                # Envía el mensaje a cada usuario registrado
-                for usuario in usuarios_registrados:
-                    
-                    msg['To'] = usuario.email
-                    server.sendmail(smtp_username, usuario.email, msg.as_string())
-                
-                server.quit()
-                
-                return redirect('correo_enviado')  # Redirige a una página de confirmación
+                send_mail(subject, message, smtp_username, to_email, fail_silently=False)
+                return redirect('correo_enviado') 
             except Exception as e:
                 # Maneja los errores aquí (por ejemplo, si no se puede conectar al servidor SMTP)
                 print(str(e))
