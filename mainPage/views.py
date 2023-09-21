@@ -23,6 +23,9 @@ def novedades(request):
 def faq(request):
     return render(request, 'faq.html')
 
+def perfil(request):
+    return render(request, 'perfil.html')
+
 def Secciones(request):
     return render(request, 'Secciones.html')
 
