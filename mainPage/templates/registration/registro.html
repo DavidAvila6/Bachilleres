@@ -26,8 +26,8 @@
                         <form action="" method="post">
                             
                             {% csrf_token %}
-                            {{ form | crispy }}
-                            <!--<a href="/">ir al home</a>-->
+                            {{ form.as_p }}
+                            <a href="/">ir al home</a>
                             <br>
                             <input type="submit" value="Registrar" class="btn btn-success float-right">
                             <br><br>
@@ -39,10 +39,13 @@
 
                         </form>  
                     </div>
-                    <br>
-                </div><br>
+                </div>
             </div>
         </div>
     </div>
-    {% endblock %}
+    
+</body>
+
+</html>
+
 
