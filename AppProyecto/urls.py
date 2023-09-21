@@ -28,8 +28,16 @@ urlpatterns = [
     path('faq/', views.faq),
     path('accounts/', include('django.contrib.auth.urls')),
     path('Secciones/', views.Secciones ),
+    path('perfil/', views.perfil ),
+    path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
+    #Correos-----------------------------------------------------------------
+    path('correo/', views.correo,name='correo'),
+    path('enviar_correo/', views.enviar_correo, name='enviar_correo'),
+    path('error_correo/', views.error_correo, name='error_correo'),
+    path('correo_enviado/', views.correo_enviado, name='correo_enviado'),
+
     path('descargar/', views.descargar_archivo, name = "descargar"),
-    path('registro/', views.registro, name="regsitro")
+    path('registro/', views.registro, name="registro")
     
     
 ]

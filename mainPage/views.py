@@ -1,11 +1,18 @@
-from django.shortcuts import redirect, render
-from django.http import HttpResponse
 import mimetypes
 import os
+import smtplib
+from django.shortcuts import redirect, render
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import customUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth.models import User
+from .forms import EmailForm
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from django.core.mail import EmailMessage
+from .forms import FormularioContacto
 
 # Create your views here.
 
@@ -23,8 +30,23 @@ def novedades(request):
 def faq(request):
     return render(request, 'faq.html')
 
+def perfil(request):
+    return render(request, 'perfil.html')
+
 def Secciones(request):
     return render(request, 'Secciones.html')
+
+@login_required
+def edit_perfil(request):
+    if request.method == 'POST':
+        form = customUserCreationForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/perfil')  
+    else:
+        form = customUserCreationForm(instance=request.user)
+    
+    return render(request, 'edit_perfil.html', {'form': form})
 
 
 
@@ -66,3 +88,86 @@ def registro(request):
         data["form"] = formulario
     return render(request, 'registration/registro.html', data)
 
+#Seccion de correos---------------------------------------------------------------------
+def error_correo(request):
+    return render(request, 'correos/error_correo.html')
+
+def correo_enviado(request):
+    return render(request, 'correos/correo_enviado.html')
+
+def correo(request):
+
+    formulario_contacto=FormularioContacto()
+
+    if request.method=="POST":
+        formulario_contacto=FormularioContacto(data=request.POST)
+        if formulario_contacto.is_valid():
+            nombre=request.POST.get("nombre")
+            email=request.POST.get("email")
+            contenido=request.POST.get("contenido")
+
+            email=EmailMessage("Mensaje de app Django",
+            "El usuario con nombre {} con la dirección {} escribe lo siguiente:\n\n {}".format(nombre, email, contenido), 
+            '',
+            ["bachilleresbch@gmail.com"], 
+            reply_to=[email])
+
+            try:
+                email.send()
+
+                return redirect('correo_enviado')
+            except Exception as e:
+                # Maneja los errores aquí (por ejemplo, si no se puede conectar al servidor SMTP)
+                print(str(e))
+                return redirect('error_correo')
+
+    return render(request, "correos/correo.html", {'miFormulario':formulario_contacto})
+
+@login_required
+def enviar_correo(request):
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            
+            # Obtén la lista de usuarios registrados
+            usuarios_registrados = User.objects.all()
+            
+            # Configura el servidor de correo saliente (SMTP)
+            smtp_server = 'smtp.gmail.com'  # Cambia esto si estás usando otro proveedor de correo
+            smtp_port = 587  # Puerto de Gmail
+            smtp_username = 'bachilleresbch@gmail.com'  # Tu dirección de correo electrónico
+            smtp_password = 'qpcu ybch elbk kihu'  # Tu contraseña
+            
+            # Configura el mensaje
+            msg = MIMEMultipart()
+            msg['From'] = smtp_username
+            msg['Subject'] = subject
+            msg.attach(MIMEText(message, 'plain'))
+            
+            # Inicia la conexión con el servidor SMTP de Gmail
+            try:
+                server = smtplib.SMTP(smtp_server, smtp_port)
+                server.starttls()
+                server.login(smtp_username, smtp_password)
+                
+                # Envía el mensaje a cada usuario registrado
+                for usuario in usuarios_registrados:
+                    
+                    msg['To'] = usuario.email
+                    server.sendmail(smtp_username, usuario.email, msg.as_string())
+                
+                server.quit()
+                
+                return redirect('correo_enviado')  # Redirige a una página de confirmación
+            except Exception as e:
+                # Maneja los errores aquí (por ejemplo, si no se puede conectar al servidor SMTP)
+                print(str(e))
+                return redirect('error_correo')  # Redirige a una página de error
+    else:
+        form = EmailForm()
+    
+    return render(request, 'correos/enviar_correo.html', {'form': form})
+
+#Finalizado Seccion de correos-----------------------------------------------------
