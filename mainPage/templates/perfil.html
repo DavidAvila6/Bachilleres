@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    /* Estilo para las secciones */
+    body {
+        background: linear-gradient(to bottom, #6D6656, #E4DBC5 ); /* Cambia los colores según tu preferencia */
+        color: #fff; /* Color del texto en el cuerpo */
+        font-family: Tahoma, sans-serif; /* Tahoma como fuente principal y sans-serif como respaldo */
+    }
+    section {
+        background-color: #46443F ; /* Color gris claro */
+        padding: 20px; /* Espaciado interno para separar el contenido del fondo */
+        margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
+    }
+</style>
+
+<div class="container mt-5">
+    <section class="perfil">
+        <!--<img src="imagen-de-perfil.jpg" alt="Imagen de perfil">-->
+        <h2>{{ user.username }}</h2>
+        <p>Nombre: {{ user.first_name}}</p>
+        <p>Apellido: {{ user.last_name}}</p>
+        <p>Correo Electrónico: {{ user.email }}</p>
+        <p>Fecha de Nacimiento: 01 de enero de 1990</p>
+        <br><br>
+        <a href="{% url 'edit_perfil' %}" class="btn btn-primary">Editar Perfil</a> 
+    </section>
+
+    <section class="actividades">
+        <h2>Mis Actividades</h2>
+        <ul>
+            <li>Actividad 1</li>
+            <li>Actividad 2</li>
+            <li>Actividad 3</li>
+        </ul>
+    </section>
+
+    <section class="amigos">
+        <h2>Mis Cursos</h2>
+        <ul>
+            <li>Curso 1</li>
+            <li>Curso 2</li>
+            <li>Curso 3</li>
+        </ul>
+    </section>
+    </section>
+</div>
+<br>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<style>
+    /* Estilo para las secciones */
+    body {
+        background: linear-gradient(to bottom, #6D6656, #E4DBC5 ); /* Cambia los colores según tu preferencia */
+        color: #fff; /* Color del texto en el cuerpo */
+        font-family: Tahoma, sans-serif; /* Tahoma como fuente principal y sans-serif como respaldo */
+    }
+    section {
+        background-color: #46443F ; /* Color gris claro */
+        padding: 20px; /* Espaciado interno para separar el contenido del fondo */
+        margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
+    }
+</style>
+ 
+
+<div class="contenedorFormulario">
+
+    {% if "valido" in request.GET %}
+
+    <p>Información enviada correctamente</p>
+
+
+    {% endif %}
+
+    <form action="" method="POST">
+
+        {% csrf_token %}<!--Toque csrf para activar la seguridad en los formularios-->
+
+    <table style="margin: 20px left;">{{miFormulario.as_table}}</table>
+
+    <input type="submit" value="Enviar" style="width: 150px;">
+
+    </form>
+
+</div>
+
+{% endblock %}
