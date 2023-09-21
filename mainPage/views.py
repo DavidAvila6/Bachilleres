@@ -68,4 +68,3 @@ def registro(request):
             
         data["form"] = formulario
     return render(request, 'registration/registro.html', data)
-
