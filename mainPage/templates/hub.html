@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+body {
+    font-family: Tahoma, sans-serif; /* Tahoma como fuente principal y sans-serif como respaldo */
+}
+</style>
     <div class="imgbienbenidos row justify-content-center">
         
         <div class="col-md-8 ">
             <div class="position-relative">
                 <img src="../static/img/acerca1.jpg" class="img-fluid  my-4" alt="..." id="ImgBienvenida">
-                <h1 class="position-absolute top-50 end-0 translate-middle-y"> Bienvenidos a nuestra empresa </h1>
+                
+                <h1 class="position-absolute top-50 end-0 translate-middle-y">
+                    <img src="../static/img/IconoBH.png" alt="Logo" width="150" height="150"  style="display: block; margin: 0 auto;" >
+                     Bienvenidos a nuestra empresa BCH 
+                   
+                    
+                </h1>
+                
             </div>
         </div>
 

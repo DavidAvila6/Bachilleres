@@ -6,6 +6,7 @@
     body {
         background: linear-gradient(to bottom, #6D6656, #E4DBC5 ); /* Cambia los colores según tu preferencia */
         color: #fff; /* Color del texto en el cuerpo */
+        font-family: Tahoma, sans-serif; /* Tahoma como fuente principal y sans-serif como respaldo */
     }
     section {
         background-color: #46443F ; /* Color gris claro */
@@ -18,7 +19,8 @@
     <section>
         <h1 class="display-4">Recursos</h1>
         <p>Nuestra plataforma ofrece servicios personalizados de orientación académica y profesional para estudiantes recién graduados, brindándoles acceso a asesoría especializada, recursos educativos y herramientas de planificación de carrera, todo en un solo lugar.</p>
-        <a href="{% url 'descargar' %}"class="btn btn-info ">Descargar Listado</a>
+        <a href="{% url 'descargar' %}"class="btn btn-info"
+        style="background-color: white; color: black;">Descargar Listado</a>
     </section>
 
     <section>
