@@ -15,12 +15,58 @@
         padding: 20px; /* Espaciado interno para separar el contenido del fondo */
         margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
     }
+    .email-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color:#6D6656;
+      }
+      .email-form h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+    
+      .email-form form {
+        display: flex;
+        flex-direction: column;
+      }
+    
+      .email-form form label {
+        margin-bottom: 10px;
+      }
+    
+      .email-form form input[type="text"],
+      .email-form form input[type="email"] {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+    
+      .email-form form button {
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    
+      .email-form form button:hover {
+        background-color: #0056b3;
+      }
 </style>
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 col-md-6 offset-md-3">
-            <div class="card">
                 <div class="card-body">
+                  <div class="email-form">
                     <h2>Editar perfil</h2>
                     <form method="post">
                     {% csrf_token %}
@@ -30,10 +76,10 @@
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </div>
                     </form>
-                </div>
+                </div>  
             </div>
         </div>
     </div>
-</div>
-
+  </div>
+<br><br><br>
 {% endblock %}
