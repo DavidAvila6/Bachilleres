@@ -4,11 +4,8 @@ import mimetypes
 import os
 from django.contrib.auth.decorators import login_required
 from .forms import customUserCreationForm
-from .forms import ContactForm
-from .forms import RegistroForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.urls import reverse
 
 # Create your views here.
 
@@ -26,24 +23,11 @@ def novedades(request):
 def faq(request):
     return render(request, 'faq.html')
 
+def perfil(request):
+    return render(request, 'perfil.html')
+
 def Secciones(request):
     return render(request, 'Secciones.html')
-
-def Contact(request):
-    contact_form = ContactForm()
-    if request.method == 'POST':
-        contact_form = ContactForm(data=request.POST)
-
-        if contact_form.is_valid():
-            contact_form.save()
-            # Tengo que avisar que todo fue bien
-            return redirect(reverse('contact')+'?ok')
-        
-        else:
-            #Tengo que generar un error
-            return redirect(reverse('contact')+'?error')   
-
-    return render(request, 'contact.html', {'form':contact_form})
 
 
 
@@ -68,17 +52,19 @@ def descargar_archivo(request):
     return response
 
 def registro(request):
-    registro_form = RegistroForm()
+    data = {
+        'form': customUserCreationForm()
+    }
+
     if request.method == 'POST':
-        registro_form = RegistroForm(data=request.POST)
-
-        if registro_form.is_valid():
-            registro_form.save()
-            return redirect(reverse('/')+'?ok')
-        
-        else:
-            return redirect(reverse('registro')+'?error')   
-
-    return render(request, 'registration/registro.html', {'form':registro_form})
-    
-
+        formulario = customUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"] )
+            login(request, user)
+            
+            messages.success(request, "Registro exitoso, bienvenido")
+            return redirect(to="/")
+            
+        data["form"] = formulario
+    return render(request, 'registration/registro.html', data)
