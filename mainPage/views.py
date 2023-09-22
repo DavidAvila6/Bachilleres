@@ -71,6 +71,7 @@ def descargar_archivo(request):
  
     return response
 
+
 def registro(request):
     data = {
         'form': customUserCreationForm()
@@ -90,12 +91,14 @@ def registro(request):
     return render(request, 'registration/registro.html', data)
 
 #Seccion de correos---------------------------------------------------------------------
+@login_required
 def error_correo(request):
     return render(request, 'correos/error_correo.html')
-
+@login_required
 def correo_enviado(request):
     return render(request, 'correos/correo_enviado.html')
 
+@login_required
 def correo(request):
 
     formulario_contacto=FormularioContacto()
