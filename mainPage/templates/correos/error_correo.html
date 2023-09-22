@@ -3,19 +3,10 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<style>
-    /* Estilo para las secciones */
-    body {
-        background: linear-gradient(to bottom, #6D6656, #E4DBC5 ); /* Cambia los colores según tu preferencia */
-        color: #fff; /* Color del texto en el cuerpo */
-        font-family: Tahoma, sans-serif; /* Tahoma como fuente principal y sans-serif como respaldo */
-    }
-    section {
-        background-color: #46443F ; /* Color gris claro */
-        padding: 20px; /* Espaciado interno para separar el contenido del fondo */
-        margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
-    }
-</style>
+{% load static %}
+<head>
+  <link href="{% static "css/correo.css" %}" rel="stylesheet">
+</head>
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 col-md-6 offset-md-3">
