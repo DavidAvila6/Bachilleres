@@ -1,6 +1,5 @@
 import mimetypes
 import os
-import smtplib
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -14,6 +13,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
 from .forms import FormularioContacto
+
 
 # Create your views here.
 
@@ -163,3 +163,5 @@ def enviar_correo(request):
     return render(request, 'correos/enviar_correo.html', {'form': form})
 
 #Finalizado Seccion de correos-----------------------------------------------------
+
+     
