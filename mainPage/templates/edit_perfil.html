@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<style>
+    /* Estilo para las secciones */
+    body {
+        background: linear-gradient(to bottom, #6D6656, #E4DBC5 ); /* Cambia los colores según tu preferencia */
+        color: #fff; /* Color del texto en el cuerpo */
+        font-family: Tahoma, sans-serif; /* Tahoma como fuente principal y sans-serif como respaldo */
+    }
+    section {
+        background-color: #46443F ; /* Color gris claro */
+        padding: 20px; /* Espaciado interno para separar el contenido del fondo */
+        margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
+    }
+</style>
+
+<h2>Editar perfil</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar cambios</button>
+</form>
+
+{% endblock %}
