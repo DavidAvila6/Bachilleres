@@ -40,6 +40,7 @@ urlpatterns = [
     path('registro/', views.registro, name="registro"),
     
     #Calendario-----------------------------------------------------------------
+    path('perfil/calendar/', include('cal.urls')),
     
 
 ]
