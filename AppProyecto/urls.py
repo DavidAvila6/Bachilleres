@@ -37,7 +37,9 @@ urlpatterns = [
     path('correo_enviado/', views.correo_enviado, name='correo_enviado'),
 
     path('descargar/', views.descargar_archivo, name = "descargar"),
-    path('registro/', views.registro, name="registro")
+    path('registro/', views.registro, name="registro"),
     
+    #Calendario-----------------------------------------------------------------
+    path('perfil/calendar/', include('schedule.urls')),
     
 ]
