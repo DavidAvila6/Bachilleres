@@ -89,7 +89,23 @@ def registro(request):
         if formulario.is_valid():
             formulario.save()
             user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"] )
-            login(request, user)
+            if user:
+                login(request, user)
+
+                # Renderiza el contenido HTML desde la plantilla
+                context = {'user': user}  # Puedes pasar datos adicionales a la plantilla si es necesario
+                html_content = render_to_string('correos/emailpage.html', context)
+
+
+                # Envía un correo electrónico de confirmación con contenido HTML
+                subject = 'Bienvenido a Nuestra Aplicación'
+                from_email = settings.EMAIL_HOST_USER
+                recipient_list = [user.email]
+
+                send_mail(subject, '', from_email, recipient_list, fail_silently=True, html_message=html_content)
+
+                
+
             
             messages.success(request, "Registro exitoso, bienvenido")
             return redirect(to="/")
