@@ -73,6 +73,7 @@ class Beca (models.Model):
     nombre = models.CharField(max_length=30)
     tipo = models.CharField(max_length=10,choices=OPCIONES_TIPO,default=Nacional)
     monto = models.IntegerField()
+    
     Documentos = models.ManyToManyField(Documentos)
     Requisitos = models.ManyToManyField(Requisitos)
     Descripcion = models.CharField(max_length=1000)
