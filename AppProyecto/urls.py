@@ -29,7 +29,5 @@ urlpatterns = [
     path('becas/',views.becas),
     path('faq/', views.faq),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('descargar/', views.descargar_archivo, name = "descargar")
-    
-    
+    path('descargar/', views.descargar_archivo, name = "descargar"),
 ]
