@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+<head>
+  <link href="{% static "css/correo.css" %}" rel="stylesheet">
+</head>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+                <div class="card-body">
+                  <div class="email-form">
+
+                    <h2>Error al enviar el correo electrónico</h2>
+                    <h1>No se encontro el usuario</h1>
+                    <p>Se produjo un error al intentar enviar el correo electrónico. Por favor, inténtalo nuevamente más tarde.</p>
+                    <a href="{% url 'enviar_correo' %}" class="btn btn-success float-right">Volver al formulario de envío de correo</a>
+                </div>  
+            </div>
+        </div>
+    </div>
+  </div>
+<br><br><br>
+{% endblock %}

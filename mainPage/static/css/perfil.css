@@ -1,0 +1,85 @@
+/* styles.css */
+
+/* Estilo para las secciones */
+body {
+    background: linear-gradient(to bottom, #6D6656, #E4DBC5);
+    color: #fff;
+    font-family: Tahoma, sans-serif;
+}
+
+section {
+    background-color: #46443F;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.button-list {
+    list-style: none;
+    padding: 0;
+}
+
+.button-list li {
+    margin: 10px 0;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.email-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color:#6D6656;
+  }
+  .email-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .email-form form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .email-form form label {
+    margin-bottom: 10px;
+  }
+
+  .email-form form input[type="text"],
+  .email-form form input[type="email"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .email-form form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .email-form form button:hover {
+    background-color: #0056b3;
+  }

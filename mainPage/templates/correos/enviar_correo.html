@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+<head>
+  <link href="{% static "css/correo.css" %}" rel="stylesheet">
+</head>
+
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-12 col-md-6 offset-md-3">
+              <div class="card-body">
+                <div class="email-form">
+                  <h2>Enviar Correo Electrónico</h2>
+                    <form method="post">
+                      {% csrf_token %}
+                      {{ form.as_p }}
+                      <button type="submit">Enviar Correo</button>
+                
+              </div>  
+          </div>
+      </div>
+  </div>
+</div>
+<br><br>
+
+{% endblock %}
