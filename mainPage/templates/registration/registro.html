@@ -12,20 +12,22 @@
             <div class="col-12 col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="text-center">Ingresa tus credenciales</h2>
+                        <h2 class="text-center">Registrate</h2>
                         <hr>
                         <form action="" method="post">
                             
                             {% csrf_token %}
-                            {{ form | crispy }}                     
+                            {{ form | crispy }}  
                             <br>
-                            <input type="submit" value="Ingresar" class="btn btn-success float-right">
+                            <input type="submit" value="Registrar" class="btn btn-success float-right">
+                            <br><br>
+                            <p>Si ya estas registrado, Ingresa:</p>
+                            <a href="{% url 'login' %}" class="btn btn-success float-right">Login</a>  
+                            
                             <br>
-                            <br>
-                            <p>Si no estas registrado:</p>
-                            <a href="/registro" class="btn btn-success float-right">REGISTRATE AQUI</a>  
+                            
 
-                        </form>
+                        </form>  
                     </div>
                 </div>
             </div>

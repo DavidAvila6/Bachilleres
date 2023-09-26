@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+<head>
+  <link href="{% static "css/correo.css" %}" rel="stylesheet">
+</head>
+ 
+
+<div class="contenedorFormulario">
+
+    {% if "valido" in request.GET %}
+
+    <p>Información enviada correctamente</p>
+
+
+    {% endif %}
+
+    <form action="" method="POST">
+
+        {% csrf_token %}<!--Toque csrf para activar la seguridad en los formularios-->
+
+    <table style="margin: 20px left;">{{miFormulario.as_table}}</table>
+
+    <input type="submit" value="Enviar" style="width: 150px;">
+
+    </form>
+
+</div>
+
+{% endblock %}

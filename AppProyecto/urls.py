@@ -19,7 +19,6 @@ from django.urls import path, include
 from mainPage import views
 from AppProyecto.settings import BASE_DIR
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.principalHub),
@@ -29,5 +28,20 @@ urlpatterns = [
     path('becas/',views.becas),
     path('faq/', views.faq),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('Secciones/', views.Secciones ),
+    path('perfil/', views.perfil ),
+    path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
+    #Correos-----------------------------------------------------------------
+    path('correo/', views.correo,name='correo'),
+    path('correodirecto/', views.correodirecto,name='correodirecto'),
+    path('enviar_correo/', views.enviar_correo, name='enviar_correo'),
+    path('error_correo/', views.error_correo, name='error_correo'),
+    path('usuario_noencontrado/', views.usuario_noencontrado, name='usuario_noencontrado'),
+    path('correo_enviado/', views.correo_enviado, name='correo_enviado'),
+    path('enviar_HTML/', views.enviar_HTML,name='enviar_HTML'),
+
     path('descargar/', views.descargar_archivo, name = "descargar"),
+    path('registro/', views.registro, name="registro")
+    
+    
 ]

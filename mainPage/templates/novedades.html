@@ -1,27 +1,56 @@
 {% extends 'base.html' %}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
 
 {% block content %}
-<style>
-    /* Estilo para las secciones */
-    body {
-        background: linear-gradient(to bottom, #6D6656, #E4DBC5 ); /* Cambia los colores según tu preferencia */
-        color: #fff; /* Color del texto en el cuerpo */
-    }
-    section {
-        background-color: #46443F ; /* Color gris claro */
-        padding: 20px; /* Espaciado interno para separar el contenido del fondo */
-        margin-bottom: 20px; /* Espaciado inferior para separar las secciones */
-    }
-</style>
+{% load static %} 
+<head>
+    <link href="{% static "css/default.css" %}" rel="stylesheet">
+</head>
+
 <div class="container mt-5">
-    <section>
+    <head>
+        <link href="https://file.myfontastic.com/prkEeSwJctji9XxgDMYUbe/icons.css" rel="stylesheet">
+        <link href="{% static "css/novedades.css" %}" rel="stylesheet">
+<section>
         <h1 class="display-4"> Novedades y Actualizaciones</h1>
-        <p>Bienvenido a nuestra sección de Novedades y Actualizaciones. Aquí encontrarás información sobre las próximas mejoras y novedades que llegarán a nuestra plataforma. Esta sección está diseñada para mantenerte informado y brindarte un vistazo exclusivo a las características que estamos preparando para mejorar tu experiencia. ¡Sigue atento para no perderte ninguna actualización importante!</p>
-       
-    </section>
-
+        <hr class="line">
+        <p>Bienvenido a nuestra sección de Novedades y Actualizaciones. Aquí encontrarás información sobre las próximas mejoras y novedades que llegarán a nuestra plataforma. Esta sección está diseñada para mantenerte informado y brindarte un vistazo exclusivo a las características que estamos preparando para mejorar tu experiencia. ¡Sigue atento para no perderte ninguna actualización importante!</p> 
     
+    </head>
+    <main>
+        <h1>Actualizaciones recientes</h1>
+        <hr class="line"
+        <div class="container-comments">        
+            <div class="comments">
+                <div class="fotoDesarrollador">
 
+                    <img src="{% static 'img/asesor.jpg' %}" class="">
+                 </div>
+                 <div class="infoComment">
+                     <div class="header">
+                        
+                        <h4>Santiago Bautista</h4>
+                        <h5>fecha:</h5>
+                     </div> 
+                     <p>
+                        Aqui ira toda la información de las proximas actualizaciónes </p>
+
+                    <div class="footer">
+                        <label class="icon-rebel"></label>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        
+    </main>
+    <div class="capa-data">
+
+    </div>
 </div>
+</section>
 <br>
+</html>
+
 {% endblock %}
