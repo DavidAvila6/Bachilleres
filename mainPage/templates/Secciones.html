@@ -65,77 +65,89 @@
         });
     });
 </script>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrera de Enfermería: Cuidando Vidas y Promoviendo la Salud</title>
+    <link href="{% static "css/default.css" %}" rel="stylesheet">
+    <style>
+        /* Estilos para el menú lateral */
+        .right-navbar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto; /* Agregamos desplazamiento vertical */
+            transition: width 0.3s; /* Transición suave para el ancho */
+        }
 
-<style>
-    /* Estilos para el menú lateral */
-    .right-navbar {
-        width: 250px;
-        background-color: #333;
-        color: #fff;
-        position: fixed;
-        top: 80px;
-        left: 0;
-        height: 100%;
-        overflow-y: auto; /* Agregamos desplazamiento vertical */
-        transition: width 0.3s; /* Transición suave para el ancho */
-    }
+        .navbar-list {
+            list-style: none;
+            padding: 0;
+        }
 
-    .navbar-list {
-        list-style: none;
-        padding: 0;
-    }
+        .navbar-item {
+            padding: 10px;
+            transition: background-color 0.3s; /* Transición suave para el fondo */
+        }
 
-    .navbar-item {
-        padding: 10px;
-        transition: background-color 0.3s; /* Transición suave para el fondo */
-    }
+        .navbar-item a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            padding: 10px 20px; /* Espaciado en el enlace */
+        }
 
-    .navbar-item a {
-        text-decoration: none;
-        color: #fff;
-        display: block;
-        padding: 10px 20px; /* Espaciado en el enlace */
-    }
+        /* Estilo para el enlace activo */
+        .navbar-item.active {
+            background-color: #555;
+        }
 
-    /* Estilo para el enlace activo */
-    .navbar-item.active {
-        background-color: #555;
-    }
+        /* Estilos para el hover */
+        .navbar-item:hover {
+            background-color: #555;
+        }
 
-    /* Estilos para el hover */
-    .navbar-item:hover {
-        background-color: #555;
-    }
+        /* Estilos para el título del menú */
+        .navbar-title {
+            font-size: 18px;
+            padding: 15px 20px;
+        }
 
-    /* Estilos para el título del menú */
-    .navbar-title {
-        font-size: 18px;
-        padding: 15px 20px;
-    }
+        /* Añadir sombra al menú */
+        .right-navbar {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
 
-    /* Añadir sombra al menú */
-    .right-navbar {
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    
-    }
-    .content {
-        margin-left: 250px; /* Ancho del navbar lateral derecho */
-        padding: 20px;
-        /* Añade estilos adicionales para el área de contenido según tus preferencias */
-    }
-    
-</style>
+        /* Estilos para el contenido principal */
+        .content {
+            margin-left: 250px; /* Ancho del navbar lateral derecho */
+            padding: 20px;
+            /* Añade estilos adicionales para el área de contenido según tus preferencias */
+        }
+    </style>
+</head>
+<body>
 
-<nav class="right-navbar">
-    <ul class="navbar-list">
-        <li class="navbar-item"><a href="#mate">Medicina</a></li>
-        <li class="navbar-item"><a href="#ciencias">Ing. Informatica</a></li>
-        <li class="navbar-item"><a href="#otro">Ing. Mecanica </a></li>
-        
-    </ul>
-</nav>
-<main class="content">
-    <section id="mate">
+    <nav class="right-navbar">
+        <ul class="navbar-list">
+            <li class="navbar-item"><a href="#Medicina">Medicina</a></li>
+            <li class="navbar-item"><a href="#Enfermeria">Enfermeria</a></li>
+            <li class="navbar-item"><a href="#Ingenieria de Sistemas">Ingenieria de Sistemas</a></li>
+            <li class="navbar-item"><a href="#mate">Arquitectura</a></li>
+            <li class="navbar-item"><a href="#ciencias">Derecho</a></li>
+            <li class="navbar-item"><a href="#otro">Gastronomia</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <!-- Contenido de tus secciones Medicina, Enfermeria, Ingenieria, etc. -->
+  
+    <section id="Medicina">
         <h1>Medicina</h1>
         </p>
         <div class="AcercaImg row justify-content-center g-0 pb-5">
@@ -205,8 +217,79 @@
         </body>
         
     </section>
+    <title>Carrera de Enfermería: Cuidando Vidas y Promoviendo la Salud</title>
+</head>
+<body>
+            
 
-    <section id="ciencias">
+    <section id="Enfermeria">
+        <h1>Enfermeria</h1>
+            </p>
+            <div class="AcercaImg row justify-content-center g-0 pb-5">
+                <img src="{% static 'img/enfermeria.webp' %}" class="col-md-4 p-3">
+        <h1>Carrera de Enfermería: Cuidando Vidas y Promoviendo la Salud</h1>
+    </header>
+    <main>
+        <section>
+            <h2>La Carrera de Enfermería: Un Compromiso con la Salud</h2>
+            <p>La carrera de Enfermería es una noble profesión que implica cuidar y atender a pacientes para promover su bienestar y salud. Aquí hay algunos pasos clave que debes seguir:</p>
+            <ol>
+                <li><strong>Educación Previa:</strong>
+                    <ul>
+                        <li><strong>Pregrado:</strong> Comienza con un programa de pregrado en Enfermería o campos relacionados. Aprende las bases de la atención médica.</li>
+                    </ul>
+                </li>
+                <li><strong>Programa de Enfermería:</strong>
+                    <ul>
+                        <li><strong>Ingreso:</strong> Aplica a programas de Enfermería acreditados.</li>
+                        <li><strong>Programa:</strong> Completa un programa de estudios que incluye cursos teóricos y prácticos en cuidado de pacientes y salud.</li>
+                    </ul>
+                </li>
+                <li><strong>Especialización:</strong>
+                    <ul>
+                        <li><strong>Selecciona tu Área:</strong> Elige una especialización, como enfermería pediátrica, cuidados intensivos o salud mental.</li>
+                    </ul>
+                </li>
+                <li><strong>Pasantías y Prácticas:</strong>
+                    <ul>
+                        <li><strong>Experiencia Clínica:</strong> Adquiere experiencia en entornos clínicos trabajando con pacientes y profesionales de la salud.</li>
+                    </ul>
+                </li>
+                <li><strong>Graduación:</strong>
+                    <ul>
+                        <li><strong>Título:</strong> Gradúate con un título de Enfermería y obtén las licencias necesarias.</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+        <section>
+            <h2>Enfoques en la Carrera de Enfermería</h2>
+            <p>La Enfermería ofrece diversas áreas de enfoque, incluyendo:</p>
+            <ul>
+                <li><strong>Enfermería Pediátrica:</strong> Cuida y atiende a niños y adolescentes.</li>
+                <li><strong>Cuidados Intensivos:</strong> Trabaja en unidades de cuidados intensivos, atendiendo a pacientes críticos.</li>
+                <li><strong>Salud Mental:</strong> Apoya a pacientes con trastornos de salud mental y emocional.</li>
+                <li><strong>Enfermería Comunitaria:</strong> Trabaja en comunidades para promover la salud y la prevención de enfermedades.</li>
+                <li><strong>Geriatría:</strong> Especialízate en el cuidado de personas mayores.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Ingresando al Mundo Laboral</h2>
+            <p>Una vez que te has graduado y obtuviste tu licencia, estás listo para ingresar al apasionante mundo laboral de la Enfermería. Aquí hay algunas opciones:</p>
+            <ul>
+                <li><strong>Enfermería Hospitalaria:</strong> Trabaja en hospitales, clínicas o centros de salud, atendiendo a pacientes hospitalizados.</li>
+                <li><strong>Enfermería de Atención Primaria:</strong> Proporciona atención en entornos de atención primaria, como consultorios médicos.</li>
+                <li><strong>Enfermería de Urgencias:</strong> Responde a situaciones de emergencia y cuida a pacientes en salas de urgencias.</li>
+                <li><strong>Enfermería de Educación:</strong> Enseña y capacita a futuros enfermeros y pacientes sobre el cuidado de la salud.</li>
+                <li><strong>Enfermería de Investigación:</strong> Contribuye a la investigación médica y participa en proyectos de salud.</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>¡Tu Futuro en Enfermería te Permite Cuidar Vidas y Hacer una Diferencia!</p>
+    </footer>
+</body>
+    <section id="Ingenieria de Sistemas">
         <h1>Ing. Informatica</h1>
         <img src="{% static 'img/sistemas.png' %}" class="col-md-4 p-3">
         <title>Carrera de Ingeniería en Informática: Tu Pasaporte al Mundo Digital</title>
