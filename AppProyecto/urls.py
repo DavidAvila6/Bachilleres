@@ -25,7 +25,7 @@ urlpatterns = [
     path('about/', views.about),
     path('recursos/', views.recursos),
     path('novedades/', views.novedades),
-    path('becas/',views.becas),
+    path('Medicina/', views.Medicina),
     path('faq/', views.faq),
     path('accounts/', include('django.contrib.auth.urls')),
     path('Secciones/', views.Secciones ),

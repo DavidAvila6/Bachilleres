@@ -47,6 +47,9 @@ def perfil(request):
 def Secciones(request):
     return render(request, 'Secciones.html')
 
+def Medicina(request):
+    return render(request, 'SecBecas/Medicina.html')
+
 @login_required
 def edit_perfil(request):
     if request.method == 'POST':

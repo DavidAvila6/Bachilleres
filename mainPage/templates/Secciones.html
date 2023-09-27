@@ -3,11 +3,19 @@
 
 {% block content %}
 {% load static %} 
+<style>
+    /* Estilo para el texto en color negro */
+    .texto-negro {
+        color: black; /* Puedes cambiar "black" por el color que desees */
+    }
+</style>
+<main class="content">
 <head>
     <link href="{% static "css/default.css" %}" rel="stylesheet">
 </head>
 <div class="container mt-5">
     <section>
+        <section id="Secciones">
         <h1 class="display-4"> Secciones </h1>
         <section class="section-description">
             <h2 class="section-title">Vida Educativa y Laboral</h2>
@@ -134,7 +142,10 @@
 <body>
 
     <nav class="right-navbar">
+        
+
         <ul class="navbar-list">
+            <li class="navbar-item"><a href="#Secciones">Descripcion</a></li>
             <li class="navbar-item"><a href="#Medicina">Medicina</a></li>
             <li class="navbar-item"><a href="#Enfermeria">Enfermeria</a></li>
             <li class="navbar-item"><a href="#Ingenieria de Sistemas">Ingenieria de Sistemas</a></li>
@@ -144,11 +155,13 @@
         </ul>
     </nav>
 
-    <main class="content">
+    
     <section id="Medicina">
+       <section>
+        <div class="separador"></div>
+        <section>
         <h1>Medicina</h1>
-        </p>
-
+        </p>   
             <img src="{% static 'img/medicina.webp' %}" class="col-md-4 p-3">
             <title>Carrera de Medicina: Tu Camino hacia la Salud</title>
         </head>
@@ -157,6 +170,7 @@
                 <h1>Carrera de Medicina: Tu Camino hacia la Salud</h1>
             </header>
             <main>
+                
                 <section>
                     <h2>La Carrera de Medicina: Un Recorrido</h2>
                     <p>La carrera de medicina es un viaje apasionante que se enfoca en la atención de la salud, el diagnóstico y el tratamiento de enfermedades y trastornos. Aquí hay algunos pasos clave que debes seguir:</p>
@@ -210,17 +224,27 @@
                 </section>
             </main>
             <footer>
-                <p>¡Tu Futuro en Medicina te Espera!</p>
+                <p><span class="texto-negro">¡Tu Futuro en Medicina te Espera!</p>
             </footer>
-        </body>
-        
-    </section>
-    <title>Carrera de Enfermería: Cuidando Vidas y Promoviendo la Salud</title>
+            <section>
+                <h2>Estas interesado en universidad.</h2>
+                <p>Esta puede ser la oportunidad para que llegues a la vida universitaria</p>
+                <p>Consulta becas aqui!<p>
+            <a href="/Medicina">
+                <button class="boton-estetico">Haz clic aquí</button>
+            </a>
+        </section>
+    <title>      </title>
 </head>
 <body>
             
 
     <section id="Enfermeria">
+    </section>
+
+    <div class="separador"></div> <!-- Espacio separador -->
+    
+
         <h1>Enfermeria</h1>
             </p>
   
@@ -284,7 +308,7 @@
         </section>
     </main>
     <footer>
-        <p>¡Tu Futuro en Enfermería te Permite Cuidar Vidas y Hacer una Diferencia!</p>
+        <p><span class="texto-negro">¡Tu Futuro en Enfermería te Permite Cuidar Vidas y Hacer una Diferencia!</p>
     </footer>
 </head>    
 </section>
@@ -295,6 +319,7 @@
 
 
     <section id="Ingenieria de Sistemas">
+
         <h1>Ing. Informatica</h1>
         <img src="{% static 'img/sistemas.png' %}" class="col-md-4 p-3">
         <title>Carrera de Ingeniería en Informática: Tu Pasaporte al Mundo Digital</title>
@@ -360,7 +385,7 @@
         </section>
     </main>
     <footer>
-        <p>¡Tu Futuro en Ingeniería en Informática te Espera!</p>
+        <p><span class="texto-negro">¡Tu Futuro en Ingeniería en Informática te Espera!</p>
     </footer>
 </section>
 <title></title>
@@ -438,7 +463,7 @@
         </section>
     </main>
     <footer>
-        <p>¡Tu Futuro en Arquitectura te Ofrece la Oportunidad de Diseñar un Mundo Mejor!</p>
+        <p><span class="texto-negro">¡Tu Futuro en Arquitectura te Ofrece la Oportunidad de Diseñar un Mundo Mejor!</p>
     </footer>
 </body>
 </html>
@@ -513,7 +538,7 @@
             </section>
         </main>
         <footer>
-            <p>¡Tu Futuro en Derecho te Lleva hacia la Justicia!</p>
+            <p><span class="texto-negro">¡Tu Futuro en Derecho te Lleva hacia la Justicia!</p>
         </footer>
     </section>
 </head>
@@ -592,7 +617,7 @@
         </section>
     </main>
     <footer>
-        <p>¡Tu Futuro en Gastronomía te Espera!</p>
+        <p><span class="texto-negro">¡Tu Futuro en Gastronomía te Espera!</p>
     </footer>
 </body>
 </html>
