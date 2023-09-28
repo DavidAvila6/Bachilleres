@@ -50,6 +50,21 @@ def Secciones(request):
 def Medicina(request):
     return render(request, 'SecBecas/Medicina.html')
 
+def Derecho(request):
+    return render(request, 'SecBecas/Derecho.html')
+
+def Arquitectura(request):
+    return render(request, 'SecBecas/Arquitectura.html')
+
+def Gastronomia(request):
+    return render(request, 'SecBecas/Gastronomia.html')
+
+def Enefermeria(request):
+    return render(request, 'SecBecas/Enfermeria.html')
+
+def IngSistemas(request):
+    return render(request, 'SecBecas/IngSistemas.html')
+
 @login_required
 def edit_perfil(request):
     if request.method == 'POST':
