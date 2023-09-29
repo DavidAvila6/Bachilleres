@@ -55,6 +55,9 @@
     </div>
 
     </div>
+    {% if user.is_authenticated %}
+    <br><
+    {% else %}
     <div class="Contactanos row g-0 my-5 justify-content-center">
         <div class="texto_contacto col-md-4 text-center my-auto">          
             <div>
@@ -62,6 +65,6 @@
             </div>       
         </form>
     </div>
-
+    {% endif %}
 {% endblock %}
 

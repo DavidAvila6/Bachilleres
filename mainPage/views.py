@@ -21,7 +21,7 @@ from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-
+from .models import Becas_Fav,Beca
 # Create your views here.
 
 def principalHub(request):
@@ -35,8 +35,19 @@ def recursos(request):
 def novedades(request):
     return render(request, 'novedades.html')
 
+#login_required  
+
+@login_required
 def becas(request):
-    return render(request, 'becas.html')
+    
+    if request.user.is_authenticated:
+        becas = Beca.objects.all()
+        favoritos = Becas_Fav.objects.filter(usuario=request.user)
+        return render(request,'becas.html', {'favoritos': favoritos,'becas':becas})
+
+    else:
+        favoritos = Becas_Fav.objects.all()
+        return render(request,'becas.html', {'favoritos': favoritos})
 
 def faq(request):
     return render(request, 'faq.html')
