@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Universidad(models.Model):
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=50)
     nit = models.IntegerField()
     ciudad = models.CharField(max_length=50)
     pais = models.CharField(max_length=50)
@@ -52,13 +52,13 @@ class Fundacion(models.Model):
     
 class Requisitos (models.Model):
     id = models.AutoField(primary_key=True)
-    Descripcion = models.CharField(max_length=100)
+    Descripcion = models.CharField(max_length=200)
     def __str__(self):
         return self.Descripcion
     
 class Documentos (models.Model):
     id = models.AutoField(primary_key=True)
-    Descripcion = models.CharField(max_length=100)
+    Descripcion = models.CharField(max_length=200)
     def __str__(self):
         return self.Descripcion
     
@@ -70,7 +70,7 @@ class Beca (models.Model):
         (Nacional, 'Nacional'),
         (Extranjera, 'Extranjera'),
     ]
-    nombre = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=50)
     tipo = models.CharField(max_length=10,choices=OPCIONES_TIPO,default=Nacional)
     monto = models.IntegerField()
     
