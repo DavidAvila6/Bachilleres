@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %} 
+<head>
+    <link href="{% static "css/perfil.css" %}" rel="stylesheet">
+</head>
+
+
+<div class="container mt-5">
+    <section class="perfil">
+        <!--<img src="imagen-de-perfil.jpg" alt="Imagen de perfil">-->
+        <h2>{{ user.username }}</h2>
+        <p>Nombre: {{ user.first_name}}</p>
+        <p>Apellido: {{ user.last_name}}</p>
+        <p>Correo Electrónico: {{ user.email }}</p>
+        <p>Fecha de Nacimiento: 01 de enero de 1990</p>
+        <br><br>
+        <a href="{% url 'edit_perfil' %}" class="btn btn-primary">Editar Perfil</a> 
+    </section>
+    {% if user.is_superuser%}
+    <section class="admin">
+        <h2>Administrador</h2><br>
+        <ul class="button-list">
+            <li>
+                <a href='/correo' class="button">Enviar Correo A Empresa</a>
+                //Esto es para los comentarios de la gente se envia al correo de la empresa
+            </li><br>
+            <li>
+                <a href='/enviar_correo' class="button">Enviar Correo con Asunto de Empresa</a>
+            </li><br>
+            <li>
+                <a href='/enviar_HTML' class="button">Enviar HTML prediseñado</a>
+            </li><br>
+            <li>
+                <a href='/correodirecto' class="button">Correo directo a Usuario</a>
+            </li><br>
+        </ul>
+        
+    </section>
+    {% endif  %}
+    <section class="actividades">
+        <h2>Mis Actividades</h2>
+        <ul>
+            <li>Actividad 1</li>
+            <li>Actividad 2</li>
+            <li>Actividad 3</li>
+        </ul>
+    </section>
+
+    <section class="amigos">
+        <h2>Mis Cursos</h2>
+        <ul>
+            <li>Curso 1</li>
+            <li>Curso 2</li>
+            <li>Curso 3</li>
+        </ul>
+    </section>
+    </section>
+</div>
+<br>
+
+{% endblock %}

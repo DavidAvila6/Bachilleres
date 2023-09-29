@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+*{
+    font-family: oswal;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Source Serif";
+}
+
+body {
+  background: linear-gradient(to bottom, #6D6656, #E4DBC5 );
+}
+img{
+  border-radius: 10px;
+  padding-left: 2vmax;
+}
+.SeccionTexto{
+  background: #E4DBC5;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+.SeccionTexto h2{
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.Becas{
+  color: white;
+  font-size: 1.1rem;
+}
+.TituloSeccion hr{
+  border: solid 2px white;
+}
+.Becas h2{
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.AreaAcordeon{
+  border-radius: 10px;
+  background-color: #243328;
+  color: white;
+}
+
+.card{
+  background: linear-gradient(to bottom, #2E994D, #243328 );
+  color: white;
+}
+.AcordeonContainer{
+    padding: 0.2rem 0rem;
+    border-radius: 20px;
+  }
+  .AcordeonLabel {
+  position: relative;
+  cursor: pointer;
+  }
+  
+  .AcordeonLabel::before {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  }
+  
+  .AcordeonContent {
+  height: 0;
+  overflow: hidden;
+  transition: 0.5s !important;
+  }
+  
+  .AcordeonContainer.active .AcordeonContent {
+  padding-top: 1rem;
+  height: auto;
+  }
+  
+  .AcordeonContainer.active .AcordeonLabel::before {
+  content: "-";
+  }
