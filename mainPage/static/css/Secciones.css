@@ -17,3 +17,32 @@
 .boton-estetico:hover {
     background-color: #2980b9;
 }
+.boton-link {
+    text-decoration: none; /* Quitar subrayado del enlace */
+    display: inline-block; /* Hacer que el enlace y el botón se muestren en línea */
+    text-align: center; /* Centrar el contenido horizontalmente */
+    background-color: #007BFF; /* Color de fondo del enlace */
+    color: #fff; /* Color del texto */
+    padding: 15px 30px; /* Espaciado interno (ajusta según sea necesario) */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+  }
+  
+  .boton-link:hover {
+    background-color: #0056b3; /* Cambio de color al pasar el cursor por encima */
+  }
+  
+  .boton-estetico {
+    background-color: #ff5722; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Quitar el borde del botón */
+    padding: 10px 20px; /* Espaciado interno del botón (ajusta según sea necesario) */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+  }
+  
+  .boton-estetico:hover {
+    background-color: #e64a19; /* Cambio de color al pasar el cursor por encima del botón */
+  }
+  
