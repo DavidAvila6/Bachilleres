@@ -2,7 +2,7 @@ import mimetypes
 import os
 import smtplib
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 
 from AppProyecto import settings
+from mainPage.models import Becas_Fav, Configuracion_Becas
 from .forms import customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
@@ -271,3 +272,17 @@ def enviar_HTML(request):
           
 
 #Finalizado Seccion de correos-----------------------------------------------------
+#Favoritos------------------------------------
+def agregar_favorito(request):
+    if request.method == 'POST':
+        tipo = request.POST.get('tipo')
+        usuario = request.user  # Obtén el usuario actual
+        configuracion_becas_id = request.POST.get('configuracion_becas_id')
+
+        # Asegúrate de tener Configuracion_Becas importado y obtenido correctamente
+        configuracion_becas = Configuracion_Becas.objects.get(id=configuracion_becas_id)
+
+        # Crea la instancia de Becas_Fav y guárdala en la base de datos
+        beca_fav = Becas_Fav.create(tipo=tipo, usuario=usuario, configuracion_becas=configuracion_becas)
+
+        return JsonResponse({'status': 'success'})

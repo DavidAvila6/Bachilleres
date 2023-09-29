@@ -114,6 +114,11 @@ class Becas_Fav (models.Model):
         constraints = [
             models.UniqueConstraint(fields=['usuario', 'Configuracion_Becas','tipo'], name='unique_foraneas_favoritos'),
         ]
+    @classmethod
+    def create(cls, tipo, usuario, configuracion_becas):
+        fav = cls(tipo=tipo, usuario=usuario, Configuracion_Becas=configuracion_becas)
+        fav.save()
+        return fav
     def __str__(self):
         fila = "Tipo : "+str(self.tipo)+" / Usuario: "+str(self.usuario)
         return fila
