@@ -74,7 +74,6 @@ class Beca (models.Model):
     nombre = models.CharField(max_length=50)
     tipo = models.CharField(max_length=10,choices=OPCIONES_TIPO,default=Nacional)
     valor = models.CharField(max_length=100)
-    
     Documentos = models.ManyToManyField(Documentos)
     Requisitos = models.ManyToManyField(Requisitos)
     Descripcion = models.CharField(max_length=1000)

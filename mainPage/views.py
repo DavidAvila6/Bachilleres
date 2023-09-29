@@ -8,7 +8,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
-
 from AppProyecto import settings
 from mainPage.models import Becas_Fav, Configuracion_Becas
 from .forms import customUserCreationForm
@@ -22,6 +21,7 @@ from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from .models import User,Configuracion_Becas
 
 # Create your views here.
 
@@ -37,7 +37,9 @@ def novedades(request):
     return render(request, 'novedades.html')
 
 def becas(request):
-    return render(request, 'becas.html')
+    becas_sin = Configuracion_Becas.objects.filter()
+    becas = Configuracion_Becas.objects.all()
+    return render(request, 'becas.html', {'becas': becas,'becas_sin':becas_sin})
 
 def faq(request):
     return render(request, 'faq.html')
@@ -47,6 +49,7 @@ def perfil(request):
 
 def Secciones(request):
     return render(request, 'Secciones.html')
+
 
 @login_required
 def edit_perfil(request):

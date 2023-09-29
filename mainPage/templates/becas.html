@@ -41,6 +41,104 @@
 
   <div class="filtros row g-0 justify-content-center">
 
+
+
+    <div class="table">
+      <h2>Becas general</h2>
+      <table class="table table-primary">
+        <thead>
+          <tr>
+            <th scope="col">Fundacion</th>
+            <th scope="col">Universidad</th>
+            <th scope="col">Facultad</th>
+            <th scope="col">nombbre beca</th>
+            <th scope="col">Requisitos</th>
+            <th scope="col">Documentos</th>
+            <th scope="col">Descripcion</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for becas in becas %}
+          <tr class=" base_datos">
+            <td>{{ becas.Fundacion}}</td>
+            <td>{{ becas.Union_U_F.univeridad}}</td>
+            <td>{{ becas.Union_U_F.facultad}}</td>
+            <td> {{ becas.Beca}} </td>
+            <td>
+              {% for x in becas.Beca.Requisitos.all %}
+              <ul>
+                <li>
+                  {{ x.Descripcion }}
+                </li>
+              </ul>
+              {% endfor %}
+            </td>
+            <td>
+              {% for x in becas.Beca.Documentos.all %}
+              <ul>
+                <li>
+                  {{ x.Descripcion }}
+                </li>
+              </ul>
+              {% endfor %}
+            </td>
+            <td>{{ becas.Beca.Descripcion}}</td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="table">
+      <h2>Becas general filtrado</h2>
+      <table class="table table-primary">
+        <thead>
+          <tr>
+            <th scope="col">Fundacion</th>
+            <th scope="col">Universidad</th>
+            <th scope="col">Facultad</th>
+            <th scope="col">nombbre beca</th>
+            <th scope="col">Requisitos</th>
+            <th scope="col">Documentos</th>
+            <th scope="col">Descripcion</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for becas_sin in becas_sin %}
+          <tr class=" base_datos">
+            <td>{{ becas_sin.Fundacion}}</td>
+            <td>{{ becas_sin.Union_U_F.univeridad}}</td>
+            <td>{{ becas_sin.Union_U_F.facultad}}</td>
+            <td> {{ becas_sin.Beca}} </td>
+            <td>
+              {% for x in becas_sin.Beca.Requisitos.all %}
+              <ul>
+                <li>
+                  {{ x.Descripcion }}
+                </li>
+              </ul>
+              {% endfor %}
+            </td>
+            <td>
+              {% for x in becas_sin.Beca.Documentos.all %}
+              <ul>
+                <li>
+                  {{ x.Descripcion }}
+                </li>
+              </ul>
+              {% endfor %}
+            </td>
+            <td>{{ becas_sin.Beca.Descripcion}}</td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <!--
     <div class="Becas row g-0 justify-content-center">
 
       <div id="Medicina" class="MedicinaGeneral row g-0 mt-3 justify-content-center">
@@ -1313,6 +1411,8 @@
     
 
     </div>
+
+  -->
 </body>
 
 
