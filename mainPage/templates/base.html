@@ -59,6 +59,7 @@
                     <a class="nav-link" href="/Secciones">Secciones</a>
                 </li>
 
+
                 {% if user.is_authenticated  %}
                 <li>
                   <a type="button" class="btn btn-outline-danger" aria-current="page" href="{% url 'logout' %}">Cerrar Sesion</a>
