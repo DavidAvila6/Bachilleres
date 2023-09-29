@@ -47,6 +47,7 @@ class Fundacion(models.Model):
     ]
     nombre = models.CharField(max_length=30)
     tipo =  models.CharField(max_length=20,choices=OPCIONES_TIPO,default=Universidad)
+    
     def __str__(self):
         return self.nombre
     
@@ -112,7 +113,7 @@ class Becas_Fav (models.Model):
     Configuracion_Becas = models.ForeignKey(Configuracion_Becas, on_delete=models.CASCADE)
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['usuario', 'Configuracion_Becas','tipo'], name='unique_foraneas_favoritos'),
+            models.UniqueConstraint(fields=['usuario', 'Configuracion_Becas','tipo'], name='unique_foraneas_favoritos_Beca'),
         ]
     def __str__(self):
         fila = "Tipo : "+str(self.tipo)+" / Usuario: "+str(self.usuario)
@@ -122,6 +123,21 @@ class Facultad_fav(models.Model):
     id = models.AutoField(primary_key=True)
     Facultad = models.ForeignKey(Facultad,on_delete=models.CASCADE)
     Estudiante = models.ForeignKey(User, on_delete=models.CASCADE)
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['Facultad', 'Estudiante'], name='unique_foraneas_favoritos_Facultad'),
+        ]
     def __str__(self):
         return "Facultad: "+str(self.Facultad)+" / Estudiante: "+str(self.Estudiante)
+
+class Universidad_fav(models.Model):
+    id = models.AutoField(primary_key=True)
+    Universidad = models.ForeignKey(Universidad,on_delete=models.CASCADE)
+    Estudiante = models.ForeignKey(User, on_delete=models.CASCADE)
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['Universidad', 'Estudiante'], name='unique_foraneas_favoritos_Universidad'),
+        ]
+    def __str__(self):
+        return "Universidad: "+str(self.Universidad)+" / Estudiante: "+str(self.Estudiante)
 
