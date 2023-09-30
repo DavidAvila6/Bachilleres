@@ -21,6 +21,7 @@
     {% if user.is_superuser%}
     <section class="admin">
         <h2>Administrador</h2><br>
+        <h3>Correos:</h3><br>
         <ul class="button-list">
             <li>
                 <a href='/correo' class="button">Enviar Correo A Empresa</a>
@@ -35,7 +36,7 @@
             <li>
                 <a href='/correodirecto' class="button">Correo directo a Usuario</a>
             </li><br>
-            Becas-----------------
+            <h3>Universidad/becas/facultad:</h3><br>
             <li>
                 <a class="button" href="{% url 'agregar_beca' %}">Agregar Beca</a>
             </li><br>

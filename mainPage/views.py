@@ -328,7 +328,7 @@ def agregar_beca(request):
     else:
         form = BecaForm()
     
-    return render(request, 'agregar_beca.html', {'form': form})
+    return render(request, 'becasform/agregar_beca.html', {'form': form})
 
 
 
