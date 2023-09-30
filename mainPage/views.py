@@ -11,7 +11,7 @@ from django.utils.html import strip_tags
 
 from AppProyecto import settings
 from mainPage.models import Becas_Fav, Configuracion_Becas
-from .forms import customUserCreationForm
+from .forms import BecaForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
 from .forms import EmailUsername
@@ -286,3 +286,55 @@ def agregar_favorito(request):
         beca_fav = Becas_Fav.create(tipo=tipo, usuario=usuario, configuracion_becas=configuracion_becas)
 
         return JsonResponse({'status': 'success'})
+#Agregar beca---------------------------
+def enviar_correo_beca_agregada(nueva_beca):
+    subject = 'Nueva Beca Agregada: {}'.format(nueva_beca.nombre)
+    template_name = 'correos/nueva_beca_email.html'
+
+    # Obtén la lista de usuarios registrados
+    usuarios_registrados = User.objects.all()
+    to_email = [usuario.email for usuario in usuarios_registrados]
+
+    # Configura el servidor de correo saliente (SMTP)
+    smtp_server = 'smtp.gmail.com'  # Cambia esto si estás usando otro proveedor de correo
+    smtp_port = 587  # Puerto de Gmail
+    smtp_username = 'bachilleresbch@gmail.com'  # Tu dirección de correo electrónico
+    smtp_password = 'qpcu ybch elbk kihu'  # Tu contraseña
+
+    context = {
+        'nombre_beca': nueva_beca.nombre,
+        'tipo_beca': nueva_beca.tipo,
+        'valor_beca': nueva_beca.valor,
+        'descripcion_beca': nueva_beca.Descripcion,
+        'requisitos': nueva_beca.Requisitos.all(),
+        'documentos': nueva_beca.Documentos.all(),
+    }
+
+    message = render(None, template_name, context).content.decode('utf-8')
+
+    send_mail(subject, message, smtp_username, to_email, html_message=message)
+
+def agregar_beca(request):
+    if request.method == 'POST':
+        form = BecaForm(request.POST)
+        if form.is_valid():
+            # Guardar la beca
+            nueva_beca = form.save()
+
+            # Enviar correo electrónico a los usuarios
+            enviar_correo_beca_agregada(nueva_beca)
+
+            return redirect('beca_enviado')
+    else:
+        form = BecaForm()
+    
+    return render(request, 'agregar_beca.html', {'form': form})
+
+
+
+
+            
+
+@login_required
+def beca_enviado(request):
+    return render(request, 'becasform/beca_enviado.html')

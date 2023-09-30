@@ -43,5 +43,7 @@ urlpatterns = [
     path('descargar/', views.descargar_archivo, name = "descargar"),
     path('registro/', views.registro, name="registro"),
     path('agregar_favorito/', views.agregar_favorito, name='nombre_de_tu_vista_agregar_favorito'),
+    path('agregar_beca/', views.agregar_beca, name='agregar_beca'),
+    path('beca_enviado/', views.beca_enviado, name='beca_enviado'),
     
 ]

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Beca Agregada</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nueva Beca Agregada</h1>
+        <p>Se ha agregado una nueva beca con la siguiente información:</p>
+        
+        <ul>
+            <li><span class="highlight">Nombre:</span> {{ nombre_beca }}</li>
+            <li><span class="highlight">Tipo:</span> {{ tipo_beca }}</li>
+            <li><span class="highlight">Valor:</span> {{ valor_beca }}</li>
+            <li><span class="highlight">Descripción:</span> {{ descripcion_beca }}</li>
+        </ul>
+
+        <p>Requisitos:</p>
+        <ul>
+            {% for requisito in requisitos %}
+                <li>{{ requisito.Descripcion }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>Documentos:</p>
+        <ul>
+            {% for documento in documentos %}
+                <li>{{ documento.Descripcion }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>¡Gracias por ser parte de nuestro sistema!</p>
+    </div>
+</body>
+<footer class="row g-0 text-center py-1" style="background-color:#EFE9D7;">
+        
+  <div class="FooterIconos col">
+      <h1>BCH</h1>
+      
+  </div>
+</footer>
+</html>
