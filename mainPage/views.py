@@ -37,9 +37,10 @@ def novedades(request):
     return render(request, 'novedades.html')
 
 def becas(request):
+    becas_fun = Configuracion_Becas.objects.values_list('Fundacion__nombre', flat=True).distinct()
     becas_sin = Configuracion_Becas.objects.filter(Fundacion__nombre="NA")
     becas = Configuracion_Becas.objects.exclude(Fundacion__nombre="NA")
-    return render(request, 'becas.html', {'becas': becas,'becas_sin':becas_sin})
+    return render(request, 'becas.html', {'becas': becas,'becas_sin':becas_sin,'becas_fun':becas_fun})
 
 def faq(request):
     return render(request, 'faq.html')
