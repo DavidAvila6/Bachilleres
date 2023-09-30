@@ -51,10 +51,11 @@
             <th scope="col">Fundacion</th>
             <th scope="col">Universidad</th>
             <th scope="col">Facultad</th>
-            <th scope="col">nombbre beca</th>
+            <th scope="col">nombre beca</th>
             <th scope="col">Requisitos</th>
             <th scope="col">Documentos</th>
             <th scope="col">Descripcion</th>
+            <th scope="col">imagen</th>
           </tr>
         </thead>
         <tbody>
@@ -83,6 +84,7 @@
               {% endfor %}
             </td>
             <td>{{ becas.Beca.Descripcion}}</td>
+            <td><img src="{{ becas.Beca.imagen.url }}"></td>
             {% endfor %}
           </tr>
         </tbody>
@@ -91,17 +93,18 @@
 
 
     <div class="table">
-      <h2>Becas general filtrado</h2>
+      <h2>Becas general filtrado fundacion</h2>
       <table class="table table-primary">
         <thead>
           <tr>
             <th scope="col">Fundacion</th>
             <th scope="col">Universidad</th>
             <th scope="col">Facultad</th>
-            <th scope="col">nombbre beca</th>
+            <th scope="col">nombre beca</th>
             <th scope="col">Requisitos</th>
             <th scope="col">Documentos</th>
             <th scope="col">Descripcion</th>
+            <th scope="col">imagen</th>
           </tr>
         </thead>
         <tbody>
@@ -130,12 +133,81 @@
               {% endfor %}
             </td>
             <td>{{ becas_sin.Beca.Descripcion}}</td>
+            <td><img src="{{ becas_sin.Beca.imagen.url }}"></td>
             {% endfor %}
           </tr>
         </tbody>
       </table>
     </div>
 
+
+
+    {% for becas_sin in becas_sin %}
+
+    <div class="MedicinaGeneralPost row g-0 justify-content-center my-5">
+      <div class="card col-8 border-0">
+        <h2 class="text-center py-2 ">{{ becas_sin.Beca}}</h2>
+        <div class="div row align-content-center justify-content-center">
+          <div class="col pt-5 text-center">
+            <img src="{{ becas_sin.Beca.imagen.url }}" class="img-fluid">
+          </div>
+          <div class="col px-5 py-3">
+            <div class="Acordeon">
+              <p>
+                {{ becas_sin.Beca.Descripcion}}
+              </p>
+              <div class="AcordeonContainer">
+                <hr>
+                <div class="AcordeonLabel">Requisitos</div>
+                <div class="AcordeonContent">
+                  {% for x in becas_sin.Beca.Requisitos.all %}
+                  <ul>
+                    <li>
+                      {{ x.Descripcion }}
+                    </li>
+                  </ul>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="AcordeonContainer">
+                <hr>
+                <div class="AcordeonLabel"> Valor y duracion de la beca</div>
+                <div class="AcordeonContent">
+                  <p>
+                    {{ becas_sin.Beca.valor_duracion}}
+                  </p>
+                </div>
+              </div>
+              <div class="AcordeonContainer">
+                <hr>
+                <div class="AcordeonLabel">Cómo aplicar</div>
+                <div class="AcordeonContent">
+                  <p>
+                    NA
+                  </p>
+                </div>
+              </div>
+
+              <div class="AcordeonContainer">
+                <hr>
+                <div class="AcordeonLabel">Qué documentos necesitas</div>
+                <div class="AcordeonContent">
+                  {% for x in becas_sin.Beca.Documentos.all %}
+                  <ul>
+                    <li>
+                      {{ x.Descripcion }}
+                    </li>
+                  </ul>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
 
 
     <!--
@@ -149,72 +221,7 @@
 
 
 
-        <div class="MedicinaGeneralPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Beca de la Universidad de La Sabana</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/sabana.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    La Universidad de La Sabana impulsa este programa para captar
-                    aquellos estudiantes que se destacaron en los estudios de
-                    bachillerato, ofreciendo la beca para los dos estudiantes destacados
-                    en el primer semestre del curso de Medicina.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>El solicitante debe ser recomendado por el colegio.</li>
-                        <li>ser de nuevo ingreso al programa</li>
-                        <li>Buenos resultados en el proceso de ingreso</li>
-                        <li>Alto nivel académico durante la etapa de bachillerato</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El programa de beca de Medicina ofrece dos cupos, uno que cubre
-                        la totalidad de la matrícula y otro en 70 % y se otorgan
-                        semestralmente. Así mismo, los beneficiarios de la beca quedarán
-                        libres del pago de derechos de grado como beneficio al final del
-                        programa.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Para aplicar debes estar inscrito en el programa de educación
-                        superior de la facultad de Medicina y cumplir los requisitos.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Carta de postulacion del colegio</li>
-                        <li>Carta de admonistracion del programa</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
 
         -----------------------------------------------------------------------------------------------
