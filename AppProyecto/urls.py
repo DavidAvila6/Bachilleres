@@ -31,6 +31,7 @@ urlpatterns = [
     path('Secciones/', views.Secciones ),
     path('perfil/', views.perfil ),
     path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
+    path('dar_like/<int:beca_id>/', views.dar_like, name='dar_like'),
     #Correos-----------------------------------------------------------------
     path('correo/', views.correo,name='correo'),
     path('correodirecto/', views.correodirecto,name='correodirecto'),

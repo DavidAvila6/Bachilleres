@@ -21,7 +21,10 @@ from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-from .models import Becas_Fav,Beca
+from .models import Becas_Fav,Beca,Configuracion_Becas
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+
 # Create your views here.
 
 def principalHub(request):
@@ -41,13 +44,24 @@ def novedades(request):
 def becas(request):
     
     if request.user.is_authenticated:
-        becas = Beca.objects.all()
+        becas = Beca.objects.filter()
         favoritos = Becas_Fav.objects.filter(usuario=request.user)
         return render(request,'becas.html', {'favoritos': favoritos,'becas':becas})
 
     else:
         favoritos = Becas_Fav.objects.all()
+        configuracion = Configuracion_Becas.objects.all()
         return render(request,'becas.html', {'favoritos': favoritos})
+@login_required
+def dar_like(request, beca_id):
+    beca = get_object_or_404(Beca, pk=beca_id)
+    beca.likes += 1
+    beca.save()
+    return JsonResponse({'success': True})
+
+
+    
+
 
 def faq(request):
     return render(request, 'faq.html')
@@ -69,6 +83,8 @@ def edit_perfil(request):
         form = customUserCreationForm(instance=request.user)
     
     return render(request, 'edit_perfil.html', {'form': form})
+
+
 
 
 

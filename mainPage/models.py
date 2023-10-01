@@ -78,6 +78,7 @@ class Beca (models.Model):
     Documentos = models.ManyToManyField(Documentos)
     Requisitos = models.ManyToManyField(Requisitos)
     Descripcion = models.CharField(max_length=1000)
+    likes = models.IntegerField(default=0)  # Campo de Likes agregado
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['nombre'], name='unique_foraneas_Beca'),
