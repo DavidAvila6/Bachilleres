@@ -59,17 +59,17 @@
           </tr>
         </thead>
         <tbody>
-          {% for becas in becas_fun %}     
+          {% for becas in becas_final %}     
           <tr class=" base_datos">
-            <td>{{ becas }}</td>
+            <td>{{ becas.Fundacion }}</td>
             <td>{{ becas.Union_U_F.univeridad}}</td>
             <td>{{ becas.Union_U_F.facultad}}</td>
             <td> {{ becas.Beca}} </td>
             <td>
-              {% for x in becas.Beca.Requisitos.all %}
+              {% for x in becas.universidades.all %}
               <ul>
                 <li>
-                  {{ x.Descripcion }}
+                  {{ x.Union_U_F__univeridad__nombre}}
                 </li>
               </ul>
               {% endfor %}
