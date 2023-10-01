@@ -2,14 +2,14 @@ import mimetypes
 import os
 import smtplib
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
-
 from AppProyecto import settings
+from mainPage.models import Becas_Fav, Configuracion_Becas
 from .forms import customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
@@ -21,9 +21,7 @@ from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-from .models import Becas_Fav,Beca,Configuracion_Becas
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
+from .models import User,Configuracion_Becas
 
 # Create your views here.
 
@@ -42,26 +40,15 @@ def novedades(request):
 
 @login_required
 def becas(request):
-    
-    if request.user.is_authenticated:
-        becas = Beca.objects.filter()
-        favoritos = Becas_Fav.objects.filter(usuario=request.user)
-        return render(request,'becas.html', {'favoritos': favoritos,'becas':becas})
-
-    else:
-        favoritos = Becas_Fav.objects.all()
-        configuracion = Configuracion_Becas.objects.all()
-        return render(request,'becas.html', {'favoritos': favoritos})
-@login_required
-def dar_like(request, beca_id):
-    beca = get_object_or_404(Beca, pk=beca_id)
-    beca.likes += 1
-    beca.save()
-    return JsonResponse({'success': True})
-
-
-    
-
+    becas_fun = Configuracion_Becas.objects.distinct("Fundacion")
+    for x in becas_fun:
+        fundacions = x.Fundacion
+        configuracion_unica = Configuracion_Becas.objects.filter(Fundacion=fundacions).values("Union_U_F__univeridad__nombre")
+        x.universidades = configuracion_unica
+    becas_sin = Configuracion_Becas.objects.filter(Fundacion__nombre="NA")
+    becas2 = Configuracion_Becas.objects.all()
+    becas = Configuracion_Becas.objects.exclude(Fundacion__nombre="NA")
+    return render(request, 'becas.html', {'becas2': becas2,'becas_sin':becas_sin,'becas_fun':becas_fun})
 
 def faq(request):
     return render(request, 'faq.html')
@@ -71,6 +58,7 @@ def perfil(request):
 
 def Secciones(request):
     return render(request, 'Secciones.html')
+
 
 @login_required
 def edit_perfil(request):
@@ -298,3 +286,17 @@ def enviar_HTML(request):
           
 
 #Finalizado Seccion de correos-----------------------------------------------------
+#Favoritos------------------------------------
+def agregar_favorito(request):
+    if request.method == 'POST':
+        tipo = request.POST.get('tipo')
+        usuario = request.user  # Obtén el usuario actual
+        configuracion_becas_id = request.POST.get('configuracion_becas_id')
+
+        # Asegúrate de tener Configuracion_Becas importado y obtenido correctamente
+        configuracion_becas = Configuracion_Becas.objects.get(id=configuracion_becas_id)
+
+        # Crea la instancia de Becas_Fav y guárdala en la base de datos
+        beca_fav = Becas_Fav.create(tipo=tipo, usuario=usuario, configuracion_becas=configuracion_becas)
+
+        return JsonResponse({'status': 'success'})

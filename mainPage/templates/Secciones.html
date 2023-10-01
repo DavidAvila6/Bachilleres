@@ -49,6 +49,11 @@
 
 
 <script>
+    function agregarFavorito() {
+        // Puedes agregar más lógica aquí si es necesario antes de enviar el formulario
+        document.getElementById("favoritoForm").submit();
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         const rightNavbar = document.querySelector('.right-navbar');
 
@@ -137,6 +142,12 @@
 <main class="content">
     <section id="mate">
         <h1>Medicina</h1>
+        <form id="favoritoForm" method="post" action="{% url 'nombre_de_tu_vista_agregar_favorito' %}">
+            {% csrf_token %}
+            <input type="hidden" name="tipo" value="facultad"> <!-- Puedes cambiar esto según tus necesidades -->
+            <input type="hidden" name="configuracion_becas_id" value="1"> <!-- Reemplaza con el ID correcto -->
+            <button type="button" onclick="agregarFavorito()">Agregar Favorito</button>
+        </form>
         </p>
         <div class="AcercaImg row justify-content-center g-0 pb-5">
             <img src="{% static 'img/medicina.webp' %}" class="col-md-4 p-3">
