@@ -1,9 +1,12 @@
 import calendar
 from datetime import date, datetime, timedelta
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views import generic
 from django.utils.safestring import mark_safe
+
+from cal.forms import EventForm
 
 from .models import *
 from .utils import Calendar
@@ -44,3 +47,15 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+def event(request, event_id=None):
+    instance = Event()
+    if event_id:
+        instance = get_object_or_404(Event, pk=event_id)
+    else:
+        instance = Event()
+    
+    form = EventForm(request.POST or None, instance=instance)
+    if request.POST and form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('cal:calendar'))
+    return render(request, 'cal/event.html' , {'form': form})
