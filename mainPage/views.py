@@ -38,17 +38,14 @@ def novedades(request):
 
 def becas(request):
     becas_fun = Configuracion_Becas.objects.distinct("Fundacion")
-    becas_final = []
     for x in becas_fun:
         fundacions = x.Fundacion
         configuracion_unica = Configuracion_Becas.objects.filter(Fundacion=fundacions).values("Union_U_F__univeridad__nombre")
         x.universidades = configuracion_unica
-        y = x
-        y.universidades = configuracion_unica
-        becas_final.append(y)
     becas_sin = Configuracion_Becas.objects.filter(Fundacion__nombre="NA")
+    becas2 = Configuracion_Becas.objects.all()
     becas = Configuracion_Becas.objects.exclude(Fundacion__nombre="NA")
-    return render(request, 'becas.html', {'becas': becas,'becas_sin':becas_sin,'becas_fun':becas_fun,'becas_final':becas_final})
+    return render(request, 'becas.html', {'becas2': becas2,'becas_sin':becas_sin,'becas_fun':becas_fun})
 
 def faq(request):
     return render(request, 'faq.html')
