@@ -337,8 +337,3 @@ def agregar_beca(request):
 @login_required
 def beca_enviado(request):
     return render(request, 'becasform/beca_enviado.html')
-
-def perfil_con_calendario(request):
-    calendar_url = '/cal/templates/calendar.html'
-    # Puedes realizar cualquier lógica adicional aquí antes de renderizar la plantilla
-    return render(request, 'perfil.html', {'calendar_url': calendar_url})

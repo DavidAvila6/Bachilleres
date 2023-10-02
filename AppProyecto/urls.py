@@ -48,8 +48,7 @@ urlpatterns = [
     
     #Calendario-----------------------------------------------------------------
     path('perfil/calendar/', include('cal.urls')),
-    path('perfil_con_calendario/', views.perfil_con_calendario, name='perfil_con_calendario'),
-
+    
     
 
 ]

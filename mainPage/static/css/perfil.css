@@ -1,18 +1,15 @@
 /* styles.css */
 
 /* Estilo para las secciones */
- body {
+body {
     background: linear-gradient(to bottom, #6D6656, #E4DBC5);
     color: #fff;
     font-family: Tahoma, sans-serif;
-    background-image: url('../static/img/perfil.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 section {
     background-color: #46443F;
-    padding: 80px;
+    padding: 20px;
     margin-bottom: 20px;
 }
 
