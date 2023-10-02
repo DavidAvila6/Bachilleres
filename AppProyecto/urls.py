@@ -21,6 +21,7 @@ from django.urls import path, include
 from mainPage import views
 from AppProyecto.settings import BASE_DIR
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.principalHub),
@@ -33,6 +34,8 @@ urlpatterns = [
     path('Secciones/', views.Secciones ),
     path('perfil/', views.perfil ),
     path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
+    #-------
+    path('agregar_beca_fav/<int:configuracion_becas_id>/', views.agregar_beca_fav, name='agregar_beca_fav'),
     #Correos-----------------------------------------------------------------
     path('correo/', views.correo,name='correo'),
     path('correodirecto/', views.correodirecto,name='correodirecto'),
@@ -44,7 +47,7 @@ urlpatterns = [
 
     path('descargar/', views.descargar_archivo, name = "descargar"),
     path('registro/', views.registro, name="registro"),
-    path('agregar_favorito/', views.agregar_favorito, name='nombre_de_tu_vista_agregar_favorito'),
+    
     
 ]
 if settings.DEBUG:

@@ -201,13 +201,22 @@
                   {% endfor %}
                 </div>
               </div>
-            </div>
-          </div>
+            </div>           
+          </div>     
         </div>
+        <li>
+          {{ beca.nombre }} - {{ beca.descripcion }}
+          {{ beca.id }} <!-- Agregando esta línea para verificar el ID -->
+          <form action="{% url 'agregar_beca_fav' beca.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Agregar a Favoritos</button>
+          </form>
+      </li>
       </div>
     </div>
 
     {% endfor %}
+    
 
 
     <!--

@@ -22,6 +22,7 @@ from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from .models import User,Configuracion_Becas
+from .models import Becas_Fav
 
 # Create your views here.
 
@@ -49,6 +50,20 @@ def becas(request):
     becas2 = Configuracion_Becas.objects.all()
     becas = Configuracion_Becas.objects.exclude(Fundacion__nombre="NA")
     return render(request, 'becas.html', {'becas2': becas2,'becas_sin':becas_sin,'becas_fun':becas_fun})
+
+
+def agregar_beca_fav(request, configuracion_becas_id):
+    # Obtener el usuario actual
+    usuario = request.user
+
+    # Obtener la configuración de becas
+    configuracion_becas = Configuracion_Becas.objects.get(id=configuracion_becas_id)
+
+    # Crear una nueva instancia de Becas_Fav
+    beca_fav = Becas_Fav.create(usuario=usuario, configuracion_becas=configuracion_becas)
+
+    # Redirigir a una página de confirmación o a donde prefieras
+    return render(request, 'confirmacion.html', {'beca_fav': beca_fav})
 
 def faq(request):
     return render(request, 'faq.html')
