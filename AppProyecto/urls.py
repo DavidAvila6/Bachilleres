@@ -46,4 +46,9 @@ urlpatterns = [
     path('agregar_beca/', views.agregar_beca, name='agregar_beca'),
     path('beca_enviado/', views.beca_enviado, name='beca_enviado'),
     
+    #Calendario-----------------------------------------------------------------
+    path('perfil/calendar/', include('cal.urls')),
+    
+    
+
 ]

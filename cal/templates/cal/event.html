@@ -1,0 +1,28 @@
+{% extends 'cal/basecal.html' %}
+
+{% block title %}
+Evento
+{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="">
+        CREAR NUEVO EVENTO
+    </h1>
+</div>
+
+<div class="clearfix">    
+        <a class="btn btn-success left -btn-lg" href="{% url 'cal:calendar' %}"> VOLVER AL CALENDARIO </a>    
+</div>
+<div class="text-center">
+    <form method="post">
+        {% csrf_token %}
+        <table class="form form-table">
+          {{ form }}
+          <br>
+          <tr><td colspan="2"><button type="submit" class="btn btn-success right"> AGREGAR NUEVO EVENTO </button></td></tr>
+        </table>
+</div>
+
+</form>
+{% endblock %}
