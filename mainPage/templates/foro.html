@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Foro de Usuarios</h1>
+<ul>
+  {% for publicacion in publicaciones %}
+    <li>
+      <div>
+        <h2>{{ publicacion.titulo }}</h2>
+        <p>{{ publicacion.contenido }}</p>
+        <p>Publicado por: {{ publicacion.autor.username }} el {{ publicacion.fecha_creacion }}</p>
+        
+        <!-- Mostrar la cantidad de comentarios -->
+        <p>{{ publicacion.num_comentarios }} comentarios</p>
+        
+        <!-- Iterar sobre los comentarios -->
+        <ul>
+          {% for comentario in publicacion.comentarios %}
+            <li>
+              <p>{{ comentario.contenido }}</p>
+              <p>Comentado por: {{ comentario.autor.username }} el {{ comentario.fecha_creacion }}</p>
+            </li>
+          {% empty %}
+            <li>No hay comentarios disponibles.</li>
+          {% endfor %}
+        </ul>
+        
+        <!-- Enlace para agregar un comentario -->
+        
+      </div>
+    </li>
+  {% empty %}
+    <li>No hay publicaciones disponibles.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

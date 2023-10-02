@@ -49,6 +49,6 @@ urlpatterns = [
     #Calendario-----------------------------------------------------------------
     path('perfil/calendar/', include('cal.urls')),
     
-    
-
+    #foro-----------------------------------------------------------------
+    path('foro/', views.PublicacionListView.as_view(), name='lista_publicaciones'),
 ]

@@ -1,6 +1,6 @@
 import mimetypes
 import os
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 
 from AppProyecto import settings
-from mainPage.models import Becas_Fav, Configuracion_Becas
+from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario
 from .forms import BecaForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
@@ -22,6 +22,8 @@ from django.core.mail import EmailMessage
 from .forms import FormularioContacto
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.views.generic import ListView
+from django.db.models import Count, Prefetch
 # Create your views here.
 
 def principalHub(request):
@@ -330,10 +332,38 @@ def agregar_beca(request):
     return render(request, 'becasform/agregar_beca.html', {'form': form})
 
 
-
-
-            
-
 @login_required
 def beca_enviado(request):
     return render(request, 'becasform/beca_enviado.html')
+
+
+
+#FORO JULOX
+class PublicacionListView(ListView):
+    model = Publicacion
+    template_name = 'foro.html'  
+    context_object_name = 'publicaciones'
+    ordering = ['-fecha_creacion']
+
+    def get_queryset(self):
+        # Anotar el número de comentarios por publicación
+        queryset = Publicacion.objects.annotate(num_comentarios=Count('comentario'))
+
+        # Usar Prefetch para obtener los comentarios relacionados con cada publicación
+        comentarios = Comentario.objects.select_related('autor').all()
+        prefetch = Prefetch('comentario_set', queryset=comentarios, to_attr='comentarios')
+
+        # Devolver el queryset con los comentarios precargados
+        return queryset.prefetch_related(prefetch)
+
+@login_required   
+def agregar_comentario(request, publicacion_id):
+    publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
+
+    if request.method == 'POST':
+        contenido = request.POST['contenido']
+        comentario = Comentario(contenido=contenido, autor=request.user, publicacion=publicacion)
+        comentario.save()
+        return redirect('detalle_publicacion', pk=publicacion_id)
+
+    return render(request, 'foro/agregar_comentario.html', {'publicacion': publicacion})
