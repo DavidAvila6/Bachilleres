@@ -146,3 +146,14 @@ class Universidad_fav(models.Model):
     def __str__(self):
         return "Universidad: "+str(self.Universidad)+" / Estudiante: "+str(self.Estudiante)
 
+class Publicacion(models.Model):
+    titulo = models.CharField(max_length=255)
+    contenido = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Comentario(models.Model):
+    contenido = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
