@@ -11,7 +11,7 @@
         <p>Publicado por: {{ publicacion.autor.username }} el {{ publicacion.fecha_creacion }}</p>
         
         <!-- Mostrar la cantidad de comentarios -->
-        <p>{{ publicacion.num_comentarios }} comentarios</p>
+        <p>comentarios ({{ publicacion.num_comentarios }})</p>
         
         <!-- Iterar sobre los comentarios -->
         <ul>
@@ -22,12 +22,14 @@
             </li>
           {% empty %}
             <li>No hay comentarios disponibles.</li>
-          {% endfor %}
+            
+          {% endfor %}         
         </ul>
         
         <!-- Enlace para agregar un comentario -->
-        
+        <a href="{% url 'agregar_comentario' publicacion.id %}">Agregar comentario</a>
       </div>
+      <br>
     </li>
   {% empty %}
     <li>No hay publicaciones disponibles.</li>

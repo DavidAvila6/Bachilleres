@@ -364,6 +364,6 @@ def agregar_comentario(request, publicacion_id):
         contenido = request.POST['contenido']
         comentario = Comentario(contenido=contenido, autor=request.user, publicacion=publicacion)
         comentario.save()
-        return redirect('detalle_publicacion', pk=publicacion_id)
+        return redirect('/foro', pk=publicacion_id)
 
-    return render(request, 'foro/agregar_comentario.html', {'publicacion': publicacion})
+    return render(request, 'agregar_comentario.html', {'publicacion': publicacion})

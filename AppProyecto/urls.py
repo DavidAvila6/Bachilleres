@@ -51,4 +51,5 @@ urlpatterns = [
     
     #foro-----------------------------------------------------------------
     path('foro/', views.PublicacionListView.as_view(), name='lista_publicaciones'),
+    path('foro/<int:publicacion_id>/agregar_comentario/', views.agregar_comentario, name='agregar_comentario'),
 ]
