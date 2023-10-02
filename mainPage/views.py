@@ -22,6 +22,8 @@ from django.core.mail import EmailMessage
 from .forms import FormularioContacto
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 
 def principalHub(request):
@@ -272,6 +274,7 @@ def enviar_HTML(request):
 
 #Finalizado Seccion de correos-----------------------------------------------------
 #Favoritos------------------------------------
+@csrf_exempt
 def agregar_favorito(request):
     if request.method == 'POST':
         tipo = request.POST.get('tipo')

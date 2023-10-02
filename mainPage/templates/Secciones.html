@@ -47,29 +47,55 @@
 
 </div>
 
-
 <script>
     function agregarFavorito() {
-        // Puedes agregar más lógica aquí si es necesario antes de enviar el formulario
-        document.getElementById("favoritoForm").submit();
+        // Obtener los datos del formulario
+        var tipo = document.getElementById('tipo').value;
+        var configuracion_becas_id = document.getElementById('configuracion_becas_id').value;
+
+        // Crear un objeto FormData con los datos del formulario
+        var formData = new FormData();
+        formData.append('tipo', tipo);
+        formData.append('configuracion_becas_id', configuracion_becas_id);
+
+        // Realizar la solicitud AJAX
+        fetch("{% url 'nombre_de_tu_vista_agregar_favorito' %}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken')  // Asegúrate de tener la función getCookie definida
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                console.log('Beca agregada a favoritos');
+            } else {
+                console.error('Error al agregar beca a favoritos:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error de red:', error);
+        });
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const rightNavbar = document.querySelector('.right-navbar');
-
-        // Agregar evento hover
-        rightNavbar.addEventListener('mouseenter', function() {
-            // Cambiar la anchura del menú en hover
-            this.style.width = '250px'; // O el ancho deseado en hover
-        });
-
-        // Agregar evento de salida del hover
-        rightNavbar.addEventListener('mouseleave', function() {
-            // Cambiar la anchura del menú cuando se sale del hover
-            this.style.width = '50px'; // Anchura mínima cuando no está en hover
-        });
-    });
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 </script>
+
 
 <style>
     /* Estilos para el menú lateral */
