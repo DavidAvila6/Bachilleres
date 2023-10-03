@@ -77,7 +77,7 @@ class Beca (models.Model):
     Documentos = models.ManyToManyField(Documentos)
     Requisitos = models.ManyToManyField(Requisitos)
     Descripcion = models.CharField(max_length=1000)
-
+    imagen = models.ImageField(upload_to="imagenes_becas/",null=True)
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['nombre'], name='unique_foraneas_Beca'),
@@ -98,7 +98,6 @@ class Configuracion_Becas(models.Model):
     def __str__(self):
         fila = "Union : "+str(self.Union_U_F.univeridad)+"-"+str(self.Union_U_F.facultad)+" / Beca: "+str(self.Beca)+" / Fundacion: "+str(self.Fundacion)
         return fila
-    
 
     
 class Becas_Fav (models.Model):
