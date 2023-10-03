@@ -303,19 +303,18 @@ def enviar_HTML(request):
 #Finalizado Seccion de correos-----------------------------------------------------
 #Favoritos------------------------------------
 @csrf_exempt
-def agregar_favorito(request):
-    if request.method == 'POST':
-        tipo = request.POST.get('tipo')
-        usuario = request.user  # Obtén el usuario actual
-        configuracion_becas_id = request.POST.get('configuracion_becas_id')
-
+def agregar_favorito(request,beca_id):
+    
+        
+    usuario = request.user  # Obtén el usuario actual
+       
         # Asegúrate de tener Configuracion_Becas importado y obtenido correctamente
-        configuracion_becas = Configuracion_Becas.objects.get(id=configuracion_becas_id)
+    configuracion_becas = Configuracion_Becas.objects.get(id=beca_id)
 
         # Crea la instancia de Becas_Fav y guárdala en la base de datos
-        beca_fav = Becas_Fav.create(tipo=tipo, usuario=usuario, configuracion_becas=configuracion_becas)
+    Becas_Fav.create(tipo='becas', usuario=usuario, configuracion_becas=configuracion_becas)
 
-        return JsonResponse({'status': 'success'})
+    return redirect('/becas')
 #Agregar beca---------------------------
 def enviar_correo_beca_agregada(nueva_beca):
     subject = 'Nueva Beca Agregada: {}'.format(nueva_beca.nombre)
