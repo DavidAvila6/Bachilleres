@@ -398,4 +398,4 @@ def eliminar_publicacion(request, publicacion_id):
     if request.user == publicacion.autor:
         publicacion.delete()
     
-    return redirect('foro/')  # Redirige a la lista de publicaciones
+    return redirect('/foro/')  # Redirige a la lista de publicaciones
