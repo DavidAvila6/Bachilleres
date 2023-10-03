@@ -2,16 +2,28 @@
 
 /* Estilo para las secciones */
 body {
-    background: linear-gradient(to bottom, #6D6656, #E4DBC5);
-    color: #fff;
-    font-family: Tahoma, sans-serif;
+  background: linear-gradient(to bottom, #6D6656, #E4DBC5);
+  color: #fff;
+  font-family: Tahoma, sans-serif;
+  background-image: url('../img/perfil.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+body.cambiado {
+  background-image: url('../img/perfil2.jpg');
+}
+.imagen-circular {
+  border-radius: 50%;
+  overflow: hidden; /* Para asegurar que la imagen no sobresalga del círculo */
 }
 
+
 section {
-    background-color: #46443F;
-    padding: 20px;
-    margin-bottom: 20px;
+  background-color: #46443F;
+  padding: 80px;
+  margin-bottom: 20px;
 }
+
 
 .button-list {
     list-style: none;
