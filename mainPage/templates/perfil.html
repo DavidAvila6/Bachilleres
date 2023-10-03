@@ -2,32 +2,15 @@
 
 {% block content %}
 {% load static %} 
-<style>
-  body {
-    background: linear-gradient(to bottom, #6D6656, #E4DBC5);
-    color: #fff;
-    font-family: Tahoma, sans-serif;
-    background-image: url('../static/img/perfil.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-body.cambiado {
-    background-image: url('../static/img/perfil2.jpg');
-}
 
-
-section {
-    background-color: #46443F;
-    padding: 80px;
-    margin-bottom: 20px;
-}
-
-</style>
-
+<head>
+    <link href="{% static "../static/css/perfil.css" %}" rel="stylesheet">
+</head>
 
 <div class="container mt-5">
     <section class="perfil">
-        <!--<img src="imagen-de-perfil.jpg" alt="Imagen de perfil">-->
+        <img src="../static/img/asesor.jpg" class="imagen-circular" alt="Imagen de perfil" width="300" height="200">
+        <br><br>
         <h1>{{ user.username }}</h1>
         <h2>Nombre: {{ user.first_name}}</h2>
         <h2>Apellido: {{ user.last_name}}</h2>
@@ -95,11 +78,7 @@ section {
     </section>
 </div>
 <br>
-<script>
-    document.getElementById('cambiarImagen').addEventListener('click', function() {
-        document.body.classList.toggle('cambiado');
-    });
-</script>
+<script src="../static/js/perfil.js"></script>
 
 
 {% endblock %}

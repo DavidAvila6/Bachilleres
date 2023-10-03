@@ -114,6 +114,18 @@
                       </ul>
                     </div>
                   </div>
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <form id="favoritoForm" method="post" action="{% url 'nombre_de_tu_vista_agregar_favorito' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name="tipo" value="facultad"> <!-- Puedes cambiar esto según tus necesidades -->
+                      <input type="hidden" name="configuracion_becas_id" value="3"> <!-- Reemplaza con el ID correcto -->
+                      <button type="button" onclick="agregarFavorito()">Agregar Favorito</button>
+                  </form>
+                    </div>
+                  </div>
+
+                  
                 </div>
               </div>
             </div>
@@ -1320,6 +1332,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../static/js/section.js"></script>
 
+<script src="../static/js/becas.js"></script>
 {% endblock %}
