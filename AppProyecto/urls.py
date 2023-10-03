@@ -35,13 +35,14 @@ urlpatterns = [
     path('perfil/', views.perfil ),
     path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
     #-------
-    path('agregar_beca_fav/<int:configuracion_becas_id>/', views.agregar_beca_fav, name='agregar_beca_fav'),
+
     #Correos-----------------------------------------------------------------
     path('correo/', views.correo,name='correo'),
     path('correodirecto/', views.correodirecto,name='correodirecto'),
     path('enviar_correo/', views.enviar_correo, name='enviar_correo'),
     path('error_correo/', views.error_correo, name='error_correo'),
     path('usuario_noencontrado/', views.usuario_noencontrado, name='usuario_noencontrado'),
+    path('agregar_favorito/', views.agregar_favorito, name='nombre_de_tu_vista_agregar_favorito'),
     path('correo_enviado/', views.correo_enviado, name='correo_enviado'),
     path('enviar_HTML/', views.enviar_HTML,name='enviar_HTML'),
 

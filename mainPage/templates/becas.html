@@ -22,6 +22,7 @@
           <ul>
             <hr>
             <li><a class="dropdown-item" href="#Medicna">Medicina</a></li>
+            
             <hr>
             <li><a class="dropdown-item" href="#Enfermeria">Enfermeria</a></li>
             <hr>
@@ -41,196 +42,95 @@
 
   <div class="filtros row g-0 justify-content-center">
 
-
-
-    <div class="table">
-      <h2>Becas general</h2>
-      <table class="table table-primary">
-        <thead>
-          <tr>
-            <th scope="col">Fundacion</th>
-            <th scope="col">Universidad</th>
-            <th scope="col">Facultad</th>
-            <th scope="col">nombre beca</th>
-            <th scope="col">Requisitos</th>
-            <th scope="col">Documentos</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">imagen</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for becas in becas_fun %}     
-          <tr class=" base_datos">
-            <td>{{ becas.Fundacion }}</td>
-            <td>{{ becas.Union_U_F.univeridad}}</td>
-            <td>{{ becas.Union_U_F.facultad}}</td>
-            <td> {{ becas.Beca}} </td>
-            <td>
-              {% for x in becas.universidades.all %}
-              <ul>
-                <li>
-                  {{ x.Union_U_F__univeridad__nombre}}
-                </li>
-              </ul>
-              {% endfor %}
-            </td>
-            <td>
-              {% for x in becas.Beca.Documentos.all %}
-              <ul>
-                <li>
-                  {{ x.Descripcion }}
-                </li>
-              </ul>
-              {% endfor %}
-            </td>
-            <td>{{ becas.Beca.Descripcion}}</td>
-            <td><img src="{{ becas.Beca.imagen.url }}"></td>
-            {% endfor %}
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-    <div class="table">
-      <h2>Becas general filtrado fundacion</h2>
-      <table class="table table-primary">
-        <thead>
-          <tr>
-            <th scope="col">Fundacion</th>
-            <th scope="col">Universidad</th>
-            <th scope="col">Facultad</th>
-            <th scope="col">nombre beca</th>
-            <th scope="col">Requisitos</th>
-            <th scope="col">Documentos</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">imagen</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for becas_sin in becas2 %}
-          <tr class=" base_datos">
-            <td>{{ becas_sin.Fundacion}}</td>
-            <td>{{ becas_sin.Union_U_F.univeridad}}</td>
-            <td>{{ becas_sin.Union_U_F.facultad}}</td>
-            <td> {{ becas_sin.Beca}} </td>
-            <td>
-              {% for x in becas_sin.Beca.Requisitos.all %}
-              <ul>
-                <li>
-                  {{ x.Descripcion }}
-                </li>
-              </ul>
-              {% endfor %}
-            </td>
-            <td>
-              {% for x in becas_sin.Beca.Documentos.all %}
-              <ul>
-                <li>
-                  {{ x.Descripcion }}
-                </li>
-              </ul>
-              {% endfor %}
-            </td>
-            <td>{{ becas_sin.Beca.Descripcion}}</td>
-            <td><img src="{{ becas_sin.Beca.imagen.url }}"></td>
-            {% endfor %}
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-
-    {% for becas_sin in becas_sin %}
-
-    <div class="MedicinaGeneralPost row g-0 justify-content-center my-5">
-      <div class="card col-8 border-0">
-        <h2 class="text-center py-2 ">{{ becas_sin.Beca}}</h2>
-        <div class="div row align-content-center justify-content-center">
-          <div class="col pt-5 text-center">
-            <img src="{{ becas_sin.Beca.imagen.url }}" class="img-fluid">
-          </div>
-          <div class="col px-5 py-3">
-            <div class="Acordeon">
-              <p>
-                {{ becas_sin.Beca.Descripcion}}
-              </p>
-              <div class="AcordeonContainer">
-                <hr>
-                <div class="AcordeonLabel">Requisitos</div>
-                <div class="AcordeonContent">
-                  {% for x in becas_sin.Beca.Requisitos.all %}
-                  <ul>
-                    <li>
-                      {{ x.Descripcion }}
-                    </li>
-                  </ul>
-                  {% endfor %}
-                </div>
-              </div>
-              <div class="AcordeonContainer">
-                <hr>
-                <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                <div class="AcordeonContent">
-                  <p>
-                    {{ becas_sin.Beca.valor_duracion}}
-                  </p>
-                </div>
-              </div>
-              <div class="AcordeonContainer">
-                <hr>
-                <div class="AcordeonLabel">Cómo aplicar</div>
-                <div class="AcordeonContent">
-                  <p>
-                    NA
-                  </p>
-                </div>
-              </div>
-
-              <div class="AcordeonContainer">
-                <hr>
-                <div class="AcordeonLabel">Qué documentos necesitas</div>
-                <div class="AcordeonContent">
-                  {% for x in becas_sin.Beca.Documentos.all %}
-                  <ul>
-                    <li>
-                      {{ x.Descripcion }}
-                    </li>
-                  </ul>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>           
-          </div>     
-        </div>
-        <li>
-          {{ beca.nombre }} - {{ beca.descripcion }}
-          {{ beca.id }} <!-- Agregando esta línea para verificar el ID -->
-          <form action="{% url 'agregar_beca_fav' beca.id %}" method="post">
-              {% csrf_token %}
-              <button type="submit">Agregar a Favoritos</button>
-          </form>
-      </li>
-      </div>
-    </div>
-
-    {% endfor %}
-    
-
-
-    <!--
     <div class="Becas row g-0 justify-content-center">
 
       <div id="Medicina" class="MedicinaGeneral row g-0 mt-3 justify-content-center">
         <div class="TituloSeccion col-9">
           <hr>
           <h2 class="text-center">Medicina</h2>
+          
         </div>
 
 
 
-        
+        <div class="MedicinaGeneralPost row g-0 justify-content-center my-5">
+          <div class="card col-8 border-0">
+            <h2 class="text-center py-2 ">Beca de la Universidad de La Sabana</h2>
+            <div class="div row align-content-center justify-content-center">
+              <div class="col pt-5 text-center">
+                <img src="../static/img/sabana.png" class="img-fluid">
+              </div>
+              <div class="col px-5 py-3">
+                <div class="Acordeon">
+                  <p>
+                    La Universidad de La Sabana impulsa este programa para captar
+                    aquellos estudiantes que se destacaron en los estudios de
+                    bachillerato, ofreciendo la beca para los dos estudiantes destacados
+                    en el primer semestre del curso de Medicina.
+                  </p>
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <div class="AcordeonLabel">Requisitos</div>
+                    <div class="AcordeonContent">
+                      <ul>
+                        <li>El solicitante debe ser recomendado por el colegio.</li>
+                        <li>ser de nuevo ingreso al programa</li>
+                        <li>Buenos resultados en el proceso de ingreso</li>
+                        <li>Alto nivel académico durante la etapa de bachillerato</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
+                    <div class="AcordeonContent">
+                      <p>
+                        El programa de beca de Medicina ofrece dos cupos, uno que cubre
+                        la totalidad de la matrícula y otro en 70 % y se otorgan
+                        semestralmente. Así mismo, los beneficiarios de la beca quedarán
+                        libres del pago de derechos de grado como beneficio al final del
+                        programa.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <div class="AcordeonLabel">Cómo aplicar</div>
+                    <div class="AcordeonContent">
+                      <p>
+                        Para aplicar debes estar inscrito en el programa de educación
+                        superior de la facultad de Medicina y cumplir los requisitos.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <div class="AcordeonLabel">Qué documentos necesitas</div>
+                    <div class="AcordeonContent">
+                      <ul>
+                        <li>Carta de postulacion del colegio</li>
+                        <li>Carta de admonistracion del programa</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="AcordeonContainer">
+                    <hr>
+                    <form id="favoritoForm" method="post" action="{% url 'nombre_de_tu_vista_agregar_favorito' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name="tipo" value="beca"> <!-- Puedes cambiar esto según tus necesidades -->
+                      <input type="hidden" name="configuracion_becas_id" value="3"> <!-- Reemplaza con el ID correcto -->
+                      <button type="button" onclick="agregarFavorito()">Agregar Favorito</button>
+                  </form>
+                    </div>
+                  </div>
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
         -----------------------------------------------------------------------------------------------
@@ -1427,13 +1327,11 @@
     
 
     </div>
-
-  -->
 </body>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../static/js/section.js"></script>
 
+<script src="../static/js/becas.js"></script>
 {% endblock %}

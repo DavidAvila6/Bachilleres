@@ -98,6 +98,15 @@ class Configuracion_Becas(models.Model):
     def __str__(self):
         fila = "Union : "+str(self.Union_U_F.univeridad)+"-"+str(self.Union_U_F.facultad)+" / Beca: "+str(self.Beca)+" / Fundacion: "+str(self.Fundacion)
         return fila
+    
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    beca = models.ForeignKey(Beca, on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'beca'], name='unique_like')
+        ]
 
     
 class Becas_Fav (models.Model):
