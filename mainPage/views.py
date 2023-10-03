@@ -1,7 +1,6 @@
 import mimetypes
 import os
-import smtplib
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -9,8 +8,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from AppProyecto import settings
-from mainPage.models import Becas_Fav, Configuracion_Becas
-from .forms import customUserCreationForm
+from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario
+from .forms import BecaForm, PublicacionForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
 from .forms import EmailUsername
@@ -19,11 +18,12 @@ from django.core.mail import send_mail, EmailMessage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
+from .forms import FormularioContacto
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-from .models import User,Configuracion_Becas
-from .models import Becas_Fav
-
+from django.views.generic import ListView
+from django.db.models import Count, Prefetch
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def principalHub(request):
@@ -302,6 +302,7 @@ def enviar_HTML(request):
 
 #Finalizado Seccion de correos-----------------------------------------------------
 #Favoritos------------------------------------
+@csrf_exempt
 def agregar_favorito(request):
     if request.method == 'POST':
         tipo = request.POST.get('tipo')
@@ -315,3 +316,115 @@ def agregar_favorito(request):
         beca_fav = Becas_Fav.create(tipo=tipo, usuario=usuario, configuracion_becas=configuracion_becas)
 
         return JsonResponse({'status': 'success'})
+#Agregar beca---------------------------
+def enviar_correo_beca_agregada(nueva_beca):
+    subject = 'Nueva Beca Agregada: {}'.format(nueva_beca.nombre)
+    template_name = 'correos/nueva_beca_email.html'
+
+    # Obtén la lista de usuarios registrados
+    usuarios_registrados = User.objects.all()
+    to_email = [usuario.email for usuario in usuarios_registrados]
+
+    # Configura el servidor de correo saliente (SMTP)
+    smtp_server = 'smtp.gmail.com'  # Cambia esto si estás usando otro proveedor de correo
+    smtp_port = 587  # Puerto de Gmail
+    smtp_username = 'bachilleresbch@gmail.com'  # Tu dirección de correo electrónico
+    smtp_password = 'qpcu ybch elbk kihu'  # Tu contraseña
+
+    context = {
+        'nombre_beca': nueva_beca.nombre,
+        'tipo_beca': nueva_beca.tipo,
+        'valor_beca': nueva_beca.valor,
+        'descripcion_beca': nueva_beca.Descripcion,
+        'requisitos': nueva_beca.Requisitos.all(),
+        'documentos': nueva_beca.Documentos.all(),
+    }
+
+    message = render(None, template_name, context).content.decode('utf-8')
+
+    send_mail(subject, message, smtp_username, to_email, html_message=message)
+
+def agregar_beca(request):
+    if request.method == 'POST':
+        form = BecaForm(request.POST)
+        if form.is_valid():
+            # Guardar la beca
+            nueva_beca = form.save()
+
+            # Enviar correo electrónico a los usuarios
+            enviar_correo_beca_agregada(nueva_beca)
+
+            return redirect('beca_enviado')
+    else:
+        form = BecaForm()
+    
+    return render(request, 'becasform/agregar_beca.html', {'form': form})
+
+
+@login_required
+def beca_enviado(request):
+    return render(request, 'becasform/beca_enviado.html')
+
+
+
+#FORO JULOX
+class PublicacionListView(ListView):
+    model = Publicacion
+    template_name = 'foro.html'  
+    context_object_name = 'publicaciones'
+    ordering = ['-fecha_creacion']
+
+    def get_queryset(self):
+        # Anotar el número de comentarios por publicación
+        queryset = Publicacion.objects.annotate(num_comentarios=Count('comentario'))
+
+        # Usar Prefetch para obtener los comentarios relacionados con cada publicación
+        comentarios = Comentario.objects.select_related('autor').all()
+        prefetch = Prefetch('comentario_set', queryset=comentarios, to_attr='comentarios')
+
+        # Devolver el queryset con los comentarios precargados
+        return queryset.prefetch_related(prefetch)
+
+@login_required   
+def agregar_comentario(request, publicacion_id):
+    publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
+
+    if request.method == 'POST':
+        contenido = request.POST['contenido']
+        comentario = Comentario(contenido=contenido, autor=request.user, publicacion=publicacion)
+        comentario.save()
+        return redirect('/foro', pk=publicacion_id)
+
+    return render(request, 'agregar_comentario.html', {'publicacion': publicacion})
+
+def eliminar_comentario(request, comentario_id):
+    comentario = get_object_or_404(Comentario, pk=comentario_id)
+    
+    # Verificar que el usuario actual sea el autor del comentario
+    if request.user == comentario.autor:
+        comentario.delete()
+    
+    # Redirigir a la página de la publicación a la que pertenece el comentario
+    return redirect('/foro', publicacion_id=comentario.publicacion.id)
+
+def crear_publicacion(request):
+    if request.method == 'POST':
+        form = PublicacionForm(request.POST)
+        if form.is_valid():
+            nueva_publicacion = form.save(commit=False)
+            nueva_publicacion.autor = request.user  # Asigna el autor de la publicación
+            nueva_publicacion.save()
+            return redirect('lista_publicaciones')  # Redirige a la lista de publicaciones
+    else:
+        form = PublicacionForm()
+    
+    return render(request, 'crear_publicacion.html', {'form': form})
+
+def eliminar_publicacion(request, publicacion_id):
+    publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
+    
+    # Verificar que el usuario actual sea el autor de la publicación
+    if request.user == publicacion.autor:
+        publicacion.delete()
+    
+    return redirect('/foro/')  # Redirige a la lista de publicaciones
