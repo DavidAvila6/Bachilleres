@@ -1,8 +1,7 @@
 import mimetypes
 import os
-import smtplib
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -10,7 +9,8 @@ from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 
 from AppProyecto import settings
-from .forms import customUserCreationForm
+from mainPage.models import Becas_Fav, Configuracion_Becas
+from .forms import BecaForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
 from .forms import EmailUsername
@@ -19,8 +19,10 @@ from django.core.mail import send_mail, EmailMessage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
+from .forms import FormularioContacto
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -289,3 +291,70 @@ def enviar_HTML(request):
           
 
 #Finalizado Seccion de correos-----------------------------------------------------
+#Favoritos------------------------------------
+@csrf_exempt
+def agregar_favorito(request):
+    if request.method == 'POST':
+        tipo = request.POST.get('tipo')
+        usuario = request.user  # Obtén el usuario actual
+        configuracion_becas_id = request.POST.get('configuracion_becas_id')
+
+        # Asegúrate de tener Configuracion_Becas importado y obtenido correctamente
+        configuracion_becas = Configuracion_Becas.objects.get(id=configuracion_becas_id)
+
+        # Crea la instancia de Becas_Fav y guárdala en la base de datos
+        beca_fav = Becas_Fav.create(tipo=tipo, usuario=usuario, configuracion_becas=configuracion_becas)
+
+        return JsonResponse({'status': 'success'})
+#Agregar beca---------------------------
+def enviar_correo_beca_agregada(nueva_beca):
+    subject = 'Nueva Beca Agregada: {}'.format(nueva_beca.nombre)
+    template_name = 'correos/nueva_beca_email.html'
+
+    # Obtén la lista de usuarios registrados
+    usuarios_registrados = User.objects.all()
+    to_email = [usuario.email for usuario in usuarios_registrados]
+
+    # Configura el servidor de correo saliente (SMTP)
+    smtp_server = 'smtp.gmail.com'  # Cambia esto si estás usando otro proveedor de correo
+    smtp_port = 587  # Puerto de Gmail
+    smtp_username = 'bachilleresbch@gmail.com'  # Tu dirección de correo electrónico
+    smtp_password = 'qpcu ybch elbk kihu'  # Tu contraseña
+
+    context = {
+        'nombre_beca': nueva_beca.nombre,
+        'tipo_beca': nueva_beca.tipo,
+        'valor_beca': nueva_beca.valor,
+        'descripcion_beca': nueva_beca.Descripcion,
+        'requisitos': nueva_beca.Requisitos.all(),
+        'documentos': nueva_beca.Documentos.all(),
+    }
+
+    message = render(None, template_name, context).content.decode('utf-8')
+
+    send_mail(subject, message, smtp_username, to_email, html_message=message)
+
+def agregar_beca(request):
+    if request.method == 'POST':
+        form = BecaForm(request.POST)
+        if form.is_valid():
+            # Guardar la beca
+            nueva_beca = form.save()
+
+            # Enviar correo electrónico a los usuarios
+            enviar_correo_beca_agregada(nueva_beca)
+
+            return redirect('beca_enviado')
+    else:
+        form = BecaForm()
+    
+    return render(request, 'becasform/agregar_beca.html', {'form': form})
+
+
+
+
+            
+
+@login_required
+def beca_enviado(request):
+    return render(request, 'becasform/beca_enviado.html')

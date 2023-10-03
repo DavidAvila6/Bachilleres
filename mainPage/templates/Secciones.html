@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 {%load static%}
-
-{% block content %}
-{% load static %} 
 <style>
     /* Estilo para el texto en color negro */
     .texto-negro {
         color: black; /* Puedes cambiar "black" por el color que desees */
     }
 </style>
-<main class="content">
+{% block content %}
 <head>
     <link href="{% static "css/default.css" %}" rel="stylesheet">
 </head>
@@ -55,91 +52,122 @@
 
 </div>
 
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const rightNavbar = document.querySelector('.right-navbar');
+    function agregarFavorito() {
+        // Obtener los datos del formulario
+        var tipo = document.getElementById('tipo').value;
+        var configuracion_becas_id = document.getElementById('configuracion_becas_id').value;
 
-        // Agregar evento hover
-        rightNavbar.addEventListener('mouseenter', function() {
-            // Cambiar la anchura del menú en hover
-            this.style.width = '250px'; // O el ancho deseado en hover
-        });
+        // Crear un objeto FormData con los datos del formulario
+        var formData = new FormData();
+        formData.append('tipo', tipo);
+        formData.append('configuracion_becas_id', configuracion_becas_id);
 
-        // Agregar evento de salida del hover
-        rightNavbar.addEventListener('mouseleave', function() {
-            // Cambiar la anchura del menú cuando se sale del hover
-            this.style.width = '50px'; // Anchura mínima cuando no está en hover
+        // Realizar la solicitud AJAX
+        fetch("{% url 'nombre_de_tu_vista_agregar_favorito' %}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken')  // Asegúrate de tener la función getCookie definida
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                console.log('Beca agregada a favoritos');
+            } else {
+                console.error('Error al agregar beca a favoritos:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error de red:', error);
         });
-    });
+    }
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 </script>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrera de Enfermería: Cuidando Vidas y Promoviendo la Salud</title>
-    <link href="{% static "css/default.css" %}" rel="stylesheet">
-    <style>
-        /* Estilos para el menú lateral */
-        .right-navbar {
-            width: 250px;
-            background-color: #333;
-            color: #fff;
-            position: fixed;
-            top: 80px;
-            left: 0;
-            height: 100%;
-            overflow-y: auto; /* Agregamos desplazamiento vertical */
-            transition: width 0.3s; /* Transición suave para el ancho */
-        }
 
-        .navbar-list {
-            list-style: none;
-            padding: 0;
-        }
 
-        .navbar-item {
-            padding: 10px;
-            transition: background-color 0.3s; /* Transición suave para el fondo */
-        }
+<style>
+    /* Estilos para el menú lateral */
+    .right-navbar {
+        width: 250px;
+        background-color: #333;
+        color: #fff;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        height: 100%;
+        overflow-y: auto; /* Agregamos desplazamiento vertical */
+        transition: width 0.3s; /* Transición suave para el ancho */
+    }
 
-        .navbar-item a {
-            text-decoration: none;
-            color: #fff;
-            display: block;
-            padding: 10px 20px; /* Espaciado en el enlace */
-        }
 
-        /* Estilo para el enlace activo */
-        .navbar-item.active {
-            background-color: #555;
-        }
+    .navbar-list {
+        list-style: none;
+        padding: 0;
+    }
 
-        /* Estilos para el hover */
-        .navbar-item:hover {
-            background-color: #555;
-        }
+    .navbar-item {
+        padding: 10px;
+        transition: background-color 0.3s; /* Transición suave para el fondo */
+    }
 
-        /* Estilos para el título del menú */
-        .navbar-title {
-            font-size: 18px;
-            padding: 15px 20px;
-        }
+    .navbar-item a {
+        text-decoration: none;
+        color: #fff;
+        display: block;
+        padding: 10px 20px; /* Espaciado en el enlace */
+    }
 
-        /* Añadir sombra al menú */
-        .right-navbar {
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    /* Estilo para el enlace activo */
+    .navbar-item.active {
+        background-color: #555;
+    }
+
+    /* Estilos para el hover */
+    .navbar-item:hover {
+        background-color: #555;
+    }
+
+    /* Estilos para el título del menú */
+    .navbar-title {
+        font-size: 18px;
+        padding: 15px 20px;
+    }
+
+    /* Añadir sombra al menú */
+    .right-navbar {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    
         }
 
         /* Estilos para el contenido principal */
-        .content {
-            margin-left: 250px; /* Ancho del navbar lateral derecho */
-            padding: 20px;
-            /* Añade estilos adicionales para el área de contenido según tus preferencias */
-        }
+    .content {
+        margin-left: 250px; /* Ancho del navbar lateral derecho */
+        padding: 20px;
+        /* Añade estilos adicionales para el área de contenido según tus preferencias */
+    }
+    
+    </style>
     </style>
 </head>
 <body>
+
 
     <nav class="right-navbar">
         
@@ -155,13 +183,18 @@
         </ul>
     </nav>
 
-    
+<main class="content">
     <section id="Medicina">
-       <section>
-        <div class="separador"></div>
-        <section>
         <h1>Medicina</h1>
-        </p>   
+
+        <form id="favoritoForm" method="post" action="{% url 'nombre_de_tu_vista_agregar_favorito' %}">
+            {% csrf_token %}
+            <input type="hidden" name="tipo" value="facultad"> <!-- Puedes cambiar esto según tus necesidades -->
+            <input type="hidden" name="configuracion_becas_id" value="1"> <!-- Reemplaza con el ID correcto -->
+            <button type="button" onclick="agregarFavorito()">Agregar Favorito</button>
+        </form>
+        </p>
+        <div class="AcercaImg row justify-content-center g-0 pb-5">
             <img src="{% static 'img/medicina.webp' %}" class="col-md-4 p-3">
             <title>Carrera de Medicina: Tu Camino hacia la Salud</title>
         </head>
@@ -170,7 +203,6 @@
                 <h1>Carrera de Medicina: Tu Camino hacia la Salud</h1>
             </header>
             <main>
-                
                 <section>
                     <h2>La Carrera de Medicina: Un Recorrido</h2>
                     <p>La carrera de medicina es un viaje apasionante que se enfoca en la atención de la salud, el diagnóstico y el tratamiento de enfermedades y trastornos. Aquí hay algunos pasos clave que debes seguir:</p>
@@ -225,6 +257,7 @@
             </main>
             <footer>
                 <p><span class="texto-negro">¡Tu Futuro en Medicina te Espera!</p>
+
             </footer>
             <section>
                 <h2>Estas interesado en universidad.</h2>
@@ -234,10 +267,10 @@
                 <button class="boton-estetico">Haz clic aquí</button>
             </a>
         </section>
-    <title>      </title>
-</head>
-<body>
-            
+        </body>
+        
+    </section>
+
 
     <section id="Enfermeria">
     </section>
@@ -324,175 +357,176 @@
 </head>
 </body>
 
+<section id="Ingenieria de Sistemas">
 
-
-    <section id="Ingenieria de Sistemas">
-
-        <h1>Ing. Informatica</h1>
-        <img src="{% static 'img/sistemas.png' %}" class="col-md-4 p-3">
-        <title>Carrera de Ingeniería en Informática: Tu Pasaporte al Mundo Digital</title>
+    <h1>Ing. Informatica</h1>
+    <img src="{% static 'img/sistemas.png' %}" class="col-md-4 p-3">
+    <title>Carrera de Ingeniería en Informática: Tu Pasaporte al Mundo Digital</title>
 </head>
 <body>
-    <header>
-        <h1>Carrera de Ingeniería en Informática: Tu Pasaporte al Mundo Digital</h1>
-    </header>
-    <main>
-        <section>
-            <h2>La Carrera de Ingeniería en Informática: Un Recorrido</h2>
-            <p>La carrera de Ingeniería en Informática es una emocionante aventura en el mundo digital. Aquí hay algunos pasos clave que debes seguir:</p>
-            <ol>
-                <li><strong>Educación Previa:</strong>
-                    <ul>
-                        <li><strong>Pregrado:</strong> Comienza con un programa de pregrado en informática o campos relacionados. Aprende los fundamentos de la tecnología.</li>
-                    </ul>
-                </li>
-                <li><strong>Programa de Ingeniería:</strong>
-                    <ul>
-                        <li><strong>Ingreso:</strong> Aplica a programas de Ingeniería en Informática acreditados.</li>
-                        <li><strong>Programa:</strong> Completa un riguroso programa de estudios que abarca programación, bases de datos, redes y más.</li>
-                    </ul>
-                </li>
-                <li><strong>Especialización:</strong>
-                    <ul>
-                        <li><strong>Selecciona tu Enfoque:</strong> Elige una especialización, como desarrollo web, inteligencia artificial o ciberseguridad.</li>
-                    </ul>
-                </li>
-                <li><strong>Práctica Profesional:</strong>
-                    <ul>
-                        <li><strong>Pasantías:</strong> Obtén experiencia práctica a través de pasantías en empresas de tecnología.</li>
-                    </ul>
-                </li>
-                <li><strong>Graduación:</strong>
-                    <ul>
-                        <li><strong>Título:</strong> Gradúate con un título de Ingeniería en Informática.</li>
-                    </ul>
-                </li>
-            </ol>
-        </section>
-        <section>
-            <h2>Enfoques en la Carrera de Ingeniería en Informática</h2>
-            <p>La Ingeniería en Informática ofrece una variedad de enfoques emocionantes, incluyendo:</p>
-            <ul>
-                <li><strong>Desarrollo Web:</strong> Crea sitios web y aplicaciones interactivas.</li>
-                <li><strong>Inteligencia Artificial:</strong> Desarrolla sistemas inteligentes y aprendizaje automático.</li>
-                <li><strong>Ciberseguridad:</strong> Protege sistemas y datos contra amenazas cibernéticas.</li>
-                <li><strong>Redes y Comunicaciones:</strong> Diseña y administra redes de computadoras.</li>
-                <li><strong>Base de Datos:</strong> Gestiona y optimiza bases de datos de gran escala.</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Ingresando al Mundo Laboral</h2>
-            <p>Una vez que te has graduado, estás listo para entrar en el emocionante mundo laboral de la informática. Aquí hay algunas opciones:</p>
-            <ul>
-                <li><strong>Desarrollo de Software:</strong> Trabaja como desarrollador de software, creando aplicaciones y sistemas.</li>
-                <li><strong>Analista de Datos:</strong> Analiza y interpreta datos para tomar decisiones informadas.</li>
-                <li><strong>Ingeniero de Seguridad:</strong> Protege sistemas y datos contra amenazas cibernéticas.</li>
-                <li><strong>Gerente de Proyectos:</strong> Lidera equipos en la ejecución de proyectos tecnológicos.</li>
-                <li><strong>Consultoría Tecnológica:</strong> Ofrece soluciones y asesoramiento tecnológico a empresas.</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p><span class="texto-negro">¡Tu Futuro en Ingeniería en Informática te Espera!</p>
-    </footer>
+<header>
+    <h1>Carrera de Ingeniería en Informática: Tu Pasaporte al Mundo Digital</h1>
+</header>
+<main>
     <section>
-        <h2>Estas interesado en universidad.</h2>
-        <p>Esta puede ser la oportunidad para que llegues a la vida universitaria</p>
-        <p>Consulta becas aqui!<p>
-    <a href="/Medicina">
-        <button class="boton-estetico">Haz clic aquí</button>
-    </a>
+        <h2>La Carrera de Ingeniería en Informática: Un Recorrido</h2>
+        <p>La carrera de Ingeniería en Informática es una emocionante aventura en el mundo digital. Aquí hay algunos pasos clave que debes seguir:</p>
+        <ol>
+            <li><strong>Educación Previa:</strong>
+                <ul>
+                    <li><strong>Pregrado:</strong> Comienza con un programa de pregrado en informática o campos relacionados. Aprende los fundamentos de la tecnología.</li>
+                </ul>
+            </li>
+            <li><strong>Programa de Ingeniería:</strong>
+                <ul>
+                    <li><strong>Ingreso:</strong> Aplica a programas de Ingeniería en Informática acreditados.</li>
+                    <li><strong>Programa:</strong> Completa un riguroso programa de estudios que abarca programación, bases de datos, redes y más.</li>
+                </ul>
+            </li>
+            <li><strong>Especialización:</strong>
+                <ul>
+                    <li><strong>Selecciona tu Enfoque:</strong> Elige una especialización, como desarrollo web, inteligencia artificial o ciberseguridad.</li>
+                </ul>
+            </li>
+            <li><strong>Práctica Profesional:</strong>
+                <ul>
+                    <li><strong>Pasantías:</strong> Obtén experiencia práctica a través de pasantías en empresas de tecnología.</li>
+                </ul>
+            </li>
+            <li><strong>Graduación:</strong>
+                <ul>
+                    <li><strong>Título:</strong> Gradúate con un título de Ingeniería en Informática.</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h2>Enfoques en la Carrera de Ingeniería en Informática</h2>
+        <p>La Ingeniería en Informática ofrece una variedad de enfoques emocionantes, incluyendo:</p>
+        <ul>
+            <li><strong>Desarrollo Web:</strong> Crea sitios web y aplicaciones interactivas.</li>
+            <li><strong>Inteligencia Artificial:</strong> Desarrolla sistemas inteligentes y aprendizaje automático.</li>
+            <li><strong>Ciberseguridad:</strong> Protege sistemas y datos contra amenazas cibernéticas.</li>
+            <li><strong>Redes y Comunicaciones:</strong> Diseña y administra redes de computadoras.</li>
+            <li><strong>Base de Datos:</strong> Gestiona y optimiza bases de datos de gran escala.</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Ingresando al Mundo Laboral</h2>
+        <p>Una vez que te has graduado, estás listo para entrar en el emocionante mundo laboral de la informática. Aquí hay algunas opciones:</p>
+        <ul>
+            <li><strong>Desarrollo de Software:</strong> Trabaja como desarrollador de software, creando aplicaciones y sistemas.</li>
+            <li><strong>Analista de Datos:</strong> Analiza y interpreta datos para tomar decisiones informadas.</li>
+            <li><strong>Ingeniero de Seguridad:</strong> Protege sistemas y datos contra amenazas cibernéticas.</li>
+            <li><strong>Gerente de Proyectos:</strong> Lidera equipos en la ejecución de proyectos tecnológicos.</li>
+            <li><strong>Consultoría Tecnológica:</strong> Ofrece soluciones y asesoramiento tecnológico a empresas.</li>
+        </ul>
+    </section>
+</main>
+<footer>
+    <p><span class="texto-negro">¡Tu Futuro en Ingeniería en Informática te Espera!</p>
+</footer>
+<section>
+    <h2>Estas interesado en universidad.</h2>
+    <p>Esta puede ser la oportunidad para que llegues a la vida universitaria</p>
+    <p>Consulta becas aqui!<p>
+<a href="/IngSistemas">
+    <button class="boton-estetico">Haz clic aquí</button>
+</a>
 </section>
 </section>
 <title></title>
 </head>
 </body>
         
-    </section>
+</section>
     
-    <head>
-        <meta charset="UTF-8">
-    <section id="Arquitectura">
-        <h1>Arquitectura</h1>
-        <img src="{% static 'img/Arquitectura.jpg' %}" class="col-md-4 p-3">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrera de Arquitectura: Diseñando Espacios Inspiradores</title>
+<head>
+    <meta charset="UTF-8">
+<section id="Arquitectura">
+    <h1>Arquitectura</h1>
+    <img src="{% static 'img/Arquitectura.jpg' %}" class="col-md-4 p-3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrera de Arquitectura: Diseñando Espacios Inspiradores</title>
 </head>
 <body>
-    <header>
-        <h1>Carrera de Arquitectura: Diseñando Espacios Inspiradores</h1>
-    </header>
-    <main>
-        <section>
-            <h2>La Carrera de Arquitectura: Un Camino Creativo</h2>
-            <p>La carrera de Arquitectura es una disciplina apasionante que involucra la planificación, diseño y construcción de espacios habitables. Aquí hay algunos pasos clave que debes seguir:</p>
-            <ol>
-                <li><strong>Educación Previa:</strong>
-                    <ul>
-                        <li><strong>Pregrado:</strong> Comienza con un programa de pregrado en arquitectura o campos relacionados. Aprende los principios del diseño y la construcción.</li>
-                    </ul>
-                </li>
-                <li><strong>Programa de Arquitectura:</strong>
-                    <ul>
-                        <li><strong>Ingreso:</strong> Aplica a programas de Arquitectura acreditados.</li>
-                        <li><strong>Programa:</strong> Completa un riguroso plan de estudios que abarca diseño arquitectónico, historia del arte y construcción.</li>
-                    </ul>
-                </li>
-                <li><strong>Especialización:</strong>
-                    <ul>
-                        <li><strong>Selecciona tu Enfoque:</strong> Elige una especialización, como diseño urbano, sostenibilidad o restauración histórica.</li>
-                    </ul>
-                </li>
-                <li><strong>Pasantías y Prácticas:</strong>
-                    <ul>
-                        <li><strong>Experiencia Práctica:</strong> Realiza pasantías en estudios de arquitectura para aplicar tus conocimientos en proyectos reales.</li>
-                    </ul>
-                </li>
-                <li><strong>Graduación:</strong>
-                    <ul>
-                        <li><strong>Título:</strong> Gradúate con un título de Arquitectura.</li>
-                    </ul>
-                </li>
-            </ol>
-        </section>
-        <section>
-            <h2>Enfoques en la Carrera de Arquitectura</h2>
-            <p>La Arquitectura ofrece diversas especialidades, incluyendo:</p>
-            <ul>
-                <li><strong>Diseño Urbano:</strong> Planifica y crea espacios urbanos funcionales y estéticamente agradables.</li>
-                <li><strong>Sostenibilidad:</strong> Diseña edificios ecológicamente sostenibles y eficientes energéticamente.</li>
-                <li><strong>Restauración y Conservación:</strong> Restaura y conserva edificios históricos y patrimonio cultural.</li>
-                <li><strong>Diseño Residencial:</strong> Crea hogares hermosos y funcionales para individuos y familias.</li>
-                <li><strong>Planificación de Espacios Públicos:</strong> Diseña áreas públicas como parques, plazas y espacios de recreación.</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Ingresando al Mundo Laboral</h2>
-            <p>Una vez que te has graduado, estás listo para entrar en el emocionante mundo laboral de la Arquitectura. Aquí hay algunas opciones:</p>
-            <ul>
-                <li><strong>Arquitectura de Diseño:</strong> Trabaja en la creación de planos y diseños arquitectónicos.</li>
-                <li><strong>Consultoría en Sostenibilidad:</strong> Colabora en proyectos sostenibles y eco-amigables.</li>
-                <li><strong>Restauración y Conservación:</strong> Restaura y preserva edificios históricos y culturales.</li>
-                <li><strong>Desarrollo Inmobiliario:</strong> Participa en el desarrollo y construcción de propiedades.</li>
-                <li><strong>Educación e Investigación:</strong> Enseña y contribuye a la investigación arquitectónica en instituciones académicas.</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p><span class="texto-negro">¡Tu Futuro en Arquitectura te Ofrece la Oportunidad de Diseñar un Mundo Mejor!</p>
-    </footer>
+<header>
+    <h1>Carrera de Arquitectura: Diseñando Espacios Inspiradores</h1>
+</header>
+<main>
     <section>
-        <h2>Estas interesado en universidad.</h2>
-        <p>Esta puede ser la oportunidad para que llegues a la vida universitaria</p>
-        <p>Consulta becas aqui!<p>
-        <a href="/Arquitectura">
-            <button class="boton-estetico">Haz clic aquí</button>
-        </a>
+        <h2>La Carrera de Arquitectura: Un Camino Creativo</h2>
+        <p>La carrera de Arquitectura es una disciplina apasionante que involucra la planificación, diseño y construcción de espacios habitables. Aquí hay algunos pasos clave que debes seguir:</p>
+        <ol>
+            <li><strong>Educación Previa:</strong>
+                <ul>
+                    <li><strong>Pregrado:</strong> Comienza con un programa de pregrado en arquitectura o campos relacionados. Aprende los principios del diseño y la construcción.</li>
+                </ul>
+            </li>
+            <li><strong>Programa de Arquitectura:</strong>
+                <ul>
+                    <li><strong>Ingreso:</strong> Aplica a programas de Arquitectura acreditados.</li>
+                    <li><strong>Programa:</strong> Completa un riguroso plan de estudios que abarca diseño arquitectónico, historia del arte y construcción.</li>
+                </ul>
+            </li>
+            <li><strong>Especialización:</strong>
+                <ul>
+                    <li><strong>Selecciona tu Enfoque:</strong> Elige una especialización, como diseño urbano, sostenibilidad o restauración histórica.</li>
+                </ul>
+            </li>
+            <li><strong>Pasantías y Prácticas:</strong>
+                <ul>
+                    <li><strong>Experiencia Práctica:</strong> Realiza pasantías en estudios de arquitectura para aplicar tus conocimientos en proyectos reales.</li>
+                </ul>
+            </li>
+            <li><strong>Graduación:</strong>
+                <ul>
+                    <li><strong>Título:</strong> Gradúate con un título de Arquitectura.</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h2>Enfoques en la Carrera de Arquitectura</h2>
+        <p>La Arquitectura ofrece diversas especialidades, incluyendo:</p>
+        <ul>
+            <li><strong>Diseño Urbano:</strong> Planifica y crea espacios urbanos funcionales y estéticamente agradables.</li>
+            <li><strong>Sostenibilidad:</strong> Diseña edificios ecológicamente sostenibles y eficientes energéticamente.</li>
+            <li><strong>Restauración y Conservación:</strong> Restaura y conserva edificios históricos y patrimonio cultural.</li>
+            <li><strong>Diseño Residencial:</strong> Crea hogares hermosos y funcionales para individuos y familias.</li>
+            <li><strong>Planificación de Espacios Públicos:</strong> Diseña áreas públicas como parques, plazas y espacios de recreación.</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Ingresando al Mundo Laboral</h2>
+        <p>Una vez que te has graduado, estás listo para entrar en el emocionante mundo laboral de la Arquitectura. Aquí hay algunas opciones:</p>
+        <ul>
+            <li><strong>Arquitectura de Diseño:</strong> Trabaja en la creación de planos y diseños arquitectónicos.</li>
+            <li><strong>Consultoría en Sostenibilidad:</strong> Colabora en proyectos sostenibles y eco-amigables.</li>
+            <li><strong>Restauración y Conservación:</strong> Restaura y preserva edificios históricos y culturales.</li>
+            <li><strong>Desarrollo Inmobiliario:</strong> Participa en el desarrollo y construcción de propiedades.</li>
+            <li><strong>Educación e Investigación:</strong> Enseña y contribuye a la investigación arquitectónica en instituciones académicas.</li>
+        </ul>
+    </section>
+</main>
+<footer>
+    <p><span class="texto-negro">¡Tu Futuro en Arquitectura te Ofrece la Oportunidad de Diseñar un Mundo Mejor!</p>
+</footer>
+<section>
+    <h2>Estas interesado en universidad.</h2>
+    <p>Esta puede ser la oportunidad para que llegues a la vida universitaria</p>
+    <p>Consulta becas aqui!<p>
+    <a href="/Arquitectura">
+        <button class="boton-estetico">Haz clic aquí</button>
+    </a>
 </section>
 </body>
 </html>
-    </section>
+</section>
 
+
+
+    <!DOCTYPE html>
     <head>
         <meta charset="UTF-8">
         <section id="Derecho">
@@ -579,7 +613,6 @@
     </html>
 
 
-    <!DOCTYPE html>
 <html lang="es">
 <head>
     <section id="Gastronomia">
@@ -659,9 +692,10 @@
             <button class="boton-estetico">Haz clic aquí</button>
         </a>
 </section>
-</section>
 </body>
-</html>
+
+    </html>
+
 
     
 </main>
