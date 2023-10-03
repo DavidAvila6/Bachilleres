@@ -10,7 +10,7 @@ from django.utils.html import strip_tags
 
 from AppProyecto import settings
 from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario
-from .forms import BecaForm, customUserCreationForm
+from .forms import BecaForm, PublicacionForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
 from .forms import EmailUsername
@@ -367,3 +367,35 @@ def agregar_comentario(request, publicacion_id):
         return redirect('/foro', pk=publicacion_id)
 
     return render(request, 'agregar_comentario.html', {'publicacion': publicacion})
+
+def eliminar_comentario(request, comentario_id):
+    comentario = get_object_or_404(Comentario, pk=comentario_id)
+    
+    # Verificar que el usuario actual sea el autor del comentario
+    if request.user == comentario.autor:
+        comentario.delete()
+    
+    # Redirigir a la página de la publicación a la que pertenece el comentario
+    return redirect('/foro', publicacion_id=comentario.publicacion.id)
+
+def crear_publicacion(request):
+    if request.method == 'POST':
+        form = PublicacionForm(request.POST)
+        if form.is_valid():
+            nueva_publicacion = form.save(commit=False)
+            nueva_publicacion.autor = request.user  # Asigna el autor de la publicación
+            nueva_publicacion.save()
+            return redirect('lista_publicaciones')  # Redirige a la lista de publicaciones
+    else:
+        form = PublicacionForm()
+    
+    return render(request, 'crear_publicacion.html', {'form': form})
+
+def eliminar_publicacion(request, publicacion_id):
+    publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
+    
+    # Verificar que el usuario actual sea el autor de la publicación
+    if request.user == publicacion.autor:
+        publicacion.delete()
+    
+    return redirect('foro/')  # Redirige a la lista de publicaciones

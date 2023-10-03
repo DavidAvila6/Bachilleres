@@ -2,6 +2,9 @@
 
 {% block content %}
 <h1 class="text-center">Foro de Usuarios</h1>
+<div class="text-right">
+    <a class="btn btn-success" href="{% url 'crear_publicacion' %}">Crear Publicación</a>
+</div>
 <ul>
   {% for publicacion in publicaciones %}
     <li>
@@ -20,6 +23,9 @@
               <p>{{ comentario.contenido }}</p>
               <p>Comentado por: {{ comentario.autor.username }} el {{ comentario.fecha_creacion }}</p>
             </li>
+            {% if request.user == comentario.autor %}
+            <a href="{% url 'eliminar_comentario' comentario.id %}">Eliminar comentario</a>
+            {% endif %}
           {% empty %}
             <li>No hay comentarios disponibles.</li>
             
