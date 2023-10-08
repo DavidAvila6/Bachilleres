@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Beca,Facultad,Universidad,Union_U_F,Fundacion,Configuracion_Becas,Becas_Fav,Facultad_fav,Documentos,Requisitos,Universidad_fav
+from .models import Beca,Facultad,Universidad,Union_U_F,Fundacion,Configuracion_Becas,Becas_Fav,Facultad_fav,Documentos,Requisitos,Universidad_fav, Publicacion, Comentario
 
 # Register your models here.
 
@@ -14,3 +14,5 @@ admin.site.register(Facultad_fav)
 admin.site.register(Documentos)
 admin.site.register(Requisitos)
 admin.site.register(Universidad_fav)
+admin.site.register(Publicacion)
+admin.site.register(Comentario)

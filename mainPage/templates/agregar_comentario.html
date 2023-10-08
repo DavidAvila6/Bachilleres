@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Agregar comentario a "{{ publicacion.titulo }}"</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <textarea name="contenido" rows="4" cols="50" required></textarea>
+    <br>
+    <input type="submit" value="Agregar Comentario">
+</form>
+
+{% endblock %}

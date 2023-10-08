@@ -103,20 +103,26 @@ class Configuracion_Becas(models.Model):
     
 class Becas_Fav (models.Model):
     id = models.AutoField(primary_key=True)
+    facultad = 'facultad'
+    beca = 'beca'
+    OPCIONES_TIPO = [
+        (facultad, 'facultad'),
+        (beca, 'beca'),
+    ]
+    tipo = models.CharField(max_length=10,choices=OPCIONES_TIPO)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     Configuracion_Becas = models.ForeignKey(Configuracion_Becas, on_delete=models.CASCADE)
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['usuario', 'Configuracion_Becas'], name='unique_foraneas_favoritos_Beca'),
+            models.UniqueConstraint(fields=['usuario', 'Configuracion_Becas','tipo'], name='unique_foraneas_favoritos_Beca'),
         ]
     @classmethod
-    def create(cls, usuario, configuracion_becas):
-        fav = cls(usuario=usuario, Configuracion_Becas=configuracion_becas)
+    def create(cls, tipo, usuario, configuracion_becas):
+        fav = cls(tipo=tipo, usuario=usuario, Configuracion_Becas=configuracion_becas)
         fav.save()
         return fav
     def __str__(self):
-        fila = "Beca : "+str(self.Configuracion_Becas.Beca
-                             )+" / Usuario: "+str(self.usuario)
+        fila = "Tipo : "+str(self.tipo)+" / Usuario: "+str(self.usuario)
         return fila
     
 class Facultad_fav(models.Model):
@@ -141,3 +147,16 @@ class Universidad_fav(models.Model):
     def __str__(self):
         return "Universidad: "+str(self.Universidad)+" / Estudiante: "+str(self.Estudiante)
 
+class Publicacion(models.Model):
+    titulo = models.CharField(max_length=255)
+    contenido = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    id = models.BigAutoField(primary_key=True)
+
+class Comentario(models.Model):
+    contenido = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
+    id = models.BigAutoField(primary_key=True)
