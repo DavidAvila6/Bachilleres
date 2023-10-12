@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="text-center">Foro de Usuarios</h1>
+  <div class="text-right mb-3">
+    <a class="btn btn-success" href="{% url 'crear_publicacion' %}">Crear Publicación</a>
+  </div>
+  <ul class="list-group">
+    {% for publicacion in publicaciones %}
+    <li class="list-group-item mb-3">
+      <div>
+        <h2 class="h4">{{ publicacion.titulo }}</h2>
+        <div class="bg-secondary text-light p-3"> <!-- Aplicar fondo diferente al contenido -->
+          <p>{{ publicacion.contenido }}</p>
+        </div>
+        <p class="mb-2">Publicado por: {{ publicacion.autor.username }} el {{ publicacion.fecha_creacion }}</p>
+        {% if request.user == publicacion.autor %}
+        <a href="{% url 'eliminar_publicacion' publicacion.id %}" class="btn btn-danger btn-sm">Eliminar Publicación</a>
+        {% endif %}
+        <!-- Mostrar la cantidad de comentarios -->
+        <p class="mb-1">Comentarios ({{ publicacion.num_comentarios }})</p>
+        
+        <!-- Iterar sobre los comentarios -->
+        <ul class="list-group">
+          {% for comentario in publicacion.comentarios %}
+          <li class="list-group-item mb-2">
+            <p>{{ comentario.contenido }}</p>
+            <p class="mb-1">Comentado por: {{ comentario.autor.username }} el {{ comentario.fecha_creacion }}</p>
+            {% if request.user == comentario.autor %}
+            <a href="{% url 'eliminar_comentario' comentario.id %}" class="btn btn-danger btn-sm">Eliminar Comentario</a>
+            {% endif %}
+          </li>
+          {% empty %}
+          <li class="list-group-item">No hay comentarios disponibles.</li>
+          {% endfor %}
+        </ul>
+        
+        <!-- Enlace para agregar un comentario -->
+        <a href="{% url 'agregar_comentario' publicacion.id %}" class="btn btn-primary btn-sm mt-2">Agregar Comentario</a>
+      </div>
+    </li>
+    {% empty %}
+    <li class="list-group-item">No hay publicaciones disponibles.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

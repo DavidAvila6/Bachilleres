@@ -22,7 +22,6 @@
           <ul>
             <hr>
             <li><a class="dropdown-item" href="#Medicna">Medicina</a></li>
-            
             <hr>
             <li><a class="dropdown-item" href="#Enfermeria">Enfermeria</a></li>
             <hr>
@@ -42,1284 +41,195 @@
 
   <div class="filtros row g-0 justify-content-center">
 
-    <div class="Becas row g-0 justify-content-center">
 
-      <div id="Medicina" class="MedicinaGeneral row g-0 mt-3 justify-content-center">
-        <div class="TituloSeccion col-9">
-          <hr>
-          <h2 class="text-center">Medicina</h2>
+<!--
+    <div class="table">
+      <h2>Becas general</h2>
+      <table class="table table-primary">
+        <thead>
+          <tr>
+            <th scope="col">Fundacion</th>
+            <th scope="col">Universidad</th>
+            <th scope="col">Facultad</th>
+            <th scope="col">nombre beca</th>
+            <th scope="col">Requisitos</th>
+            <th scope="col">Documentos</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">imagen</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for becas in becas_fun %}     
+          <tr class=" base_datos">
+            <td>{{ becas.Fundacion }}</td>
+            <td>{{ becas.Union_U_F.univeridad}}</td>
+            <td>{{ becas.Union_U_F.facultad}}</td>
+            <td> {{ becas.Beca}} </td>
+            <td>
+              {% for x in becas.universidades.all %}
+              <ul>
+                <li>
+                  {{ x.Union_U_F__univeridad__nombre}}
+                </li>
+              </ul>
+              {% endfor %}
+            </td>
+            <td>
+              {% for x in becas.Beca.Documentos.all %}
+              <ul>
+                <li>
+                  {{ x.Descripcion }}
+                </li>
+              </ul>
+              {% endfor %}
+            </td>
+            <td>{{ becas.Beca.Descripcion}}</td>
+            <td><img src="{{ becas.Beca.imagen.url }}"></td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="table">
+      <h2>Becas general filtrado fundacion</h2>
+      <table class="table table-primary">
+        <thead>
+          <tr>
+            <th scope="col">Fundacion</th>
+            <th scope="col">Universidad</th>
+            <th scope="col">Facultad</th>
+            <th scope="col">nombre beca</th>
+            <th scope="col">Requisitos</th>
+            <th scope="col">Documentos</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">imagen</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for becas_sin in becas2 %}
+          <tr class=" base_datos">
+            <td>{{ becas_sin.Fundacion}}</td>
+            <td>{{ becas_sin.Union_U_F.univeridad}}</td>
+            <td>{{ becas_sin.Union_U_F.facultad}}</td>
+            <td> {{ becas_sin.Beca}} </td>
+            <td>
+              {% for x in becas_sin.Beca.Requisitos.all %}
+              <ul>
+                <li>
+                  {{ x.Descripcion }}
+                </li>
+              </ul>
+              {% endfor %}
+            </td>
+            <td>
+              {% for x in becas_sin.Beca.Documentos.all %}
+              <ul>
+                <li>
+                  {{ x.Descripcion }}
+                </li>
+              </ul>
+              {% endfor %}
+            </td>
+            <td>{{ becas_sin.Beca.Descripcion}}</td>
+            <td><img src="{{ becas_sin.Beca.imagen.url }}"></td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+-->
+
+
+    {% for becas_sin in becas_sin %}
+
+    <div class="MedicinaGeneralPost row g-0 justify-content-center my-5">
+      <div class="card col-8 border-0">
+        <h2 class="text-center py-2 ">{{ becas_sin.Beca}}</h2>
+        <div class="div row align-content-center justify-content-center">
+          <div class="col pt-5 text-center">
+            <img src="{{ becas_sin.Beca.imagen.url }}" class="img-fluid">
+          </div>
+          <div class="col px-5 py-3">
+            <div class="Acordeon">
+              <p>
+                {{ becas_sin.Beca.Descripcion}}
+                
+              </p>
+              <div class="AcordeonContainer">
+                <hr>
+                <div class="AcordeonLabel">Requisitos</div>
+                <div class="AcordeonContent">
+                  {% for x in becas_sin.Beca.Requisitos.all %}
+                  <ul>
+                    <li>
+                      {{ x.Descripcion }}
+                    </li>
+                  </ul>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="AcordeonContainer">
+                <hr>
+                <div class="AcordeonLabel"> Valor y duracion de la beca</div>
+                <div class="AcordeonContent">
+                  <p>
+                    {{ becas_sin.Beca.valor_duracion}}
+                  </p>
+                </div>
+              </div>
+              <div class="AcordeonContainer">
+                <hr>
+                <div class="AcordeonLabel">Cómo aplicar</div>
+                <div class="AcordeonContent">
+                  <p>
+                    NA
+                  </p>
+                </div>
+              </div>
+
+              <div class="AcordeonContainer">
+                <hr>
+                <div class="AcordeonLabel">Qué documentos necesitas</div>
+                <div class="AcordeonContent">
+                  {% for x in becas_sin.Beca.Documentos.all %}
+                  <ul>
+                    <li>
+                      {{ x.Descripcion }}
+                    </li>
+                  </ul>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+                       
+          </div>     
+        </div>
+       <!-- <form id="favoritoForm" method="post" action="{% url 'nombre_de_tu_vista_agregar_favorito' becas_sin.Beca.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="tipo" value="beca"> 
           
-        </div>
-
-
-
-        <div class="MedicinaGeneralPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Beca de la Universidad de La Sabana</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/sabana.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    La Universidad de La Sabana impulsa este programa para captar
-                    aquellos estudiantes que se destacaron en los estudios de
-                    bachillerato, ofreciendo la beca para los dos estudiantes destacados
-                    en el primer semestre del curso de Medicina.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>El solicitante debe ser recomendado por el colegio.</li>
-                        <li>ser de nuevo ingreso al programa</li>
-                        <li>Buenos resultados en el proceso de ingreso</li>
-                        <li>Alto nivel académico durante la etapa de bachillerato</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El programa de beca de Medicina ofrece dos cupos, uno que cubre
-                        la totalidad de la matrícula y otro en 70 % y se otorgan
-                        semestralmente. Así mismo, los beneficiarios de la beca quedarán
-                        libres del pago de derechos de grado como beneficio al final del
-                        programa.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Para aplicar debes estar inscrito en el programa de educación
-                        superior de la facultad de Medicina y cumplir los requisitos.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Carta de postulacion del colegio</li>
-                        <li>Carta de admonistracion del programa</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        -----------------------------------------------------------------------------------------------
-
-
-        <div class="MedicinaGeneralPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Becas ICETEX</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/icetex.jpg" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    El Instituto Colombiano de Crédito Educativo y Estudios Técnicos en
-                    el Exterior, ICETEX, ofrece facilidades para pago de estudios, tanto
-                    en el país, como para quienes desean estudiar en el exterior,
-                    incluyendo una variedad de programas que incluyen becas para
-                    estudiar Medicina.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Los requisitos pueden variar según sean para estudios de
-                        pregrado, maestrías y doctorados, así como de la universidad a
-                        cursar el programa.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El programa de becas ICETEX financia la totalidad de la
-                        matrícula, cuyo valor también va a depender de la universidad y
-                        la carrera elegida.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Para postularse a las becas ICETEX, debes ingresar a su página
-                        web, y en la sección de becas, elegir la que se encuentre activa
-                        en la convocatoria.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Formulario de la aplicación en línea.</li>
-                        <li>Fotocopia del Título universitario.</li>
-                        <li>Certificado de notas.</li>
-                        <li>Certificado de salud.</li>
-                        <li>Constancia de autorización de tratados del ICETEX.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="MedicinaGeneralPost row g-0 justify-content-center my-5">
-
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Becas David Geffen</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/UCLA.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    Estas becas para estudiar Medicina en Estados Unidos, y en
-                    específico en la Universidad de California Los Ángeles (UCLA),
-                    también se otorgan a estudiantes extranjeros y se califica basándose
-                    en los méritos del postulante, por lo que contar con un excelente
-                    historial académico es algo necesario.>
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Debido a que es una beca basada en el mérito, esta solamente se
-                        otorga a quienes progresan académicamente de manera
-                        satisfactoria.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Esta beca cubre la totalidad de la matrícula durante los cuatro
-                        años de duración de la carrera en la facultad de Medicina,
-                        además cubre los gastos de alojamiento, transporte y otros
-                        asociados a su permanencia durante el estudio.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Las Becas Médicas David Geffen consideran a todos los
-                        solicitantes automáticamente a través del proceso de solicitud,
-                        que se realiza desde su página web y la posterior entrevista.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      Para aplicar debes llenar el formulario que se encuentra en el
-                      siguiente enlace, donde se encuentran los distintos tipos de
-                      ayuda financiera, con los respectivos requerimientos.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+          <button type="button" onclick="agregarFavorito()">Agregar Favorito</button>
+      </form>
+           -->
+           <a href="{% url 'nombre_de_tu_vista_agregar_favorito' becas_sin.Beca.id %}" class="button-link">
+            Agregar a favoritos
+        </a>
       </div>
+    </div>
 
-      
-      <div id="Enfermeria" class="Enfermeria row g-0 justify-content-center">
-        <div class="TituloSeccion col-9">
-          <hr>
-          <h2 class="text-center">Emfermeria</h2>
-        </div>
-
-        <div class="EnfermeriaPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Beca de la Universidad de La Sabana</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/sabana.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    La Beca Excelencia que ofrece la Universidad de la Sabana está
-                    dirigida a estudiantes de nuevo ingreso en pregrado, que estén
-                    dispuestos a completar sus estudios en esta universidad de manera
-                    semestral. Puedes utilizar esta beca para estudiar Enfermería en
-                    Colombia, en esta prestigiosa universidad.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <p>Para optar a la beca debes:</p>
-                      <ul>
-                        <li>Tener excelentes notas.</li>
-                        <li>Buen dominio del idioma inglés.</li>
-                        <li>Excelente puntuación en examen de admisión.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Esta beca Excelencia presenta dos opciones, puede cubrir tanto
-                        el 100 % como el 60 % de la matrícula de la carrera que desees
-                        estudiar.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        La postulación debe ser enviada por uno de los colegios
-                        invitados a participar de las becas por su excelencia académica.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Se solicitan directamente al colegio postulante.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="EnfermeriaPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Beca SENA para especialista en enfermería y medicina</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/sena.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    Esta Beca del Servicio Nacional de Aprendizaje está dirigida a profesionales de la enfermería que
-                    deseen ampliar sus conocimientos académicos y su formación profesional en esta importante rama del
-                    saber, ofreciendo cursos y maestrías a profesionales en ejercicio.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <p>Ser profesional de la enfermería en ejercicio y estar inscrito en el servicio nacional de
-                        aprendizaje SENA.</p>
-                      <ul>
-                        <li>Tener excelentes notas.</li>
-                        <li>Buen dominio del idioma inglés.</li>
-                        <li>Excelente puntuación en examen de admisión.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Los cursos tienen duraciones distintas, los hay de 12 y de 14 meses, la beca cubre el 100 % del
-                        costo del curso.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Para aplicar al curso debes estar inscrito en el Servicio Nacional de Aprendizaje e inscribirse
-                        a través de la página web.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Los documentos cambian de acuerdo al curso a realizar o programa a seguir. También depende de la
-                        institución en donde se aplicará.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="EnfermeriaPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Beca Future in Russia</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/rusia.jpg" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    A través de la embajada rusa en los distintos países se ofrecen becas para estudiar diversas
-                    carreras en Rusia, incluyendo Enfermería. Estas becas ofrecen no sólo el pago total de tus estudios
-                    sino también el pago de manutención, alojamiento y un curso para aprender el idioma durante un año.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Todos los extranjeros que decidan aplicar pueden hacerlo a través de la embajada rusa, no se
-                        necesita un nivel específico de inglés o ruso.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El 100 % del costo de la universidad, pago por manutención te incluye también pago de
-                        alojamiento y un curso para aprender el idioma ruso.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Puedes aplicar de manera online por la página Future in Russia o también puedes hacerlo por
-                        medio de la embajada rusa en Colombia.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Copia fotostática del pasaporte con vigencia de 18 meses</li>
-                        <li>Copia fotostática de los documentos de estudio, incluyendo las calificaciones obtenidas,
-                          traducidas al ruso.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div id="IngenieriaSistemas" class="IngenieriaSistemas row justify-content-center alin">
-        <div class="TituloSeccion col-9">
-          <hr>
-          <h2 class="text-center">Ingenieria de Sistemas</h2>
-        </div>
-
-        <div class="IngenieriaSistemasPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Universidad de los Andes</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/Andes.jpg" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    La Universidad de los Andes es una institución reconocida en Colombia y ofrece becas para estudiar
-                    ingeniería de sistemas en Colombia 2023. Esta prestigiosa institución posee convenios con entes de
-                    cooperación como Icetex y la fundación CEIBA.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Ser admitido(a) en la Facultad de ingeniería de sistemas de la Universidad de los Andes.
-                        </li>
-                        <li>Demostrar un rendimiento académico.</li>
-                        <li>Cumplir con los requisitos socioeconómicos de la universidad.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El valor y la duración de las becas pueden variar:
-                      </p>
-                      <ul>
-                        <li>Según el perfil del estudiante.</li>
-                        <li>Disponibilidad de fondos.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Registra el formulario de solicitud de becas.</li>
-                        <li>Presentar los requerimientos dentro del tiempo.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Convenio de solicitud de becas, debidamente completado.</li>
-                        <li>Documentos que respalden tu rendimiento académico y tus logros extracurriculares.</li>
-                        <li>Información sobre tu situación socioeconómica.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="IngenieriaSistemasPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Universidad Nacional de Colombia</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/UNacional.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    La Universidad Nacional de Colombia también ofrece becas para estudiar ingeniería de sistemas en
-                    Colombia 2022, para aquellos jóvenes deseosos de transformar sus vidas a través de la Ingeniería de
-                    sistemas. Puedes aplicar a este u otros programas académicos.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Ser admitido(a) en el programa de la Universidad Nacional de Colombia.</li>
-                        <li>Demostrar excelencia académica y potencial en la ingeniería de sistemas.</li>
-                        <li>Cumplir con los requisitos socioeconómicos de la universidad.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El valor y la duración de las becas pueden variar:
-                      </p>
-                      <ul>
-                        <li>Según el perfil del estudiante.</li>
-                        <li>Disponibilidad de fondos.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Completa la convocatoria de solicitud.</li>
-                        <li>Entrega de documentos dentro del plazo.</li>
-                        <li>Elige el pensum ingeniería de sistemas eafit.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Convenio de solicitud de becas, debidamente completado.</li>
-                        <li>Transcripciones académicas y certificados de estudios.</li>
-                        <li>Cartas de recomendación.</li>
-                        <li>Ensayo personal.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="IngenieriaSistemasPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Instituto (MIT) - Tecnológico de Massachusetts, ubicado en Estados Unidos</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/Massachusetts.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    El MIT es una prestigiosa institución, que ofrece becas para estudiar ingeniería a estudiantes
-                    internacionales. Este tecnológico posee gran fama mundial por la excelente calidad de la educación
-                    impartida y el nivel de sus egresados.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Ser admitido(a) en el programa de becas para ingeniería de sistemas del MIT.</li>
-                        <li>Demostrar excelencia académica.</li>
-                        <li>Poseer habilidades básicas destacadas en el campo de la ingeniería.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El valor y la duración de las becas pueden variar:
-                      </p>
-                      <ul>
-                        <li>Las becas tener un alcance 36 meses.</li>
-                        <li>Gastos de manutención mensual.</li>
-                        <li>Cobertura de los costos de matrícula.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Completa el formulario de solicitud en línea del MIT.</li>
-                        <li>Realiza los exámenes estandarizados requeridos.</li>
-                        <li>Presenta todos los documentos solicitados dentro de los plazos establecidos.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Formulario de solicitud debidamente completado.</li>
-                        <li>Transcripciones académicas y certificados de estudios.</li>
-                        <li>Ensayos personales.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div id="Arquitectura" class="Arquitectura row justify-content-center">
-        <div class="TituloSeccion col-9">
-          <hr>
-          <h2 class="text-center">Arquitectura</h2>
-        </div>
-
-        <div class="ArquitecturaPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Becas ICETEX</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/icetex.jpg" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    El Instituto Colombiano de Crédito Educativo y Estudios Técnicos en el Exterior, (ICETEX), ofrece
-                    becas para estudiar en universidades colombianas, en diversas áreas del pensamiento humano,
-                    incluyendo becas para estudiar Arquitectura en niveles de pregrado y postgrado.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Los requisitos pueden variar según sean para estudios de pregrado, maestrías y doctorados, así
-                        como de la universidad a cursar el programa.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El programa de ICETEX, al ofertar las becas para estudiar en Colombia ofrece financiar la
-                        totalidad de la matrícula, cuyo valor también va a depender de la universidad y el nivel de
-                        estudio a aplicar.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Para postularse a las becas ICETEX, debes ingresar a su página web, y en la sección de becas,
-                        elegir la que se encuentre activa en la convocatoria.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Formulario de la aplicación en línea.</li>
-                        <li>Fotocopia del Título universitario.</li>
-                        <li>Certificado de notas.</li>
-                        <li>Certificado de salud.</li>
-                        <li>Constancia de autorización de tratados del ICETEX.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ArquitecturaPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Beca Invest Your Talent</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/InvestItalia.jpg" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    Esta es una de las becas que ofrece el Gobierno de Italia, para atraer a jóvenes talentos
-                    extranjeros en Arquitectura, ingeniería, diseño y carreras afines, para que estos puedan obtener
-                    estudios de maestrías en institutos de educación superior en el país e iniciar una experiencia
-                    laboral en las empresas italianas.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Cualificaciones académicas.</li>
-                        <li>Los solicitantes deben tener menos de 26 años de edad.</li>
-                        <li>Dominio del inglés.</li>
-                        <li>Tener nacionalidad de alguno de los países del acuerdo (Colombia es aceptado).</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        La beca cubre un periodo de estudios de nueve meses y durante este tiempo cubrirá el pago total
-                        de tus estudios, un seguro médico y un estipendio mensual de 900 euros.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Las solicitudes se realizan a través del sitio web oficial de la beca, al momento de ser
-                        aceptado en el programa de la universidad elegida para realizar los estudios.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Expediente académico que certifique que ha completado su licenciatura.</li>
-                        <li>Certificado de lengua inglesa (IELTS o TOEFL).</li>
-                        <li>Certificado de lengua italiana (opcional).</li>
-                        <li>Vídeo en el que el candidato explique sus motivaciones (no más de 1 minuto).</li>
-                        <li>Currículum vítae.</li>
-                        <li>Pasaporte válido.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ArquitecturaPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Becas OEA</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/OEA.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    La Organización de Estados Americanos, en alianza con diversos entes de México, ofrece becas
-                    académicas para realizar estudios de postgrado en ciencias e ingenierías, (incluida la carrera de
-                    Arquitectura) en dicho país y así promover la integración regional a través del intercambio de
-                    estudiantes.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Contar con un diploma de Grado según sea el caso.</li>
-                        <li>Tener una media de calificaciones de mínimo 8 en una escala del 1 al 10.</li>
-                        <li>Cumplir con los requerimientos de idioma del programa elegido.</li>
-
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Esta beca otorga un aporte único de 1,200 dólares americanos para cierta cantidad de
-                        seleccionados, así como un estipendio mensual para gastos de manutención, seguro médico básico,
-                        y posibilidad de descuento parcial o total en los precios de la matrícula.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Para aplicar a estas becas primero debes solicitar admisión a alguno de los programas
-                        presenciales que formen parte del Sistema Nacional de Postgrados (SNP), para luego solicitar el
-                        beneficio de la beca siguiendo los procesos de la institución académica elegida.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Solicitud en línea.</li>
-                        <li>Copia del último diploma universitario obtenido.</li>
-                        <li>Duplicado del certificado de notas de todos los grados académicos alcanzados.</li>
-                        <li>Tres (3) cartas de recomendación.</li>
-                        <li>Currículum vítae.</li>
-                        <li>Carta de admisión a la universidad o centro de investigación.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="Derecho" class="Derecho row justify-content-center">
-        <div class="TituloSeccion col-9">
-          <hr>
-          <h2 class="text-center">Derecho</h2>
-        </div>
-
-        <div class="DerechoPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Beca Nacional de Excelencia Académica en Derecho</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/colombia.jpg" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    Beca otorgada por diversas universidades en Colombia. Algunas de las instituciones educativas
-                    reconocidas que te ofrecen esta beca son la Universidad de los Andes, la Universidad Nacional de
-                    Colombia, la Universidad Externado de Colombia y la Pontificia Universidad Javeriana.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Ser colombiano.</li>
-                        <li>Promedio sobresaliente en la educación secundaria para acceder a las becas para
-                          especializaciones.</li>
-                        <li>Demostrar aptitudes y habilidades destacadas en el campo del Derecho.</li>
-
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Cubre la totalidad o una parte significativa de los costos de matrícula.</li>
-                        <li>Duración varía según la institución y el nivel de estudio.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <lu>
-                        <li>Consulta los requisitos y fechas de convocatoria de cada beca.</li>
-                        <li>Prepara los documentos solicitados.</li>
-                        <li>Completa el formulario de solicitud en línea, si está disponible.</li>
-                        <li>Envía la solicitud y los documentos requeridos dentro del plazo establecido.</li>
-                      </lu>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Formulario de solicitud completo.</li>
-                        <li>Copias de documentos de identificación.</li>
-                        <li>Certificados académicos y expedientes de calificaciones.</li>
-                        <li>Cartas de recomendación.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="DerechoPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 "> Beca de Intercambio Internacional en Derecho</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/internacional.jpg" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    La Beca de Intercambio Internacional en Derecho brinda a los estudiantes colombianos la
-                    oportunidad de vivir una experiencia educativa a disponer de becas para estudiar Derecho en el
-                    extranjero, ampliando sus horizontes académicos y culturales en el campo legal.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Debes ser colombiano.</li>
-                        <li>Estar matriculado en una institución colombiana de educación superior.</li>
-                        <li>Cumplir con los requisitos establecidos por la universidad o programa de intercambio
-                          extranjero.</li>
-                        <li>Acreditar competencia en el idioma solicitado por la institución de destino para poder
-                          estudiar Derecho en el extranjero.</li>
-
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Puede cubrirte los gastos de matrícula en la institución de destino.</li>
-                        <li>La duración de la beca puede variar según el programa de intercambio de estudiantes
-                          internacionales.</li>
-                        <li>Generalmente de uno a dos semestres académicos.</li>
-                        <li>Posibilidad de que recibas una asignación mensual para cubrir gastos de subsistencia.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <lu>
-                        <li>Debes investigar y seleccionar programas de intercambio internacional en Derecho.</li>
-                        <li>Cumple con los requisitos y plazos de solicitud establecidos por la institución o programa
-                          de intercambio.</li>
-                        <li>Tienes que presentar una solicitud completa, que puede incluir formularios en línea,
-                          ensayos y documentos adicionales requeridos.</li>
-
-                      </lu>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Llenar el formulario de solicitud completamente.</li>
-                        <li>Documentos de identificación.</li>
-                        <li>Expedientes académicos y certificados de calificaciones.</li>
-                        <li>Certificados de dominio del idioma requerido por la institución de destino.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="DerechoPost row g-0 justify-content-center my-5">
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Becas Erasmus</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/Union.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    El programa de becas Erasmus de la Unión Europea, ofrece becas de movilidad para estudiantes de
-                    países participantes, incluyendo Colombia. Estas becas permiten a los estudiantes de Derecho
-                    realizar intercambios o completar programas de maestría en Derecho en universidades europeas
-                    asociadas.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Titulación universitaria.</li>
-                        <li>Destacado rendimiento académico.</li>
-                        <li>Competencia en el idioma inglés (certificación TOEFL o IELTS).</li>
-
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Duración de un año, dependiendo del programa de becas maestría seleccionado.</li>
-                        <li>Asignación mensual de 1.000 euros durante un año para gastos de manutención.</li>
-                        <li>Financiamiento adicional de 1.000 € a 4.000 €.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <lu>
-                        <li>Contacta la oficina de Relaciones Internacionales de tu universidad para obtener
-                          información sobre los requisitos y el proceso de solicitud.</li>
-                        <li>Seleccionar una universidad de acogida. </li>
-                        <li>Completa el formulario de solicitud de tu universidad de origen y proporciona la
-                          documentación requerida.</li>
-
-                      </lu>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Llena completamente la solicitud.</li>
-                        <li>Presenta tu expediente académico actualizado.</li>
-                        <li>Carta de motivación.</li>
-                        <li>Cartas de recomendación.</li>
-                        <li>Presentación de certificado de idioma, como TOEFL o IELTS, que demuestre el nivel de
-                          competencia lingüística.</li>
-                        <li>Copia del pasaporte.</li>
-                        <li>Fotos tamaño carnet.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-
-      <div id="Gastronomia" class="Gastronomia row justify-content-center">
-        <div class="TituloSeccion col-9">
-          <hr>
-          <h2 class="text-center">Gastronomia</h2>
-        </div>
-
-        <div class="GastronomiaPost row g-0 justify-content-center my-5">
-
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Descuentos para estudiar Gastronomía en Universidad de San Buenaventura</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/SanBuenabentura.jpg" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    La Universidad de San Buenaventura ofrece la beca en la carrera de gastronomía "Fray Fernando
-                    Garzón Ramírez, OFM" para estudiantes destacados de colegios con convenios. Se otorgan tres becas
-                    para estudiar gastronomía para colombianos con descuentos de entre 50%, 30% y 20%.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Presentar al estudiante mediante carta de la Rectoría del Colegio a la Unidad de Mercadeo
-                          Institucional.</li>
-                        <li>Demostrar condición académica: adjuntar últimos 3 boletines y certificado de buena
-                          conducta.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El valor de las becas gastronomía ofrecidas por la Universidad de San Buenaventura es del 50%,
-                        30% y 20% respectivamente. La duración de las becas puede cambiar según la época del año.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Los estudiantes elegidos deben completar el proceso de inscripción y admisión a través del
-                        sitio web de la Universidad de San Buenaventura (usbbog.edu.co)
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Carta de presentación del estudiante.</li>
-                        <li>Tres (3) últimos boletines de calificaciones del último grado.</li>
-                        <li>Certificado de buena conducta del estudiante para solicitar las becas para estudiar
-                          gastronomía.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="GastronomiaPost row g-0 justify-content-center my-5">
-
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">Becas Fundación Alicia</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/Alicia.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    El propósito de esta beca española es fomentar el aprendizaje del proceso culinario y alimenticio.
-                    Como iniciativa, los estudiantes realizan un procedimiento de investigación supervisado por
-                    expertos. La beca cubre costos de alimentación, pero no compensación económica por las prácticas.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Los detalles exactos pueden cambiar según la beca específica ofrecida por la Fundación Alicia.
-                        Te recomiendo que te pongas en contacto con ellos para obtener información precisa.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El programa de becas para estudiar gastronomía en España oferta 9 plazas para cada uno de los
-                        períodos de prácticas que habilita durante el año: desde enero hasta marzo, desde abril hasta
-                        julio y desde septiembre hasta diciembre. Los precios varían según el período y la época.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El programa de becas para estudiar gastronomía en España oferta 9 plazas para cada uno de los
-                        períodos de prácticas que habilita durante el año: desde enero hasta marzo, desde abril hasta
-                        julio y desde septiembre hasta diciembre. Los precios varían según el período y la época.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Curriculum vitae</li>
-                        <li>Carta de motivación</li>
-                        <li>Fotocopia del DNI, NIE o Pasaporte</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="GastronomiaPost row g-0 justify-content-center my-5">
-
-          <div class="card col-8 border-0">
-            <h2 class="text-center py-2 ">James Beard Foundation</h2>
-            <div class="div row align-content-center justify-content-center">
-              <div class="col pt-5 text-center">
-                <img src="../static/img/James.png" class="img-fluid">
-              </div>
-              <div class="col px-5 py-3">
-                <div class="Acordeon">
-                  <p>
-                    Esta fundación en New York destaca por brindar becas de 6 a 12 meses, con una asignación semanal
-                    de 500 dólares, enfocadas en promover el liderazgo de mujeres chefs. Debes estar atento a las
-                    próximas convocatorias para aprovechar estas oportunidades en becas para colombianos.
-                  </p>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Requisitos</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Nombre de la escuela seleccionada.</li>
-                        <li>Transcripción de secundaria si eres senior.</li>
-                        <li>Especialidad de estudio elegida.</li>
-                        <li>GPA más reciente.</li>
-                        <li>Rango en la clase, si aplica.</li>
-                        <li>Puntajes en SAT y/o ACT, si aplican.</li>
-                        <li>Rango en la clase, si aplica.</li>
-                        <li>Lista de actividades y voluntariado.</li>
-                        <li>Breve descripción de objetivos profesionales.</li>
-                        <li>Breve declaración de circunstancias excepcionales.</li>
-                        <li>Ensayos requeridos para becas específicas.</li>
-                        <li>Información financiera en la solicitud.</li>
-                        <li>Evaluación del consejero o supervisor.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel"> Valor y duracion de la beca</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        El valor y la duración de las becas de la Fundación James Beard también pueden variar según el
-                        programa y la beca. Algunas becas pueden otorgar sumas para cubrir los gastos educativos,
-                        mientras que otras pueden ofrecer pasantías o programas de mentoría.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Cómo aplicar</div>
-                    <div class="AcordeonContent">
-                      <p>
-                        Deberás completar un formulario de solicitud en línea proporcionando información personal,
-                        educativa y profesional. Este requisito en muchos países es indispensable, así como para optar
-                        por maestrías en gastronomía en España y otras partes del mundo.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="AcordeonContainer">
-                    <hr>
-                    <div class="AcordeonLabel">Qué documentos necesitas</div>
-                    <div class="AcordeonContent">
-                      <ul>
-                        <li>Carta de presentación.</li>
-                        <li>Curriculum vitae (CV).</li>
-                        <li>Referencias de profesores y empleadores anteriores.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
+    {% endfor %}
     
 
-    </div>
+
+
 </body>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../static/js/section.js"></script>
+  <script type="text/javascript" src="../static/js/section.js"></script>
+<script src="../static/js/becas.js"></script>
 
 {% endblock %}

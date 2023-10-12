@@ -73,11 +73,11 @@ class Beca (models.Model):
     ]
     nombre = models.CharField(max_length=50)
     tipo = models.CharField(max_length=10,choices=OPCIONES_TIPO,default=Nacional)
-    valor = models.CharField(max_length=100)
-    
+    valor_duracion = models.CharField(max_length=500)
     Documentos = models.ManyToManyField(Documentos)
     Requisitos = models.ManyToManyField(Requisitos)
     Descripcion = models.CharField(max_length=1000)
+    imagen = models.ImageField(upload_to="imagenes_becas/",null=True)
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['nombre'], name='unique_foraneas_Beca'),
@@ -146,3 +146,16 @@ class Universidad_fav(models.Model):
     def __str__(self):
         return "Universidad: "+str(self.Universidad)+" / Estudiante: "+str(self.Estudiante)
 
+class Publicacion(models.Model):
+    titulo = models.CharField(max_length=255)
+    contenido = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    id = models.BigAutoField(primary_key=True)
+
+class Comentario(models.Model):
+    contenido = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
+    id = models.BigAutoField(primary_key=True)
