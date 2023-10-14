@@ -411,9 +411,18 @@ def crear_publicacion(request):
         form = PublicacionForm(request.POST)
         if form.is_valid():
             nueva_publicacion = form.save(commit=False)
-            nueva_publicacion.autor = request.user  # Asigna el autor de la publicación
+            nueva_publicacion.autor = request.user
             nueva_publicacion.save()
-            return redirect('lista_publicaciones')  # Redirige a la lista de publicaciones
+
+            
+            subject = 'Nueva publicación creada en BCH'
+            message = 'Se ha creado una nueva publicación en el apartado de foro en BCH.'
+            from_email = settings.EMAIL_HOST_USER 
+            to_email = [request.user.email]  
+
+            send_mail(subject, message, from_email, to_email, fail_silently=True)
+
+            return redirect('lista_publicaciones')
     else:
         form = PublicacionForm()
     
