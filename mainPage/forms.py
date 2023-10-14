@@ -32,7 +32,8 @@ class EmailUsername(forms.Form):
 class BecaForm(forms.ModelForm):
         class Meta:
             model = Beca
-            fields = '__all__'
+            fields = ['nombre', 'tipo', 'valor_duracion'
+                      , 'Documentos', 'Requisitos', 'Descripcion']
 
 class PublicacionForm(forms.ModelForm):
     class Meta:
