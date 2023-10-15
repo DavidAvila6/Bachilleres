@@ -34,6 +34,12 @@ urlpatterns = [
     path('Secciones/', views.Secciones ),
     path('perfil/', views.perfil ),
     path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
+    #becas fav en perfil--------------------------------------------------------
+    # path('becas_fav/', views.becasFAV, name='becas_fav'),
+    path('becas_fav/', views.becasFAV, name='becas_fav'),
+    # ...
+     path('calificar/<int:estrellas>/', views.calificar, name='calificar'),
+
     #-------
 
     #Correos-----------------------------------------------------------------

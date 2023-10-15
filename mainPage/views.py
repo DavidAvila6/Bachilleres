@@ -24,7 +24,16 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
+
+from .models import Calificacion
 # Create your views here.
+
+@login_required
+def calificar(request, estrellas):
+    calificacion = Calificacion(usuario=request.user, estrellas=estrellas)
+    calificacion.save()
+    return redirect('novedades') 
+
 
 def principalHub(request):
     return render(request, 'hub.html')
@@ -36,6 +45,10 @@ def recursos(request):
     return render(request, 'recursos.html')
 def novedades(request):
     return render(request, 'novedades.html')
+def becasFAV(request):
+
+    becas_sin = Configuracion_Becas.objects.filter(Fundacion__nombre="NA")
+    return render(request, 'becas_fav.html', {'becas_sin':becas_sin})
 
 #login_required  
 
@@ -427,3 +440,5 @@ def eliminar_publicacion(request, publicacion_id):
         publicacion.delete()
     
     return redirect('/foro/')  # Redirige a la lista de publicaciones
+
+

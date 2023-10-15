@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
 
 class Universidad(models.Model):
@@ -159,3 +160,12 @@ class Comentario(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
     id = models.BigAutoField(primary_key=True)
+
+
+class Calificacion(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  
+    estrellas = models.IntegerField()
+
+
+
