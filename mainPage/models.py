@@ -159,3 +159,19 @@ class Comentario(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
     id = models.BigAutoField(primary_key=True)
+
+class Pregunta(models.Model):
+    texto = models.TextField(verbose_name='texto de la pregunta')
+     
+    def __str__(self):
+        return self.texto
+
+class ElegirRespuesta(models.Model):
+
+    pregunta = models.ForeignKey(Pregunta, related_name='preguntas', on_delete=models.CASCADE)
+    correcta = models.BooleanField(verbose_name='Es esta la pregunta correcta?' ,default=False, null=False)
+    texto = models.TextField(verbose_name='texto de la respuesta')
+
+    def __str__(self):
+        return self.texto
+        
