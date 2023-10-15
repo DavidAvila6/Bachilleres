@@ -1,0 +1,42 @@
+{% load static %}
+<style>
+    #chat {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        border: solid 1px black;
+        border-radius: 5px;
+        padding: 5px;
+        background: white;
+    }
+</style>
+
+
+<div id="chat">
+    <div id="chat_icon" onclick="">
+        <button id="chat_open" class="">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1}
+                stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+            </svg>
+            <p id="texto" class="mx-auto">escribenos</p>
+        </button>
+    </div>
+
+    <div id="chat_welcome" class="d-none">
+        <input type="text" name="name" id="chat_name" class="d-flex my-2" style="width: 100px;">
+        <button id="chat_join" class="py-2 px-5" onclick="">join chat</button>
+    </div>
+
+    <div id="chat_room" class="d-none">
+        <div id="chat_log" class="overflow-scroll py-2 my-2">
+            <p>Bienvenido a nuestro chat espera por un agente...</p>
+        </div>
+
+        <input type="text" name="body" id="chat_message_input" class="col-12 mb-4 pb-4 d-flex mx-auto" placeholder="Escribe tu mensaje">
+        <button id="chat_message_submit" class="py-2 px-5">Enviar</button>
+    </div>
+</div>
+
+<script src="../static/js/base.js"></script>

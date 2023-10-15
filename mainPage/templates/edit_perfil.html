@@ -2,28 +2,29 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-{% load static %} 
+{% load static %}
+
 <head>
-    <link href="{% static "css/perfil.css" %}" rel="stylesheet">
+    <link href="{% static " css/perfil.css" %}" rel="stylesheet">
 </head>
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 col-md-6 offset-md-3">
-                <div class="card-body">
-                  <div class="email-form">
+            <div class="card-body">
+                <div class="email-form">
                     <h2>Editar perfil</h2>
                     <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    
-                    <div class="button-container">
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </div>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                        <div class="button-container">
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
                     </form>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
-  </div>
+</div>
 <br><br><br>
 {% endblock %}

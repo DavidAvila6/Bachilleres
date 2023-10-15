@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% load static %} 
+{% load static %}
 
 <head>
-    <link href="{% static "../static/css/perfil.css" %}" rel="stylesheet">
+    <link href="{% static " ../static/css/perfil.css" %}" rel="stylesheet">
 </head>
 
 <div class="container mt-5">
@@ -17,8 +17,11 @@
         <h2>Correo Electrónico: {{ user.email }}</h2>
         <!--<p>Fecha de Nacimiento: 01 de enero de 1990</p>-->
         <br><br>
-        <a href="{% url 'edit_perfil' %}" class="button btn btn-info btn-lg">Editar Perfil</a> 
+        <a href="{% url 'edit_perfil' %}" class="button btn btn-info btn-lg">Editar Perfil</a>
         <button id="cambiarImagen" class="button btn btn-info btn-lg">Cambiar Imagen</button>
+        <div class="chat pt-2">
+            <a class="button btn btn-info btn-lg" href="/chat"> Chatea con tu asesor </a>
+        </div>
     </section>
     {% if user.is_superuser%}
     <section class="admin">
@@ -27,7 +30,7 @@
         <ul class="button-list">
             <li>
                 <a href='/correo' class="button btn btn-info btn-lg">Enviar Correo A Empresa</a>
-                
+
             </li><br>
             <li>
                 <a href='/enviar_correo' class="button btn btn-info btn-lg">Enviar Correo con Asunto de Empresa</a>
@@ -42,11 +45,11 @@
             <li>
                 <a class="button btn btn-info btn-lg" href="{% url 'agregar_beca' %}">Agregar Beca</a>
             </li><br>
- 
+
         </ul>
-        
+
     </section>
-    {% endif  %}
+    {% endif %}
     <section class="actividades">
         <h2>Mis Herramientas</h2>
         <ul>
@@ -62,16 +65,16 @@
         <div class="buttonCalendar">
             <a class="button btn btn-info btn-lg" href="calendar/calendar"> MI CALENDARIO </a>
         </div>
+        
     </section>
 
     <section class="amigos">
         <h2>Mis Universidades Cercanas</h2>
         <ul>
-            
-
             <div class="calendar-container">
-                <iframe src="https://www.google.com/maps/d/embed?mid=165oy0DvJdm0Z7hezVPPe61HfXC8&hl=en_US&ehbc=2E312F" width="640" height="480"></iframe>
-                
+                <iframe src="https://www.google.com/maps/d/embed?mid=165oy0DvJdm0Z7hezVPPe61HfXC8&hl=en_US&ehbc=2E312F"
+                    width="640" height="480"></iframe>
+
             </div>
         </ul>
     </section>

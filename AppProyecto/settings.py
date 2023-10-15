@@ -34,7 +34,14 @@ ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
+
 INSTALLED_APPS = [
+    'daphne',
     'crispy_forms',
     'crispy_bootstrap5',
     'django.contrib.admin',
@@ -45,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainPage',
     'cal',
+    'chat',
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -79,7 +87,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'AppProyecto.wsgi.application'
-
+ASGI_APPLICATION = "AppProyecto.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -94,9 +102,6 @@ DATABASES = {
         'PORT': '5432',  # el puerto por defecto para PostgreSQL
     }
 }
-
-
-
 
 
 # Password validation
@@ -144,9 +149,9 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST="smtp.gmail.com"
-EMAIL_USE_TLS=True
-EMAIL_PORT=587
-EMAIL_HOST_USER='bachilleresbch@gmail.com'
-EMAIL_HOST_PASSWORD='qpcu ybch elbk kihu'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'bachilleresbch@gmail.com'
+EMAIL_HOST_PASSWORD = 'qpcu ybch elbk kihu'

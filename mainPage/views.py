@@ -26,30 +26,49 @@ from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
+
 def principalHub(request):
     return render(request, 'hub.html')
+
 
 def about(request):
     return render(request, 'about.html')
 
+
 def recursos(request):
     return render(request, 'recursos.html')
+
+
 def novedades(request):
     return render(request, 'novedades.html')
 
-#login_required  
+
+def faq(request):
+    return render(request, 'faq.html')
+
+
+def perfil(request):
+    return render(request, 'perfil.html')
+
+
+def Secciones(request):
+    return render(request, 'Secciones.html')
+
+# login_required
+
 
 @login_required
 def becas(request):
     becas_fun = Configuracion_Becas.objects.distinct("Fundacion")
     for x in becas_fun:
         fundacions = x.Fundacion
-        configuracion_unica = Configuracion_Becas.objects.filter(Fundacion=fundacions).values("Union_U_F__univeridad__nombre")
+        configuracion_unica = Configuracion_Becas.objects.filter(
+            Fundacion=fundacions).values("Union_U_F__univeridad__nombre")
         x.universidades = configuracion_unica
     becas_sin = Configuracion_Becas.objects.filter(Fundacion__nombre="NA")
     becas2 = Configuracion_Becas.objects.all()
     becas = Configuracion_Becas.objects.exclude(Fundacion__nombre="NA")
-    return render(request, 'becas.html', {'becas2': becas2,'becas_sin':becas_sin,'becas_fun':becas_fun})
+    return render(request, 'becas.html', {'becas2': becas2, 'becas_sin': becas_sin, 'becas_fun': becas_fun})
 
 
 def agregar_beca_fav(request, configuracion_becas_id):
@@ -57,22 +76,15 @@ def agregar_beca_fav(request, configuracion_becas_id):
     usuario = request.user
 
     # Obtener la configuración de becas
-    configuracion_becas = Configuracion_Becas.objects.get(id=configuracion_becas_id)
+    configuracion_becas = Configuracion_Becas.objects.get(
+        id=configuracion_becas_id)
 
     # Crear una nueva instancia de Becas_Fav
-    beca_fav = Becas_Fav.create(usuario=usuario, configuracion_becas=configuracion_becas)
+    beca_fav = Becas_Fav.create(
+        usuario=usuario, configuracion_becas=configuracion_becas)
 
     # Redirigir a una página de confirmación o a donde prefieras
     return render(request, 'confirmacion.html', {'beca_fav': beca_fav})
-
-def faq(request):
-    return render(request, 'faq.html')
-
-def perfil(request):
-    return render(request, 'perfil.html')
-
-def Secciones(request):
-    return render(request, 'Secciones.html')
 
 
 @login_required
@@ -81,36 +93,29 @@ def edit_perfil(request):
         form = customUserCreationForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/perfil')  
+            return redirect('/perfil')
     else:
         form = customUserCreationForm(instance=request.user)
-    
+
     return render(request, 'edit_perfil.html', {'form': form})
 
 
+def descargar_archivo(request):
 
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-
-
-
-
-def descargar_archivo(request): 
- 
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
- 
     filename = 'recursos.txt'
- 
-    filepath = BASE_DIR + '/AppProyecto/downloads/' + filename 
- 
-    path = open(filepath, 'r') 
- 
+
+    filepath = BASE_DIR + '/AppProyecto/downloads/' + filename
+
+    path = open(filepath, 'r')
+
     mime_type, _ = mimetypes.guess_type(filepath)
-    
-    response = HttpResponse(path, content_type = mime_type)
- 
+
+    response = HttpResponse(path, content_type=mime_type)
+
     response['Content-Disposition'] = f"attachment; filename={filename}"
- 
+
     return response
 
 
@@ -123,59 +128,67 @@ def registro(request):
         formulario = customUserCreationForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"] )
+            user = authenticate(
+                username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
             if user:
                 login(request, user)
 
                 # Renderiza el contenido HTML desde la plantilla
-                context = {'user': user}  # Puedes pasar datos adicionales a la plantilla si es necesario
-                html_content = render_to_string('correos/emailpage.html', context)
-
+                # Puedes pasar datos adicionales a la plantilla si es necesario
+                context = {'user': user}
+                html_content = render_to_string(
+                    'correos/emailpage.html', context)
 
                 # Envía un correo electrónico de confirmación con contenido HTML
                 subject = 'Bienvenido a Nuestra Aplicación'
                 from_email = settings.EMAIL_HOST_USER
                 recipient_list = [user.email]
 
-                send_mail(subject, '', from_email, recipient_list, fail_silently=True, html_message=html_content)
+                send_mail(subject, '', from_email, recipient_list,
+                          fail_silently=True, html_message=html_content)
 
-                
-
-            
             messages.success(request, "Registro exitoso, bienvenido")
             return redirect(to="/")
-            
+
         data["form"] = formulario
     return render(request, 'registration/registro.html', data)
 
-#Seccion de correos---------------------------------------------------------------------
+# Seccion de correos---------------------------------------------------------------------
+
+
 @login_required
 def error_correo(request):
     return render(request, 'correos/error_correo.html')
+
+
 @login_required
 def usuario_noencontrado(request):
     return render(request, 'correos/usuario_noencontrado.html')
+
+
 @login_required
 def correo_enviado(request):
     return render(request, 'correos/correo_enviado.html')
 
+
 @login_required
 def correo(request):
 
-    formulario_contacto=FormularioContacto()
+    formulario_contacto = FormularioContacto()
 
-    if request.method=="POST":
-        formulario_contacto=FormularioContacto(data=request.POST)
+    if request.method == "POST":
+        formulario_contacto = FormularioContacto(data=request.POST)
         if formulario_contacto.is_valid():
-            nombre=request.POST.get("nombre")
-            email=request.POST.get("email")
-            contenido=request.POST.get("contenido")
+            nombre = request.POST.get("nombre")
+            email = request.POST.get("email")
+            contenido = request.POST.get("contenido")
 
-            email=EmailMessage("Mensaje de app Django",
-            "El usuario con nombre {} con la dirección {} escribe lo siguiente:\n\n {}".format(nombre, email, contenido), 
-            '',
-            ["bachilleresbch@gmail.com"], 
-            reply_to=[email])
+            email = EmailMessage("Mensaje de app Django",
+                                 "El usuario con nombre {} con la dirección {} escribe lo siguiente:\n\n {}".format(
+                                     nombre, email, contenido),
+                                 '',
+                                 ["bachilleresbch@gmail.com"],
+                                 reply_to=[email])
 
             try:
                 email.send()
@@ -186,7 +199,8 @@ def correo(request):
                 print(str(e))
                 return redirect('error_correo')
 
-    return render(request, "correos/correo.html", {'miFormulario':formulario_contacto})
+    return render(request, "correos/correo.html", {'miFormulario': formulario_contacto})
+
 
 @login_required
 def correodirecto(request):
@@ -229,7 +243,6 @@ def correodirecto(request):
     return render(request, "correos/correo.html", {'miFormulario': EmailUsername})
 
 
-
 @login_required
 def enviar_correo(request):
     if request.method == 'POST':
@@ -237,85 +250,93 @@ def enviar_correo(request):
         if form.is_valid():
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
-            
+
             # Lista de todos los ususarios
             usuarios_registrados = User.objects.all()
 
             to_email = [usuario.email for usuario in usuarios_registrados]
-            
+
             # Configura el servidor de correo saliente (SMTP)
-            smtp_server = 'smtp.gmail.com'  # Cambia esto si estás usando otro proveedor de correo
+            # Cambia esto si estás usando otro proveedor de correo
+            smtp_server = 'smtp.gmail.com'
             smtp_port = 587  # Puerto de Gmail
             smtp_username = 'bachilleresbch@gmail.com'  # Tu dirección de correo electrónico
             smtp_password = 'qpcu ybch elbk kihu'  # Tu contraseña
-            
+
             # Configura el mensaje
             msg = MIMEMultipart()
             msg['From'] = smtp_username
             msg['Subject'] = subject
             msg.attach(MIMEText(message, 'plain'))
-            
+
             # Inicia la conexión con el servidor SMTP de Gmail
             try:
-                send_mail(subject, message, smtp_username, to_email, fail_silently=False)
-                return redirect('correo_enviado') 
+                send_mail(subject, message, smtp_username,
+                          to_email, fail_silently=False)
+                return redirect('correo_enviado')
             except Exception as e:
                 # Maneja los errores aquí (por ejemplo, si no se puede conectar al servidor SMTP)
                 print(str(e))
-                return redirect('error_correo')  # Redirige a una página de error
+                # Redirige a una página de error
+                return redirect('error_correo')
     else:
         form = EmailForm()
-    
+
     return render(request, 'correos/enviar_correo.html', {'form': form})
+
 
 @login_required
 def enviar_HTML(request):
     if request.method == 'POST':
         form = EmailFormHTML(request.POST)
         if form.is_valid():
-            
-                subject = form.cleaned_data['subject']
-                template_path = os.path.join('mainPage', 'templates', 'correos', 'emailpage.html')
-                
 
-                with open(template_path, 'r',encoding='utf-8') as email_template_file:
-                    message_html = email_template_file.read()
-                
-                # Obtén la lista de usuarios registrados
-                usuarios_registrados = User.objects.all()
+            subject = form.cleaned_data['subject']
+            template_path = os.path.join(
+                'mainPage', 'templates', 'correos', 'emailpage.html')
 
-                to_email = [usuario.email for usuario in usuarios_registrados]
-                
-                # Configura el servidor de correo saliente (SMTP)
-                smtp_server = 'smtp.gmail.com'  # Cambia esto si estás usando otro proveedor de correo
-                smtp_port = 587  # Puerto de Gmail
-                smtp_username = 'bachilleresbch@gmail.com'  # Tu dirección de correo electrónico
-                smtp_password = 'qpcu ybch elbk kihu'  # Tu contraseña
-                
-                send_mail(subject, message_html, smtp_username, to_email, html_message=message_html)
-                return redirect('correo_enviado')
+            with open(template_path, 'r', encoding='utf-8') as email_template_file:
+                message_html = email_template_file.read()
+
+            # Obtén la lista de usuarios registrados
+            usuarios_registrados = User.objects.all()
+
+            to_email = [usuario.email for usuario in usuarios_registrados]
+
+            # Configura el servidor de correo saliente (SMTP)
+            # Cambia esto si estás usando otro proveedor de correo
+            smtp_server = 'smtp.gmail.com'
+            smtp_port = 587  # Puerto de Gmail
+            smtp_username = 'bachilleresbch@gmail.com'  # Tu dirección de correo electrónico
+            smtp_password = 'qpcu ybch elbk kihu'  # Tu contraseña
+
+            send_mail(subject, message_html, smtp_username,
+                      to_email, html_message=message_html)
+            return redirect('correo_enviado')
     else:
         form = EmailFormHTML()
-    
-    return render(request, 'correos/enviar_correo.html', {'form': form})
-          
 
-#Finalizado Seccion de correos-----------------------------------------------------
-#Favoritos------------------------------------
+    return render(request, 'correos/enviar_correo.html', {'form': form})
+
+
+# Finalizado Seccion de correos-----------------------------------------------------
+# Favoritos------------------------------------
 @csrf_exempt
-def agregar_favorito(request,beca_id):
-    
-        
+def agregar_favorito(request, beca_id):
+
     usuario = request.user  # Obtén el usuario actual
-       
-        # Asegúrate de tener Configuracion_Becas importado y obtenido correctamente
+
+    # Asegúrate de tener Configuracion_Becas importado y obtenido correctamente
     configuracion_becas = Configuracion_Becas.objects.get(id=beca_id)
 
-        # Crea la instancia de Becas_Fav y guárdala en la base de datos
-    Becas_Fav.create(tipo='becas', usuario=usuario, configuracion_becas=configuracion_becas)
+    # Crea la instancia de Becas_Fav y guárdala en la base de datos
+    Becas_Fav.create(tipo='becas', usuario=usuario,
+                     configuracion_becas=configuracion_becas)
 
     return redirect('/becas')
-#Agregar beca---------------------------
+# Agregar beca---------------------------
+
+
 def enviar_correo_beca_agregada(nueva_beca):
     subject = 'Nueva Beca Agregada: {}'.format(nueva_beca.nombre)
     template_name = 'correos/nueva_beca_email.html'
@@ -325,7 +346,8 @@ def enviar_correo_beca_agregada(nueva_beca):
     to_email = [usuario.email for usuario in usuarios_registrados]
 
     # Configura el servidor de correo saliente (SMTP)
-    smtp_server = 'smtp.gmail.com'  # Cambia esto si estás usando otro proveedor de correo
+    # Cambia esto si estás usando otro proveedor de correo
+    smtp_server = 'smtp.gmail.com'
     smtp_port = 587  # Puerto de Gmail
     smtp_username = 'bachilleresbch@gmail.com'  # Tu dirección de correo electrónico
     smtp_password = 'qpcu ybch elbk kihu'  # Tu contraseña
@@ -343,6 +365,7 @@ def enviar_correo_beca_agregada(nueva_beca):
 
     send_mail(subject, message, smtp_username, to_email, html_message=message)
 
+
 def agregar_beca(request):
     if request.method == 'POST':
         form = BecaForm(request.POST)
@@ -356,7 +379,7 @@ def agregar_beca(request):
             return redirect('beca_enviado')
     else:
         form = BecaForm()
-    
+
     return render(request, 'becasform/agregar_beca.html', {'form': form})
 
 
@@ -365,46 +388,51 @@ def beca_enviado(request):
     return render(request, 'becasform/beca_enviado.html')
 
 
-
-#FORO JULOX
+# FORO JULOX
 class PublicacionListView(ListView):
     model = Publicacion
-    template_name = 'foro.html'  
+    template_name = 'foro.html'
     context_object_name = 'publicaciones'
     ordering = ['-fecha_creacion']
 
     def get_queryset(self):
         # Anotar el número de comentarios por publicación
-        queryset = Publicacion.objects.annotate(num_comentarios=Count('comentario'))
+        queryset = Publicacion.objects.annotate(
+            num_comentarios=Count('comentario'))
 
         # Usar Prefetch para obtener los comentarios relacionados con cada publicación
         comentarios = Comentario.objects.select_related('autor').all()
-        prefetch = Prefetch('comentario_set', queryset=comentarios, to_attr='comentarios')
+        prefetch = Prefetch(
+            'comentario_set', queryset=comentarios, to_attr='comentarios')
 
         # Devolver el queryset con los comentarios precargados
         return queryset.prefetch_related(prefetch)
 
-@login_required   
+
+@login_required
 def agregar_comentario(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
 
     if request.method == 'POST':
         contenido = request.POST['contenido']
-        comentario = Comentario(contenido=contenido, autor=request.user, publicacion=publicacion)
+        comentario = Comentario(contenido=contenido,
+                                autor=request.user, publicacion=publicacion)
         comentario.save()
         return redirect('/foro', pk=publicacion_id)
 
     return render(request, 'agregar_comentario.html', {'publicacion': publicacion})
 
+
 def eliminar_comentario(request, comentario_id):
     comentario = get_object_or_404(Comentario, pk=comentario_id)
-    
+
     # Verificar que el usuario actual sea el autor del comentario
     if request.user == comentario.autor:
         comentario.delete()
-    
+
     # Redirigir a la página de la publicación a la que pertenece el comentario
     return redirect('/foro', publicacion_id=comentario.publicacion.id)
+
 
 def crear_publicacion(request):
     if request.method == 'POST':
@@ -413,17 +441,19 @@ def crear_publicacion(request):
             nueva_publicacion = form.save(commit=False)
             nueva_publicacion.autor = request.user  # Asigna el autor de la publicación
             nueva_publicacion.save()
-            return redirect('lista_publicaciones')  # Redirige a la lista de publicaciones
+            # Redirige a la lista de publicaciones
+            return redirect('lista_publicaciones')
     else:
         form = PublicacionForm()
-    
+
     return render(request, 'crear_publicacion.html', {'form': form})
+
 
 def eliminar_publicacion(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
-    
+
     # Verificar que el usuario actual sea el autor de la publicación
     if request.user == publicacion.autor:
         publicacion.delete()
-    
+
     return redirect('/foro/')  # Redirige a la lista de publicaciones

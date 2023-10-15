@@ -20,7 +20,7 @@
         {% endif %}
         <!-- Mostrar la cantidad de comentarios -->
         <p class="mb-1">Comentarios ({{ publicacion.num_comentarios }})</p>
-        
+
         <!-- Iterar sobre los comentarios -->
         <ul class="list-group">
           {% for comentario in publicacion.comentarios %}
@@ -28,16 +28,18 @@
             <p>{{ comentario.contenido }}</p>
             <p class="mb-1">Comentado por: {{ comentario.autor.username }} el {{ comentario.fecha_creacion }}</p>
             {% if request.user == comentario.autor %}
-            <a href="{% url 'eliminar_comentario' comentario.id %}" class="btn btn-danger btn-sm">Eliminar Comentario</a>
+            <a href="{% url 'eliminar_comentario' comentario.id %}" class="btn btn-danger btn-sm">Eliminar
+              Comentario</a>
             {% endif %}
           </li>
           {% empty %}
           <li class="list-group-item">No hay comentarios disponibles.</li>
           {% endfor %}
         </ul>
-        
+
         <!-- Enlace para agregar un comentario -->
-        <a href="{% url 'agregar_comentario' publicacion.id %}" class="btn btn-primary btn-sm mt-2">Agregar Comentario</a>
+        <a href="{% url 'agregar_comentario' publicacion.id %}" class="btn btn-primary btn-sm mt-2">Agregar
+          Comentario</a>
       </div>
     </li>
     {% empty %}
