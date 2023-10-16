@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Beca,Facultad,Universidad,Union_U_F,Fundacion,Configuracion_Becas,Becas_Fav,Facultad_fav,Documentos,Requisitos,Universidad_fav, Publicacion, Comentario, ElegirRespuesta, Pregunta
-
+from .models import Beca,Facultad,Universidad,Union_U_F,Fundacion,Configuracion_Becas,Becas_Fav,Facultad_fav,Documentos,Requisitos,Universidad_fav, Publicacion, Comentario, ElegirRespuesta, Pregunta, PreguntasRespondidas
+from .forms import ElegirInLineFormset
 # Register your models here.
 
 admin.site.register(Beca)
@@ -18,13 +18,20 @@ admin.site.register(Publicacion)
 admin.site.register(Comentario)
 admin.site.register(Pregunta)
 admin.site.register(ElegirRespuesta)
+admin.site.register(PreguntasRespondidas)
 
+class PreguntasRespondidasAdmin(admin.ModelAdmin):
+    list_display = ['pregunta','respuesta','correcta','']
+
+    class Meta:
+        model = PreguntasRespondidas
 
 class ElegirRespuestaInLine(admin.TabularInline):
     model = ElegirRespuesta
     can_delete = False
     max_num = ElegirRespuesta.MAXIMO_RESPUESTA
     min_num = ElegirRespuesta.MAXIMO_RESPUESTA
+    formset = ElegirInLineFormset
 
 class PreguntaAdmin(admin.ModelAdmin):
     model = Pregunta
