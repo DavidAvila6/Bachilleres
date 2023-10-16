@@ -3,24 +3,6 @@ from .models import Beca,Facultad,Universidad,Union_U_F,Fundacion,Configuracion_
 from .forms import ElegirInLineFormset
 # Register your models here.
 
-admin.site.register(Beca)
-admin.site.register(Facultad)
-admin.site.register(Universidad)
-admin.site.register(Union_U_F)
-admin.site.register(Fundacion)
-admin.site.register(Configuracion_Becas)
-admin.site.register(Becas_Fav)
-admin.site.register(Facultad_fav)
-admin.site.register(Documentos)
-admin.site.register(Requisitos)
-admin.site.register(Universidad_fav)
-admin.site.register(Publicacion)
-admin.site.register(Comentario)
-admin.site.register(Pregunta)
-admin.site.register(ElegirRespuesta)
-admin.site.register(PreguntasRespondidas)
-admin.site.register(QuizUsuario)
-
 class PreguntasRespondidasAdmin(admin.ModelAdmin):
     list_display = ['pregunta','respuesta','correcta','']
 
@@ -38,4 +20,23 @@ class PreguntaAdmin(admin.ModelAdmin):
     model = Pregunta
     inlines = (ElegirRespuestaInLine, )
     list_display = ['texto',]
-    search_field = ['texto', 'preguntas__texto']
+    search_fields = ['texto', 'preguntas__texto']
+
+
+admin.site.register(Beca)
+admin.site.register(Facultad)
+admin.site.register(Universidad)
+admin.site.register(Union_U_F)
+admin.site.register(Fundacion)
+admin.site.register(Configuracion_Becas)
+admin.site.register(Becas_Fav)
+admin.site.register(Facultad_fav)
+admin.site.register(Documentos)
+admin.site.register(Requisitos)
+admin.site.register(Universidad_fav)
+admin.site.register(Publicacion)
+admin.site.register(Comentario)
+admin.site.register(Pregunta, PreguntaAdmin)
+admin.site.register(ElegirRespuesta)
+admin.site.register(PreguntasRespondidas)
+admin.site.register(QuizUsuario)

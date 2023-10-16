@@ -48,7 +48,7 @@ class ElegirInLineFormset(forms.BaseInlineFormSet):
             if not formulario.is_valid():
                 return 
 
-            if formulario.cleaned_data and formulario.cleaned_data.get('es correcta') is True:
+            if formulario.cleaned_data and formulario.cleaned_data.get('correcta') is True:
                 respuesta_correcta += 1 
 
         try:
