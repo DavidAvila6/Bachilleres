@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from mainPage.models import Beca, Publicacion
+from mainPage.models import Beca, Publicacion, Comentario
 
 class customUserCreationForm(UserCreationForm):
     
@@ -39,3 +39,11 @@ class PublicacionForm(forms.ModelForm):
     class Meta:
         model = Publicacion
         fields = ['titulo', 'contenido']
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ['contenido']
+        widgets = {
+            'contenido': forms.Textarea(attrs={'rows': 4, 'cols': 50}),
+        }
