@@ -18,3 +18,13 @@ admin.site.register(Publicacion)
 admin.site.register(Comentario)
 admin.site.register(Pregunta)
 admin.site.register(ElegirRespuesta)
+
+
+class ElegirRespuestaInLine(admin.TabularInline):
+    model = ElegirRespuesta
+
+class PreguntaAdmin(admin.ModelAdmin):
+    model = Pregunta
+    inlines = (ElegirRespuestaInLine, )
+    list_display = ['texto',]
+    search_field = ['texto', 'preguntas__texto']
