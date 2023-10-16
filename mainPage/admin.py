@@ -22,6 +22,9 @@ admin.site.register(ElegirRespuesta)
 
 class ElegirRespuestaInLine(admin.TabularInline):
     model = ElegirRespuesta
+    can_delete = False
+    max_num = ElegirRespuesta.MAXIMO_RESPUESTA
+    min_num = ElegirRespuesta.MAXIMO_RESPUESTA
 
 class PreguntaAdmin(admin.ModelAdmin):
     model = Pregunta
