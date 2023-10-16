@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Beca,Facultad,Universidad,Union_U_F,Fundacion,Configuracion_Becas,Becas_Fav,Facultad_fav,Documentos,Requisitos,Universidad_fav, Publicacion, Comentario, ElegirRespuesta, Pregunta, PreguntasRespondidas
+from .models import Beca,Facultad,Universidad,Union_U_F,Fundacion,Configuracion_Becas,Becas_Fav,Facultad_fav,Documentos,Requisitos,Universidad_fav, Publicacion, Comentario, ElegirRespuesta, Pregunta, PreguntasRespondidas, QuizUsuario
 from .forms import ElegirInLineFormset
 # Register your models here.
 
@@ -19,6 +19,7 @@ admin.site.register(Comentario)
 admin.site.register(Pregunta)
 admin.site.register(ElegirRespuesta)
 admin.site.register(PreguntasRespondidas)
+admin.site.register(QuizUsuario)
 
 class PreguntasRespondidasAdmin(admin.ModelAdmin):
     list_display = ['pregunta','respuesta','correcta','']

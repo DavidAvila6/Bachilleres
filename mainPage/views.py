@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 
 from AppProyecto import settings
-from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario
+from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario, QuizUsuario
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
@@ -401,3 +401,11 @@ def eliminar_publicacion(request, publicacion_id):
         publicacion.delete()
     
     return redirect('/foro/')  # Redirige a la lista de publicaciones
+
+#QUIZ Y TEST--------------------------------------------------------------------------------------------------------
+
+def quiz(request):
+
+    QuizUsuario, created = QuizUsuario.objects.get_or_create(usuario=request.user)
+
+    
