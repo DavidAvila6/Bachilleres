@@ -10,8 +10,7 @@
     <section>
         <h1 class="display-4">Recursos</h1>
         <p>Nuestra plataforma ofrece servicios personalizados de orientación académica y profesional para estudiantes recién graduados, brindándoles acceso a asesoría especializada, recursos educativos y herramientas de planificación de carrera, todo en un solo lugar.</p>
-        <a href="{% url 'descargar' %}"class="btn btn-info"
-        style="background-color: white; color: black;">Descargar Listado</a>
+        <a href="{% url 'descargar' %}" class="btn btn-info" style="background-color: white; color: black;">Descargar Listado</a>
     </section>
 
     <section>
@@ -27,15 +26,36 @@
     </section>
 
     <section>
-        <h2>Oportunidades de los 3 Mas solicitados</h2>
+        <h2>Oportunidades de los 3 Más solicitados</h2>
         <p>Las oportunidades que pueden ofrecer estas carreras incluyen:</p>
         <ul>
             <li>Programadores: Alta demanda en la industria de la tecnología y oportunidades de trabajo en una variedad de sectores.</li>
             <li>Desarrolladores Web: Continúa la demanda para diseñar y mantener sitios web y aplicaciones web.</li>
             <li>Especialistas en Datos e Inteligencia Artificial: Creciente demanda en análisis de datos, aprendizaje automático y desarrollo de IA en diversas industrias.</li>
-            
-
         </ul>
+    </section>
+
+    <section>
+        <h2>Ingresa tus datos</h2>
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo Electrónico:</label>
+                        <input type="email" id="correo" name="correo" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="archivo">Sube un archivo:</label>
+                        <input type="file" id="archivo" name="archivo" class="form-control-file">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
     </section>
 </div>
 <br>
