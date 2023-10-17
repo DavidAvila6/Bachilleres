@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load chatextras%}
+{% block content%}
+
+<h1 class="text-2xl">Chat admin</h1>
+
+{% if perms.user.add_user %}
+    <p>can add user</p>
+
+    {% for room in rooms %}
+        <div class="col-3 bg-success d-inline-block">
+            <p>chat</p>
+            <p>ID: {{room.uuid}}</p>
+            <p>NAME: {{room.client}}</p>
+            <p>Status {{room.status}}</p>
+            <p>Agent: {% firstof room.agent.name 'None yet..' %}</p>
+            <p></p>
+        </div>
+
+        <div id="chat_log" >
+            {% for message in room.message.all %}
+                <div class="d-flex {% if message.created_by %} justify-content-end {% endif %}">
+                    {% if not message.created_by %}
+                        <div class="d-flex-shrink-1 col-2">
+                            {{ message.send_by|initials}}
+                        </div>
+                    {% endif %}
+
+                    <div>
+                        <div class="{% if message.created_by %}bg-primary {% else %}bg-secondary{% endif %}">
+                            <p class="fs-5">{{ message.body }}</p>
+                        </div>
+
+                        <span class="fs-6 text-secondary">{{ message.created_at|timesince}} ago</span>
+                    </div>
+
+                    {% if message.created_by %}
+                        <div class="d-flex-shrink-1 col-2">
+                            {{ message.send_by|initials}}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+
+{% endif %}
+
+
+
+
+{% endblock %}
