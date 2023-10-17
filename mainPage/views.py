@@ -402,6 +402,9 @@ def eliminar_publicacion(request, publicacion_id):
     
     return redirect('/foro/')  # Redirige a la lista de publicaciones
 
+def forosEspecificos(request):
+    return render(request, 'foros.html')
+
 #QUIZ Y TEST--------------------------------------------------------------------------------------------------------
 
 def quiz(request):

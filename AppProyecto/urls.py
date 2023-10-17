@@ -55,7 +55,7 @@ urlpatterns = [
     path('foro/comentario/<int:comentario_id>/eliminar/', views.eliminar_comentario, name='eliminar_comentario'),
     path('foro/crear_publicacion/', views.crear_publicacion, name='crear_publicacion'),
     path('foro/publicacion/<int:publicacion_id>/eliminar/', views.eliminar_publicacion, name='eliminar_publicacion'),
-    
+    path('foro/forosFacultades/', views.forosEspecificos,name='foros_especificos'),
     #Quices y TEST----------------------------------------------------------------------------------------------------------------------------------
     path('quiz/', views.quiz ,name='quices')
 ]
