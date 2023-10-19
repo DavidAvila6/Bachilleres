@@ -6,7 +6,6 @@ from django.urls import reverse
 from django.views import generic
 from django.utils.safestring import mark_safe
 from django.shortcuts import render, redirect
-from .forms import ArchivoForm
 from django.contrib.auth.decorators import login_required
 
 
