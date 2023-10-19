@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 
-{% load  chatextras %}
-
-{% load  static %}
+{% load  static chatextras %}
 
 {% block content%}
 
 <h1 class="text-2xl">Room "{{room.uuid}}"</h1>
 
 <p>
-    <b>ID: </b> {{room.uuid}}</br>
-    <b>Cliente: </b> {{room.client}}</br>
-    <b>Status: </b> {{room.status}}</br>
-    <b>Agente: </b> {% firstof room.agent.name 'None yet..' %}</br>
+    <b>Name: </b>{{ room.client }}<br>
+    <b>Started: </b>{{ room.created_at|timesince }} ago<br>
+    <b>Status: </b>{{ room.get_status_display }}<br>
+    <b>Page: </b>{{ room.url }}<br>
+    <b>Agent: </b>{% firstof room.agent.name 'None yet...' %}
 </p>
 
 <div id="chat_log" >

@@ -95,6 +95,13 @@ chatSubmitElements.onclick = function(e) {
     return false
 }
 
+chatInputElement.onkeyup = function(e) {
+    if (e.keyCode == 13) {
+        sendMessage()
+    }
+}
+
+
 
 
 
