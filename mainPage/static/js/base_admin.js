@@ -41,9 +41,22 @@ function onChatMessage(data) {
   
     if (data.type == "chat_message") {
       if (data.agent) {
-      } else {
         chatLogElements.innerHTML += `
         <div class="d-flex  mt-2" justify-content-end>
+          <div class=" flex-shrink-1 mt-2 px-2">
+              ${data.initials}
+          </div>
+          <div class="bg-primary mx-1">
+              <p>${data.message}</p>
+          </div>
+          <div class="d-flex mx-1">
+              <span>${data.created_at} ago</span>
+          </div>
+        </div>
+        `;
+      } else {
+        chatLogElements.innerHTML += `
+        <div class="d-flex  mt-2" justify-content-start>
           <div class=" flex-shrink-1 mt-2 px-2">
               ${data.initials}
           </div>

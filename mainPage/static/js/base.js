@@ -7,7 +7,6 @@ let chatSocket = null;
 let chatWindowUrl = window.location.href;
 let chatRoomUuid = Math.random().toString(36).slice(2, 12);
 
-console.log(chatRoomUuid);
 
 /*
     Elements
@@ -65,9 +64,23 @@ function onChatMessage(data) {
 
   if (data.type == "chat_message") {
     if (data.agent) {
-    } else {
+      console.log("se recibio mensaje de admin")
       chatLogElements.innerHTML += `
-      <div class="d-flex  mt-2" justify-content-end>
+      <div class="d-flex  mt-2" >
+        <div class=" flex-shrink-1 mt-2 px-2">
+            ${data.initials}
+        </div>
+        <div class="bg-primary mx-1">
+            <p>${data.message}</p>
+        </div>
+        <div class="d-flex mx-1">
+            <span>${data.created_at} ago</span>
+        </div>
+      </div>
+      `;
+    }else {
+      chatLogElements.innerHTML += `
+      <div class="d-flex  mt-2" >
         <div class=" flex-shrink-1 mt-2 px-2">
             ${data.initials}
         </div>
@@ -158,3 +171,5 @@ chatSubmitElement.onclick = function (e) {
 
   return false;
 };
+
+console.log("chatLogElements:", chatLogElements);
