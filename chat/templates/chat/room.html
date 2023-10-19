@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load  chatextras %}
+
+{% load  static %}
+
+{% block content%}
+
+<h1 class="text-2xl">Room "{{room.uuid}}"</h1>
+
+<p>
+    <b>ID: </b> {{room.uuid}}</br>
+    <b>Cliente: </b> {{room.client}}</br>
+    <b>Status: </b> {{room.status}}</br>
+    <b>Agente: </b> {% firstof room.agent.name 'None yet..' %}</br>
+</p>
+
+<div id="chat_log" >
+    {% for message in room.messages.all %}
+    <div class="d-flex {% if message.created_by %} justify-content-end {% endif %}">
+        {% if not message.created_by %}
+            <div class="col-1 bg-white">
+                {{message.sent_by|initials }}
+            </div>
+        {% endif %}
+
+        <div>
+            <div class="{% if message.created_by %}bg-primary {% else %}bg-secondary{% endif %}">
+                <p class="fs-5">{{ message.body }}</p>
+            </div>
+
+            <span class="fs-6 text-secondary">hace {{ message.created_at|timesince}}</span>
+        </div>
+
+        {% if message.created_by %}
+            <div class="d-flex-shrink-1 col-2">
+                {{ message.send_by|initials}}
+            </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+{% if room.status == 'active' %}
+<input type="text" name="body" id="chat_message_input" class="col-12 mb-4 pb-4 d-flex mx-auto my-3" placeholder="Escribe tu mensaje">
+<button id="chat_message_submit" class="py-2 px-5">Enviar</button>
+{% endif %}
+
+{% endblock%}
+
+{% block scripts %}
+    {% if room.status == 'active' %}
+        {{ room.uuid|json_script:'room_uuid' }}
+        {{ request.user.first_name|json_script:'user_name' }}
+        {{ request.user.id|json_script:'user_id' }}
+
+        <script src="{% static 'js/base_admin.js' %}"></script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% for room in rooms %}
+        <div class="col-3 bg-success-subtle d-inline-block px-3 mx-2">
+            <p>
+            <b>ID: </b> {{room.uuid}}</br>
+            <b>Cliente: </b> {{room.client}}</br>
+            <b>Status: </b> {{room.status}}</br>
+            <b>Agente: </b> {% firstof room.agent.name 'None yet..' %}</br>
+            </p>
+
+            <a href="{% url 'chat:room' room.uuid %}" class="btn btn-success">Join</a>
+        </div>
+{% endfor %}
