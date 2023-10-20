@@ -23,6 +23,13 @@ urlpatterns = [
     path('Secciones/', views.Secciones),
     path('perfil/', views.perfil),
     path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
+    #becas fav en perfil--------------------------------------------------------
+    # path('becas_fav/', views.becasFAV, name='becas_fav'),
+    path('becas_fav/', views.becasFAV, name='becas_fav'),
+    # ...
+     path('calificar/<int:estrellas>/', views.calificar, name='calificar'),
+
+    #-------
 
     # Correos-----------------------------------------------------------------
     path('correo/', views.correo, name='correo'),
@@ -42,21 +49,19 @@ urlpatterns = [
          name='nombre_de_tu_vista_agregar_favorito'),
     path('agregar_beca/', views.agregar_beca, name='agregar_beca'),
     path('beca_enviado/', views.beca_enviado, name='beca_enviado'),
-
-    # Calendario-----------------------------------------------------------------
+    
+    #Calendario----------------------------------------------------------------------------------------------------------------------------------
     path('perfil/calendar/', include('cal.urls')),
-
-    # foro-----------------------------------------------------------------
+    
+    #foro----------------------------------------------------------------------------------------------------------------------------------
     path('foro/', views.PublicacionListView.as_view(), name='lista_publicaciones'),
-    path('foro/<int:publicacion_id>/agregar_comentario/',
-         views.agregar_comentario, name='agregar_comentario'),
-    path('foro/comentario/<int:comentario_id>/eliminar/',
-         views.eliminar_comentario, name='eliminar_comentario'),
-    path('foro/crear_publicacion/',
-         views.crear_publicacion, name='crear_publicacion'),
-    path('foro/publicacion/<int:publicacion_id>/eliminar/',
-         views.eliminar_publicacion, name='eliminar_publicacion'),
-
+    path('foro/<int:publicacion_id>/agregar_comentario/', views.agregar_comentario, name='agregar_comentario'),
+    path('foro/comentario/<int:comentario_id>/eliminar/', views.eliminar_comentario, name='eliminar_comentario'),
+    path('foro/crear_publicacion/', views.crear_publicacion, name='crear_publicacion'),
+    path('foro/publicacion/<int:publicacion_id>/eliminar/', views.eliminar_publicacion, name='eliminar_publicacion'),
+    path('foro/forosFacultades/', views.forosEspecificos,name='foros_especificos'),
+    #Quices y TEST----------------------------------------------------------------------------------------------------------------------------------
+    path('quiz/', views.quiz ,name='quices')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
 
 
@@ -128,35 +129,24 @@ class Configuracion_Becas(models.Model):
             " / Beca: "+str(self.Beca)+" / Fundacion: "+str(self.Fundacion)
         return fila
 
-
 class Becas_Fav (models.Model):
     id = models.AutoField(primary_key=True)
-    facultad = 'facultad'
-    beca = 'beca'
-    OPCIONES_TIPO = [
-        (facultad, 'facultad'),
-        (beca, 'beca'),
-    ]
-    tipo = models.CharField(max_length=10, choices=OPCIONES_TIPO)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    Configuracion_Becas = models.ForeignKey(
-        Configuracion_Becas, on_delete=models.CASCADE)
-
+    Configuracion_Becas = models.ForeignKey(Configuracion_Becas, on_delete=models.CASCADE)
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=[
-                                    'usuario', 'Configuracion_Becas', 'tipo'], name='unique_foraneas_favoritos_Beca'),
+                                    'usuario', 'Configuracion_Becas'], name='unique_foraneas_favoritos_Beca'),
         ]
 
     @classmethod
     def create(cls, tipo, usuario, configuracion_becas):
-        fav = cls(tipo=tipo, usuario=usuario,
-                  Configuracion_Becas=configuracion_becas)
+        fav = cls(tipo=tipo, usuario=usuario,Configuracion_Becas=configuracion_becas)
         fav.save()
         return fav
 
     def __str__(self):
-        fila = "Tipo : "+str(self.tipo)+" / Usuario: "+str(self.usuario)
+        fila = " / Usuario: "+str(self.usuario)
         return fila
 
 
@@ -204,3 +194,45 @@ class Comentario(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
     id = models.BigAutoField(primary_key=True)
+
+class Pregunta(models.Model):
+
+    NUMERO_DE_RESPUESTAS_PERMITIDAS = 1
+     
+    texto = models.TextField(verbose_name='texto de la pregunta')
+     
+    def __str__(self):
+        return self.texto
+
+class ElegirRespuesta(models.Model):
+
+    MAXIMO_RESPUESTA = 4
+
+    pregunta = models.ForeignKey(Pregunta, related_name='preguntas', on_delete=models.CASCADE)
+    correcta = models.BooleanField(verbose_name='Es esta la pregunta correcta?' ,default=False, null=False)
+    texto = models.TextField(verbose_name='texto de la respuesta')
+
+    def __str__(self):
+        return self.texto
+
+class QuizUsuario(models.Model):   
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    #puntaje_total = models.DecimalField(verbose_name='Puntaje Total', default=0, decimal_places=2, max_digits=10)
+
+class PreguntasRespondidas(models.Model):
+    quizUser = models.ForeignKey(QuizUsuario, on_delete=models.CASCADE)
+    pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
+    respuesta = models.ForeignKey(ElegirRespuesta, on_delete=models.CASCADE, related_name='intentos')
+    correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null=False)
+    #puntaje_obtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, decimal_places=2, max_digits=6)
+
+
+
+
+class Calificacion(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  
+    estrellas = models.IntegerField()
+
+
+

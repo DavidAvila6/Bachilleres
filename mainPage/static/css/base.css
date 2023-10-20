@@ -2,6 +2,11 @@
 *{
     font-family: oswal;
 }
+body {
+  background: linear-gradient(to bottom, #6D6656, #E4DBC5 ); /* Cambia los colores según tu preferencia */
+  color: #fff; /* Color del texto en el cuerpo */
+  
+}
 h1,h2,h3,h4,h5,h6 {
   font-family: "Source Serif";
 }
