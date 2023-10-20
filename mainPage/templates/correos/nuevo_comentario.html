@@ -1,0 +1,39 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nuevo Comentario en tu publicacion en BCH</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                text-align: center;
+                padding: 20px;
+            }
+            h1 {
+                color: #333;
+            }
+            p {
+                color: #666;
+            }
+        </style>
+    </head>
+<body>
+    <h2><strong>Nuevo Comentario en tu Publicación</strong></h2>
+    <img src="https://psicologiamonzo.com/wp-content/uploads/2019/03/multiracial-grupo-joven-gente-toma-selfie_1139-1032.jpg" 
+         alt="Imagen de Agradecimiento" 
+         width="300" 
+         height="200">
+    <p><strong>Se ha agregado un nuevo comentario en tu publicación </strong>"{{ publicacion_titulo }}".</p>
+    <p><strong>Detalles del Comentario:</strong></p>
+    <ul>
+        <li>Autor del Comentario: {{ comentario_autor }}</li>
+        <li>Contenido del Comentario: {{ comentario_contenido }}</li>
+    </ul>
+    <p><strong>¡Gracias por usar nuestro servicio!</strong></p>
+
+    <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en <a href="contacto.html">contactarnos</a>.</p>
+    <p>¡Esperamos verte pronto en nuestro sitio!</p>
+</body>
+</html>

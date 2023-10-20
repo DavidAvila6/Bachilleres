@@ -32,12 +32,21 @@ class EmailUsername(forms.Form):
 class BecaForm(forms.ModelForm):
         class Meta:
             model = Beca
-            fields = '__all__'
+            fields = ['nombre', 'tipo', 'valor_duracion'
+                      , 'Documentos', 'Requisitos', 'Descripcion']
 
 class PublicacionForm(forms.ModelForm):
     class Meta:
         model = Publicacion
         fields = ['titulo', 'contenido']
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ['contenido']
+        widgets = {
+            'contenido': forms.Textarea(attrs={'rows': 4, 'cols': 50}),
+        }
 
 class ElegirInLineFormset(forms.BaseInlineFormSet):
     def clean(self):

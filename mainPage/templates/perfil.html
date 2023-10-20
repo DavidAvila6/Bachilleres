@@ -5,6 +5,7 @@
 
 <head>
     <link href="{% static "../static/css/perfil.css" %}" rel="stylesheet">
+    <script src="../static/js/modo-oscuro.js"></script>
 </head>
 
 <div class="container mt-5">
@@ -15,6 +16,7 @@
         <h2>Nombre: {{ user.first_name}}</h2>
         <h2>Apellido: {{ user.last_name}}</h2>
         <h2>Correo Electrónico: {{ user.email }}</h2>
+        <button id="toggleModoOscuroNav" class="btn btn-outline-light">Modo Oscuro</button>
         <!--<p>Fecha de Nacimiento: 01 de enero de 1990</p>-->
         <br><br>
         <a href="{% url 'edit_perfil' %}" class="button btn btn-info btn-lg">Editar Perfil</a> 
@@ -40,7 +42,9 @@
             </li><br>
             <h3>Universidad/becas/facultad:</h3><br>
             <li>
-                <a class="button btn btn-info btn-lg" href="{% url 'agregar_beca' %}">Agregar Beca</a>
+                <div class="buttonCalendar">
+                    <a class="button btn btn-info btn-lg" href="{% url 'agregar_beca' %}">Agregar Beca</a>
+                </div
             </li><br>
  
         </ul>

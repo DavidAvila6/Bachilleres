@@ -19,6 +19,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
 from .forms import FormularioContacto
+from .forms import ComentarioForm
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.views.generic import ListView
@@ -402,12 +403,34 @@ def agregar_comentario(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
 
     if request.method == 'POST':
-        contenido = request.POST['contenido']
-        comentario = Comentario(contenido=contenido, autor=request.user, publicacion=publicacion)
-        comentario.save()
-        return redirect('/foro', pk=publicacion_id)
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.autor = request.user
+            comentario.publicacion = publicacion
+            comentario.save()
 
-    return render(request, 'agregar_comentario.html', {'publicacion': publicacion})
+            # Envía un correo electrónico al autor de la publicación
+            subject = 'Nuevo comentario en tu publicación'
+            message = f'Se ha agregado un nuevo comentario en tu publicación "{publicacion.titulo}".'
+            from_email = settings.EMAIL_HOST_USER  # Usar tu dirección de correo electrónico configurada en settings
+            to_email = [publicacion.autor.email]  # El correo electrónico del autor de la publicación
+            context = {
+                'publicacion_titulo': publicacion.titulo,
+                'comentario_autor': comentario.autor.username,
+                'comentario_contenido': comentario.contenido,
+            }
+            html_content = render_to_string('correos/nuevo_comentario.html', context)
+
+            # Envía el correo electrónico con contenido HTML
+            send_mail(subject, '', from_email, to_email, fail_silently=True, html_message=html_content)
+
+            return redirect('/foro') 
+
+    else:
+        form = ComentarioForm()
+
+    return render(request, 'agregar_comentario.html', {'publicacion': publicacion, 'form': form})
 
 def eliminar_comentario(request, comentario_id):
     comentario = get_object_or_404(Comentario, pk=comentario_id)
@@ -424,9 +447,18 @@ def crear_publicacion(request):
         form = PublicacionForm(request.POST)
         if form.is_valid():
             nueva_publicacion = form.save(commit=False)
-            nueva_publicacion.autor = request.user  # Asigna el autor de la publicación
+            nueva_publicacion.autor = request.user
             nueva_publicacion.save()
-            return redirect('lista_publicaciones')  # Redirige a la lista de publicaciones
+
+            
+            subject = 'Nueva publicación creada en BCH'
+            message = 'Se ha creado una nueva publicación en el apartado de foro en BCH.'
+            from_email = settings.EMAIL_HOST_USER 
+            to_email = [request.user.email]  
+
+            send_mail(subject, message, from_email, to_email, fail_silently=True)
+
+            return redirect('lista_publicaciones')
     else:
         form = PublicacionForm()
     

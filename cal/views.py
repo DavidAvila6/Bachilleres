@@ -1,14 +1,14 @@
 import calendar
 from datetime import date, datetime, timedelta
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils.safestring import mark_safe
-from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
-
-
 from cal.forms import EventForm
 
 from .models import *
@@ -50,18 +50,37 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+@login_required
 def event(request, event_id=None):
     instance = Event()
+
     if event_id:
         instance = get_object_or_404(Event, pk=event_id)
-    else:
-        instance = Event()
-    
-    form = EventForm(request.POST or None, instance=instance)
-    if request.POST and form.is_valid():
+
+    form = EventForm(request.user, request.POST or None, instance=instance)
+
+    if request.method == 'POST' and form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('cal:calendar'))
-    return render(request, 'cal/event.html' , {'form': form})
+        user = request.user
+
+        # Renderizar el contenido HTML desde la plantilla de correo electrónico
+        context = {'user': user, 'event': instance}
+        html_content = render_to_string('cal/nuevo_evento.html', context)
+
+        # Enviar correo electrónico de confirmación con contenido HTML
+        subject = 'Nuevo evento creado'
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = [user.email]
+
+        send_mail(subject, '', from_email, recipient_list, fail_silently=True, html_message=html_content)
+        return redirect('cal:calendar')
+
+    return render(request, 'cal/event.html', {'form': form})
+
+
+def nuevo_evento(request):
+    # Lógica para la vista nuevo_evento, si es necesaria
+    return render(request, 'cal/nuevo_evento.html')
 def cargar_archivo(request):
     if request.method == 'POST':
         form = ArchivoForm(request.POST, request.FILES)
