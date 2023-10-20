@@ -42,7 +42,7 @@
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse " id="navbarNav">
-              <ul class="navbar-nav ms-auto">
+              <ul class="navbar-nav ms-auto">                  
                   <li class="nav-item pe-4">
                       <a class="nav-link active" aria-current="page" href="/about">¿Quienes Somos?</a>
                   </li>
@@ -59,10 +59,8 @@
                     <a class="nav-link" href="/Secciones">Secciones</a>
                 </li>
                 <li class="nav-item pe-4">
-                  <a class="nav-link" href="/foro">Foro</a>
-              </li>
-
-
+                  <a class="nav-link" aria-current="page" href="/foro">Foro</a>
+                </li>
                 {% if user.is_authenticated  %}
                 <li>
                   <a type="button" class="btn btn-outline-danger" aria-current="page" href="{% url 'logout' %}">Cerrar Sesion</a>

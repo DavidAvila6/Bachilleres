@@ -161,6 +161,39 @@ class Comentario(models.Model):
     publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
     id = models.BigAutoField(primary_key=True)
 
+class Pregunta(models.Model):
+
+    NUMERO_DE_RESPUESTAS_PERMITIDAS = 1
+     
+    texto = models.TextField(verbose_name='texto de la pregunta')
+     
+    def __str__(self):
+        return self.texto
+
+class ElegirRespuesta(models.Model):
+
+    MAXIMO_RESPUESTA = 4
+
+    pregunta = models.ForeignKey(Pregunta, related_name='preguntas', on_delete=models.CASCADE)
+    correcta = models.BooleanField(verbose_name='Es esta la pregunta correcta?' ,default=False, null=False)
+    texto = models.TextField(verbose_name='texto de la respuesta')
+
+    def __str__(self):
+        return self.texto
+
+class QuizUsuario(models.Model):   
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    puntaje_total = models.DecimalField(verbose_name='Puntaje Total', default=0, decimal_places=2, max_digits=10)
+
+class PreguntasRespondidas(models.Model):
+    quizUser = models.ForeignKey(QuizUsuario, on_delete=models.CASCADE)
+    pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
+    respuesta = models.ForeignKey(ElegirRespuesta, on_delete=models.CASCADE, related_name='intentos')
+    correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null=False)
+    puntaje_obtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, decimal_places=2, max_digits=6)
+
+
+
 
 class Calificacion(models.Model):
     id = models.BigAutoField(primary_key=True)

@@ -1,0 +1,16 @@
+quiz de {{user}}
+{%for pregunta in pregunta%}
+    <p>
+        {{pregunta}}
+    </p>
+    
+    {%for respuestas in pregunta.preguntas.all%}
+        <p>
+            <strong>
+                {{respuestas}}
+            </strong>
+        </p>
+        
+    {%endfor%}
+    
+{%endfor%}

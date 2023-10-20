@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from AppProyecto import settings
-from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario
+from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
@@ -441,4 +441,23 @@ def eliminar_publicacion(request, publicacion_id):
     
     return redirect('/foro/')  # Redirige a la lista de publicaciones
 
+def forosEspecificos(request):
+    return render(request, 'foros.html')
 
+#QUIZ Y TEST--------------------------------------------------------------------------------------------------------
+
+def quiz(request):
+    QuizUser, created = QuizUsuario.objects.get_or_create(usuario=request.user)
+
+    if request.method == 'POST':
+        pregunta_pk = request.POST.get('pregunta_pk')
+        pregunta_respondida = QuizUser.intentos.select_related('pregunta').get(pregunta__pk=pregunta_pk)
+        respuestas_pk = request.POST.get('respuesta_pk')
+    else:
+        respondidas = PreguntasRespondidas.objects.filter(quizUser=QuizUser).values_list('pregunta__pk', flat=True)
+        pregunta = Pregunta.objects.exclude(pk__in=respondidas)
+
+        context={
+            'pregunta': pregunta
+        }
+    return render(request, 'quiz.html', context)
