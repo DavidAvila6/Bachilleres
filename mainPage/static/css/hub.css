@@ -18,7 +18,7 @@
     ;
 }
 .boton-modal label:hover{
-    background-color: rgb(234, 215, 250);
+    background-color: #6D6656;
 }
 
 .container-modal{
@@ -36,7 +36,7 @@
     width: 100%;
     max-width: 400px;
     padding: 20px;
-    background-color: beige;
+    background-color:#6D6656;;
     border-radius: 4px;
 }
 .content-modal h2{
@@ -55,7 +55,7 @@
 }
 .content-modal .btn-cerrar label{
     padding: 7px 10px;
-    background-color: rgb(225, 215, 250);
+    background-color: green;
     color: beige;
     border-radius: 4px;
     cursor: pointer;
@@ -63,7 +63,7 @@
 
 }
 .content-modal .btn-cerrar label :hover{
-    background-color: aqua;
+    background-color: black;
 }
 .cerrar-modal{
     width: 100px;
