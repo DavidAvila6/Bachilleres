@@ -9,6 +9,9 @@
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link type="text/css" href="../static/css/base.css"  rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="../static/css/hub.css ">
+    <script src="../static/js/hub.js"></script>
   </head>
   
     <div class="imgbienbenidos row justify-content-center">
@@ -56,7 +59,7 @@
 
     </div>
     {% if user.is_authenticated %}
-    <br><
+    <br>
     {% else %}
     <div class="Contactanos row g-0 my-5 justify-content-center">
         <div class="texto_contacto col-md-4 text-center my-auto">          
@@ -66,5 +69,25 @@
         </form>
     </div>
     {% endif %}
+<!--boton-modal
+    <div class="boton-modal">
+        <label for="btn-modal">
+            guia
+        </label>
+
+    </div>
+    -->
+<!--modal-->
+   <input type="checkbox"  id="btn-modal">
+   <div class="container-modal">
+    <div class="content-modal">
+        <h2> Bienvenidos</h2>
+        <p>texto dodne va todo</p>
+        <div class="btn-cerrar">
+             <label for="btn-modal">cerrar</label>
+        </div>
+    </div>
+    <label for="btn-modal" class="cerrar-modal"></label>
+   </div>
 {% endblock %}
 
