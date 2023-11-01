@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 083), rgba(0, 0, 0, 0.5)), 
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
     url("https://photos.collectednotes.com/photos/8819/eadaa056-b09c-48ef-8c8e-aba1980308db");
     background-size: cover; /* Hace que la imagen de fondo cubra toda la pantalla */
     background-attachment: fixed; /* Fija la imagen de fondo mientras se desplaza la página */
