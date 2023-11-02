@@ -56,7 +56,10 @@
                 {% if user.is_authenticated  %}
                 <li>
                   <a type="button" class="btn btn-outline-danger" aria-current="page" href="{% url 'logout' %}">Cerrar Sesion</a>
-                </li>                              
+                </li>    
+                <li>
+                  <a type="button" class="btn btn-outline-danger" aria-current="page" href="{% url 'chat:admin' %}">Chat Admin</a>
+                </li>                          
                 {% else %}
                 <li>                
                   <a type="button" class="btn btn-outline-success" aria-current="page" href="{% url 'login' %}">Iniciar Sesion</a>
@@ -70,7 +73,7 @@
   <div>
     {% block content %}
     {% endblock %}
-
+    {% include 'chat/partials/chat_bubble.html' %}
 
     <footer class="row g-0 text-center py-1" style="background-color:#6D6656;">
         
