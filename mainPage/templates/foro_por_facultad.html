@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">{{ facultad.nombre }}</h1>
+
+<ul>
+  {% for publicacion in publicaciones %}
+    <li>
+      <div>
+        <h2>{{ publicacion.titulo }}</h2>
+        <p>{{ publicacion.contenido }}</p>
+        <p>Publicado por: {{ publicacion.autor.username }} el {{ publicacion.fecha_creacion }}</p>
+      </div>
+      <br>
+    </li>
+  {% empty %}
+    <li>No hay publicaciones disponibles para esta facultad.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

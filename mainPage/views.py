@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 
 from AppProyecto import settings
-from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
+from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
@@ -380,18 +380,19 @@ def eliminar_comentario(request, comentario_id):
     # Redirigir a la página de la publicación a la que pertenece el comentario
     return redirect('/foro', publicacion_id=comentario.publicacion.id)
 
-def crear_publicacion(request):
+def crear_publicacion(request, facultad_id):
     if request.method == 'POST':
         form = PublicacionForm(request.POST)
         if form.is_valid():
             nueva_publicacion = form.save(commit=False)
             nueva_publicacion.autor = request.user  # Asigna el autor de la publicación
+            nueva_publicacion.facultad_id = facultad_id
             nueva_publicacion.save()
             return redirect('lista_publicaciones')  # Redirige a la lista de publicaciones
     else:
         form = PublicacionForm()
     
-    return render(request, 'crear_publicacion.html', {'form': form})
+    return render(request, 'crear_publicacion.html', {'form': form, 'facultad_id': facultad_id})
 
 def eliminar_publicacion(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
@@ -404,6 +405,12 @@ def eliminar_publicacion(request, publicacion_id):
 
 def forosEspecificos(request):
     return render(request, 'foros.html')
+
+def foro_por_facultad(request, facultad_id):
+    facultad = get_object_or_404(Facultad, pk=facultad_id)
+    publicaciones = Publicacion.objects.filter(facultad=facultad)
+    return render(request, 'foro_por_facultad.html', {'facultad': facultad, 'publicaciones': publicaciones})
+
 
 #QUIZ Y TEST--------------------------------------------------------------------------------------------------------
 
