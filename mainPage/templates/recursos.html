@@ -62,7 +62,7 @@
         </div>
     </section>
 </div>
-
+{% if user.is_authenticated  %}
 <!--modal-->
 <input type="checkbox" id="btn-modal">
 <div class="container-modal" >
@@ -80,5 +80,6 @@
     </div>
     
 </div>
+{% endif %}
 <br>
 {% endblock %}

@@ -70,6 +70,7 @@
 {% load static %}
     <link rel="stylesheet" href="../static/css/hub.css ">
     <script src="../static/js/hub.js"></script>
+    {% if user.is_authenticated  %}
 <input type="checkbox" id="btn-modal">
     <div class="container-modal" >
         <div class="content-modal">
@@ -90,6 +91,7 @@
         </div>
         
     </div>
+    {% endif %}
 <style>
   /* Estilos personalizados */
   .publicacion-item:hover {

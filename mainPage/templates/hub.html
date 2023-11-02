@@ -98,7 +98,7 @@ padding: 20px;"
   
 
     {% endif %}
-
+    {% if user.is_authenticated  %}
     <!--boton-modal
     <div class="boton-modal">
         <label for="btn-modal">
@@ -129,4 +129,5 @@ padding: 20px;"
         </div>
         
     </div>
+    {% endif %}
 {% endblock %}
