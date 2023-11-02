@@ -1,55 +1,32 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-*{
-    font-family: oswal;
-}
-h1,h2,h3,h4,h5,h6 {
-  font-family: "Source Serif";
-}
-#ImgBienvenida {
-  width: 40vmax;
-  height: 700px;
-}
-
-.imgbienbenidos h1{
-  background-color:#243328 ;
-  color: white;
-  margin-right: 8vmax;
-  padding:10vmax 2vmax;
-  font-size: 2.5rem;}
-.Servicios {
-  background-color: #ebeadf;
-}
-.Servicios h3{
-    font-size: 3rem;
-}
-.Servicios p{
-    font-size: 1rem
-}
-.lista{
-    text-align: center;
-}
-.Servicios ul{
-    text-align: left;
-    display: inline-block;
-    font-size: 1rem;
+/* Estilos personalizados para el navbar futurista */
+.navbar {
+  background-color: rgba(0, 0, 0); /* Color de fondo con 70% de opacidad */
+  border-bottom: 2px solid #ffffff; /* Borde inferior */
+  display: flex;
+  position: fixed; /* Fija el navbar en la parte superior */
+  top: 0; /* Coloca el navbar en la parte superior */
+  width: 100%; /* Ancho del navbar al 100% del viewport */
+  z-index: 1000; /* Ajusta la capa superior del navbar */
+  
 }
 
-.imgservicios img{
-  max-width: 100%;
-}
-.Contactanos h5{
-    font-size: 3rem;
-    font-weight: bold;
+
+.navbar-brand {
+    color: #00ff00; /* Color del texto del logotipo */
+    font-size: 18px; /* Tamaño de fuente del logotipo */
+    font-weight: bold; /* Peso de fuente del logotipo */
 }
 
-footer{
-    background-color: #ebeadf;
-    font-size: 3rem;
+.navbar-nav {
+  justify-content: flex-end; /* Alinear a la derecha */
 }
-footer h1{
-    font-family: "Source Serif";
+
+.navbar-nav .nav-link {
+  color: #fff; /* Color del texto de los enlaces */
+  font-size: 20px; /* Tamaño de fuente de los enlaces */
+  text-transform: uppercase; /* Mayúsculas en los enlaces */
 }
-footer a{
-    color: black;
-    margin-top: auto;
+
+.navbar-nav .nav-link:hover {
+    color: #00ff00 /* Color del texto de los enlaces al pasar el mouse */
 }

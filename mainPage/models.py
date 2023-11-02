@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
 
 class Universidad(models.Model):
@@ -73,11 +74,11 @@ class Beca (models.Model):
     ]
     nombre = models.CharField(max_length=50)
     tipo = models.CharField(max_length=10,choices=OPCIONES_TIPO,default=Nacional)
-    valor = models.CharField(max_length=100)
-    
+    valor_duracion = models.CharField(max_length=500)
     Documentos = models.ManyToManyField(Documentos)
     Requisitos = models.ManyToManyField(Requisitos)
     Descripcion = models.CharField(max_length=1000)
+    imagen = models.ImageField(upload_to="imagenes_becas/",null=True)
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['nombre'], name='unique_foraneas_Beca'),
@@ -191,4 +192,14 @@ class PreguntasRespondidas(models.Model):
     respuesta = models.ForeignKey(ElegirRespuesta, on_delete=models.CASCADE, related_name='intentos')
     correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null=False)
     puntaje_obtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, decimal_places=2, max_digits=6)
+
+
+
+
+class Calificacion(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  
+    estrellas = models.IntegerField()
+
+
 

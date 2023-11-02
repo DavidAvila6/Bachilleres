@@ -70,7 +70,7 @@ main h1{
 
 .infoComment .footer{
     width: 100%;
-    background: #605b4f;
+    background: #da9b07;
     padding: 10px;
     color: aliceblue;
     display: flex;
@@ -89,4 +89,8 @@ main h1{
     color:orange;
     cursor: pointer;
 }
+
+
+
+
 

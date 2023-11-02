@@ -1,0 +1,15 @@
+/* Estilos específicos para el modo oscuro */
+body.modo-oscuro {
+    background: linear-gradient(to bottom, #0d0202, #16c0fe); /* Colores de fondo oscuro */
+    color: #fff; /* Color del texto en el cuerpo */
+}
+
+.navbar.modo-oscuro {
+    background-color: #222 !important; /* Color de fondo oscuro para la barra de navegación */
+}
+
+.footer.modo-oscuro {
+    background-color: #222 !important; /* Color de fondo oscuro para el pie de página */
+    color: #6D6656; /* Color del texto en el pie de página */
+}
+

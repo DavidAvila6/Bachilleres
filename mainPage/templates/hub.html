@@ -2,61 +2,90 @@
 
 {% block content %}
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>bachilleres</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link type="text/css" href="../static/css/base.css"  rel="stylesheet">
+    <link type="text/css" href="../static/css/img.css" rel="stylesheet">
+    <link type="text/css" href="../static/css/base.css" rel="stylesheet">
+    <script src="../static/js/img.js"></script>
+    <script src="../static/js/grafico.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="../static/css/hub.css ">
+    <script src="../static/js/hub.js"></script>
+    
   </head>
-  
-    <div class="imgbienbenidos row justify-content-center">
-        
-        <div class="col-md-8 ">
-            <div class="position-relative">
-                <img src="../static/img/acerca1.jpg" class="img-fluid  my-4" alt="..." id="ImgBienvenida">
-                
-                <h1 class="position-absolute top-50 end-0 translate-middle-y">
-                    <img src="../static/img/IconoBH.png" alt="Logo" width="150" height="150"  style="display: block; margin: 0 auto;" >
-                     Bienvenidos a nuestra empresa BCH 
-                   
-                    
-                </h1>
-                
-            </div>
-        </div>
+  <br><br><br><br><br><br>
 
-    </div>
+  <div class="welcome-container">
+    <h1 class="welcome-heading">
+        <span class="animated-letter" style="animation-delay: 0.1s;">B</span>
+        <span class="animated-letter" style="animation-delay: 0.2s;">C</span>
+        <span class="animated-letter" style="animation-delay: 0.3s;">H</span>
+    </h1>
+    <p>
+        Somos una empresa comprometida con la excelencia y la satisfacción del cliente. 
+        Nuestra misión es proporcionar soluciones de alta calidad y mejorar la vida de las personas a través de nuestros productos y servicios. Con años de experiencia y un equipo dedicado, estamos aquí para satisfacer todas tus necesidades. ¡Bienvenidos a BCH!
+    </p>
+    <div>
+        <a href="/registro" class="btn btn-outline-success">RESGISTRATE AQUI</a>           
+    </div>    
+</div>
 
-    <div class="Servicios row my-2 py-5 justify-content-center text-center">
-        <div class="col-8">
-            <h3>Nuestros Servicios</h3>
-            <p class="">
-                En Nuestra Empresa, te ofrecemos una variedad de servicios diseñados para ayudarte en tu viaje
-                educativo y profesional.
-                <br> Algunos de nuestros servicios incluyen:
-            </p>
-            <div class="lista">
-                <ul>
-                    <li>Asesoramiento académico personalizado</li>
-                    <li>Tutoría en materias específicas</li>
-                    <li>Acceso a recursos educativos en línea</li>
-                    <li>Orientación profesional y consejos de carrera</li>
-                    <li>Apoyo financiero</li>
-                </ul>
-            </div>
 
-        </div>
-        <div class="imgservicios col-8">
-            <img src="../static/img/junta.jpg" class=" mx-auto d-block" alt="..." id="ImgNuestroservicos">
-        </div>
+<br><br><br><br><br><br><br>
 
-    </div>
+
+<div class="row">
+<div class="col-md-6 circle">
+    <br>
+    <h3>¿Quiénes somos?</h3>
+    <p style="text-align: center;">
+        Nuestra misión es combatir la deserción escolar y promover el éxito académico y profesional. Ofrecemos:
+    
+        <br><br>
+            Tutorías personalizadas.
+            <br>Asesoramiento vocacional.
+            <br>Mentoría para estudiantes.
+            <br>Talleres y recursos educativos.
+            <br>Conexiones con instituciones y oportunidades profesionales.
+        <br>
+    
+        Únete a nosotros en esta lucha por el éxito educativo.
+    </p>
+    <img src="https://cdn-icons-png.flaticon.com/512/5833/5833290.png" alt="Ícono de libro" style="width: 100px; height: 100px;">
+</div>
+<div class="col-md-6 circle align-top">
+    <br>
+    <h3>Estadísticas de Deserción Escolar</h3>
+    <p style="text-align: center;">
+        Nuestra misión es reducir la deserción y promover la educación. Aquí hay algunas estadísticas clave:
+   
+    <br>
+    <br>Deserción escolar anual: 10%
+    <br>Niños en riesgo de deserción: 15%
+    <br>Éxito en la prevención: 90%
+    <br>
+    </p>
+    <img src="https://delfos.minhacienda.gov.co/img/estadisticas.png" alt="Ícono de libro" style="width: 250px; height: 200px;">
+</div>
+</div>
+
+<br><br><br>
+<header>
+    <h1>Estadísticas de Deserción Escolar</h1>
+</header>
+<br>
+
+<div class="chart-container" style="max-width: 50%;
+margin: 0 auto;
+rgba(111, 109, 109, 0.7);
+border: 1px solid #fff;
+border-radius: 5px;
+padding: 20px;"
+>
+    <img src="https://pbs.twimg.com/media/Bx2IGjvCQAAI-yz.png" alt="Ícono de libro" style="width: 800px; height: 540px;">
+</div>
 
     </div>
     {% if user.is_authenticated %}
-    <br><
+    <br>
     {% else %}
     <div class="Contactanos row g-0 my-5 justify-content-center">
         <div class="texto_contacto col-md-4 text-center my-auto">          
@@ -65,6 +94,40 @@
             </div>       
         </form>
     </div>
+
+  
+
+    {% endif %}
+    {% if user.is_authenticated  %}
+    <!--boton-modal
+    <div class="boton-modal">
+        <label for="btn-modal">
+            guia
+        </label>
+
+    </div>
+    -->
+    <!--modal-->
+    <input type="checkbox" id="btn-modal">
+    <div class="container-modal" >
+        <div class="content-modal">
+            <h2> Bienvenido a BCH.</h2>
+            <p> Con nosotros encontraras oportunidades de estudio y recibiras orientación vocacional para impulsar tu
+                futuro académico y profesional.<br>
+                Te bindramos esta breve guia para que no te pierdas y tengas una interaccion mas amena con nuestros
+                servicios.
+                Para empezar oprime siguiente.
+            </p>
+            <div class="btn-cerrar">
+                <label for="btn-modal">cerrar</label>
+            </div>
+            
+            <div class="btn-siguiente">
+
+            <button class="button-redireccionar" onclick="window.location.href='recursos'">Siguiente</button>
+            </div>
+        </div>
+        
+    </div>
     {% endif %}
 {% endblock %}
-

@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
+
 
 {% block content %}
 {% load static %} 
 <head>
-    <link href="{% static "css/default.css" %}" rel="stylesheet">
+    <link href="{% static "css/img.css" %}" rel="stylesheet">
 </head>
 
 <div class="container mt-5">
@@ -50,7 +48,90 @@
     </div>
 </div>
 </section>
+
+<section class="calificacion">
+    <link rel="stylesheet" href="cali.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <div class="col-12" style="text-align: center;">
+    <div class="col-12"><br>
+        <div class="card">
+            <div class="card-header">
+              <h2>Calificanos!</h2>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">dejanos tu calificacion, lo agradecemos.</h5>
+              <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="1estrella"></span>
+
+              <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="2estrella"></span>
+
+              <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="3estrella"></span>
+
+              <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="4estrella"></span>
+
+              <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="5estrella"></span>
+              
+              <br><br>
+              <button class="btn btn-primary" onclick="Mensaje()">Calificar</button>
+            </div>
+          </div>
+    </div>
+    </div>
+    <script>
+        
+        var contador;
+        function calificar(item){
+            console.log(item);
+            contador=item.id[0];
+            let nombre = item.id.substring(1);
+            for(let i=0;i<5;i++){
+                if(i<contador){
+                  document.getElementById((i+1)+nombre).style.color="orange";
+                }else{
+                    document.getElementById((i+1)+nombre).style.color="black";
+                }
+            }
+        }
+        function Mensaje(){
+            alert("Gracias por calificar nuestra página con  " + contador + " estrellas. ¡Ten un buen día!");
+        }
+
+        
+    </script>
+</section>
+
 <br>
 </html>
+{% load static %}
+    <link rel="stylesheet" href="../static/css/hub.css ">
+    <script src="../static/js/hub.js"></script>
+    {% if user.is_authenticated  %}
+<input type="checkbox" id="btn-modal">
+    <div class="container-modal" >
+        <div class="content-modal">
+            <h2> Gracias</h2>
+            <p>
+                 Llegamos al final de esta guía y esperamos que haya sido de gran ayuda para ti.
+                 <br>
+                  Si tienes más preguntas o necesitas asistencia adicional, no dudes en ponerte en contacto con nosotros. 
+                  <br>
+                 Estamos aquí para apoyarte en tu camino.
+                 <br> 
+                 ¡Gracias por confiar en nosotros y te deseamos mucho éxito en tus futuras exploraciones y experiencias!
+                 <br>
+                 Calificanos!
+            </p>
+            <div class="btn-cerrar">
+                <label for="btn-modal">cerrar</label>
+            </div>
+            
+            
+            
+        </div>
+        
+    </div>
+    {% endif %}
 
 {% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>

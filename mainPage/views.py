@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
-
 from AppProyecto import settings
 from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
@@ -20,13 +19,22 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.core.mail import EmailMessage
 from .forms import FormularioContacto
+from .forms import ComentarioForm
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
+from .models import Calificacion
 from django.urls import reverse
 # Create your views here.
+
+@login_required
+def calificar(request, estrellas):
+    calificacion = Calificacion(usuario=request.user, estrellas=estrellas)
+    calificacion.save()
+    return redirect('novedades') 
+
 
 def principalHub(request):
     return render(request, 'hub.html')
@@ -38,9 +46,38 @@ def recursos(request):
     return render(request, 'recursos.html')
 def novedades(request):
     return render(request, 'novedades.html')
+def becasFAV(request):
 
+    becas_sin = Configuracion_Becas.objects.filter(Fundacion__nombre="NA")
+    return render(request, 'becas_fav.html', {'becas_sin':becas_sin})
+
+#login_required  
+
+@login_required
 def becas(request):
-    return render(request, 'becas.html')
+    becas_fun = Configuracion_Becas.objects.distinct("Fundacion")
+    for x in becas_fun:
+        fundacions = x.Fundacion
+        configuracion_unica = Configuracion_Becas.objects.filter(Fundacion=fundacions).values("Union_U_F__univeridad__nombre")
+        x.universidades = configuracion_unica
+    becas_sin = Configuracion_Becas.objects.filter(Fundacion__nombre="NA")
+    becas2 = Configuracion_Becas.objects.all()
+    becas = Configuracion_Becas.objects.exclude(Fundacion__nombre="NA")
+    return render(request, 'becas.html', {'becas2': becas2,'becas_sin':becas_sin,'becas_fun':becas_fun})
+
+
+def agregar_beca_fav(request, configuracion_becas_id):
+    # Obtener el usuario actual
+    usuario = request.user
+
+    # Obtener la configuración de becas
+    configuracion_becas = Configuracion_Becas.objects.get(id=configuracion_becas_id)
+
+    # Crear una nueva instancia de Becas_Fav
+    beca_fav = Becas_Fav.create(usuario=usuario, configuracion_becas=configuracion_becas)
+
+    # Redirigir a una página de confirmación o a donde prefieras
+    return render(request, 'confirmacion.html', {'beca_fav': beca_fav})
 
 def faq(request):
     return render(request, 'faq.html')
@@ -50,6 +87,7 @@ def perfil(request):
 
 def Secciones(request):
     return render(request, 'Secciones.html')
+
 
 @login_required
 def edit_perfil(request):
@@ -62,6 +100,8 @@ def edit_perfil(request):
         form = customUserCreationForm(instance=request.user)
     
     return render(request, 'edit_perfil.html', {'form': form})
+
+
 
 
 
@@ -277,19 +317,18 @@ def enviar_HTML(request):
 #Finalizado Seccion de correos-----------------------------------------------------
 #Favoritos------------------------------------
 @csrf_exempt
-def agregar_favorito(request):
-    if request.method == 'POST':
-        tipo = request.POST.get('tipo')
-        usuario = request.user  # Obtén el usuario actual
-        configuracion_becas_id = request.POST.get('configuracion_becas_id')
-
+def agregar_favorito(request,beca_id):
+    
+        
+    usuario = request.user  # Obtén el usuario actual
+       
         # Asegúrate de tener Configuracion_Becas importado y obtenido correctamente
-        configuracion_becas = Configuracion_Becas.objects.get(id=configuracion_becas_id)
+    configuracion_becas = Configuracion_Becas.objects.get(id=beca_id)
 
         # Crea la instancia de Becas_Fav y guárdala en la base de datos
-        beca_fav = Becas_Fav.create(tipo=tipo, usuario=usuario, configuracion_becas=configuracion_becas)
+    Becas_Fav.create(tipo='becas', usuario=usuario, configuracion_becas=configuracion_becas)
 
-        return JsonResponse({'status': 'success'})
+    return redirect('/becas')
 #Agregar beca---------------------------
 def enviar_correo_beca_agregada(nueva_beca):
     subject = 'Nueva Beca Agregada: {}'.format(nueva_beca.nombre)

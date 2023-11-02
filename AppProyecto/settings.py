@@ -87,13 +87,15 @@ WSGI_APPLICATION = 'AppProyecto.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Bachilleres',
+        'NAME': 'bachilleres',
         'USER': 'postgres',
         'PASSWORD': '123456',
         'HOST': 'localhost',  # o la dirección de tu servidor PostgreSQL
         'PORT': '5432',  # el puerto por defecto para PostgreSQL
     }
 }
+
+
 
 
 
@@ -138,6 +140,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "mainPage\\static"),
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST="smtp.gmail.com"

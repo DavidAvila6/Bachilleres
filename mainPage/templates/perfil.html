@@ -4,7 +4,9 @@
 {% load static %} 
 
 <head>
+    <link href="{% static "../static/css/img.css" %}" rel="stylesheet">
     <link href="{% static "../static/css/perfil.css" %}" rel="stylesheet">
+    <script src="../static/js/modo-oscuro.js"></script>
 </head>
 
 <div class="container mt-5">
@@ -15,6 +17,7 @@
         <h2>Nombre: {{ user.first_name}}</h2>
         <h2>Apellido: {{ user.last_name}}</h2>
         <h2>Correo Electrónico: {{ user.email }}</h2>
+        <button id="toggleModoOscuroNav" class="btn btn-outline-light">Modo Oscuro</button>
         <!--<p>Fecha de Nacimiento: 01 de enero de 1990</p>-->
         <br><br>
         <a href="{% url 'edit_perfil' %}" class="button btn btn-info btn-lg">Editar Perfil</a> 
@@ -40,7 +43,9 @@
             </li><br>
             <h3>Universidad/becas/facultad:</h3><br>
             <li>
-                <a class="button btn btn-info btn-lg" href="{% url 'agregar_beca' %}">Agregar Beca</a>
+                <div class="buttonCalendar">
+                    <a class="button btn btn-info btn-lg" href="{% url 'agregar_beca' %}">Agregar Beca</a>
+                </div
             </li><br>
  
         </ul>
@@ -56,12 +61,13 @@
             </div>
             <br>
             <div class="buttonCalendar">
-                <a class="button btn btn-info btn-lg" href="calendar/calendar"> Mis becas favoritas </a>
+                <a class="button btn btn-info btn-lg" href="{% url 'becas_fav' %}"> Mis becas favoritas </a>
+            </div>            
+            <br>
+            <div class="buttonCalendar">
+                <a class="button btn btn-info btn-lg" href="calendar/calendar"> MI CALENDARIO </a>
             </div>
         </ul>
-        <div class="buttonCalendar">
-            <a class="button btn btn-info btn-lg" href="calendar/calendar"> MI CALENDARIO </a>
-        </div>
     </section>
 
     <section class="amigos">
@@ -79,6 +85,40 @@
 </div>
 <br>
 <script src="../static/js/perfil.js"></script>
+{% load static %}
+    <link rel="stylesheet" href="../static/css/hub.css ">
+    <script src="../static/js/hub.js"></script>
+    {% if user.is_authenticated  %}
+<input type="checkbox" id="btn-modal">
+    <div class="container-modal" >
+        <div class="content-modal">
+            <h2> Bienvenido a tu espacio personalizado.</h2>
+            <p>Aquí puedes personalizar y visualizar información importante de tu perfil. 
+                Desde detalles básicos hasta tus preferencias y logros, todo está a tu alcance.
+                 ¡Haz que tu perfil refleje quién eres y saca el máximo provecho de tu experiencia en nuestra comunidad!
+                 <br>
+                 Aqui encontraras:
+                 <br>
+                 -Tus becas guardadas:
+                 <br>
+                 -Un calendarios interactivo donde veras tus actividades
+                 <br>
+                 -hasta te recomendaremos Universidades Cercanas
+
+            </p>
+            <div class="btn-cerrar">
+                <label for="btn-modal">cerrar</label>
+            </div>
+            
+            <div class="btn-siguiente">
+
+            <button class="button-redireccionar" onclick="window.location.href='/novedades'">Siguiente</button>
+            </div>
+            
+        </div>
+        
+    </div>
+    {% endif %}
 
 
 {% endblock %}
