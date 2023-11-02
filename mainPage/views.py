@@ -25,6 +25,9 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
+from .forms import ArchivoForm
+from .models import Archivo
 
 from .models import Calificacion
 # Create your views here.
@@ -493,3 +496,19 @@ def quiz(request):
             'pregunta': pregunta
         }
     return render(request, 'quiz.html', context)
+
+
+
+def cargar_archivo(request):
+    if request.method == 'POST':
+        form = ArchivoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_archivos')  # Redirigir a la vista de lista de archivos
+    else:
+        form = ArchivoForm()
+    return render(request, 'cargar_archivo.html', {'form': form})
+
+def lista_archivos(request):
+    archivos = Archivo.objects.all()
+    return render(request, 'lista_archivos.html', {'archivos': archivos})

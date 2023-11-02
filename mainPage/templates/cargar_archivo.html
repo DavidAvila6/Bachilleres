@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Archivos Guardados</title>
+</head>
+<body>
+    <h1>Archivos Guardados</h1>
+    <ul>
+        {% for archivo in archivos %}
+            <li>
+                <a href="{{ archivo.archivo.url }}">{{ archivo.archivo.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
