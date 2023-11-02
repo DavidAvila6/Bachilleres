@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
+
 {% block content %}
+{% load static %}
+<head>
+  <link href="{% static " css/img.css" %}" rel="stylesheet">
+    <link href="{% static " css/perfil.css" %}" rel="stylesheet">
+    <link href="{% static " css/hub.css" %}" rel="stylesheet">
+</head>
 <div class="container mt-4">
   <h1 class="text-center">Foro de Usuarios</h1>
 
@@ -60,7 +67,31 @@
   
   <a href="forosFacultades/">Foros Específicos</a> - Aquí puedes encontrar discusiones y temas relacionados con facultades específicas.
 </div>
+{% load static %}
+    <link rel="stylesheet" href="../static/css/hub.css ">
+    <script src="../static/js/hub.js"></script>
+    {% if user.is_authenticated  %}
+<input type="checkbox" id="btn-modal">
+    <div class="container-modal" >
+        <div class="content-modal">
+            <h2> ¡Bienvenido al foro !</h2>
+            <p>Este es el lugar donde puedes compartir tus ideas, preguntas y opiniones sobre una amplia variedad de temas. 
+              Interactúa con otros usuarios y recibe respuestas de la comunidad y nuestros administradores. 
+              ¡Únete a la conversación y forma parte de esta comunidad en constante crecimiento!
+            </p>
+            <div class="btn-cerrar">
+                <label for="btn-modal">cerrar</label>
+            </div>
+            
+            <div class="btn-siguiente">
 
+            <button class="button-redireccionar" onclick="window.location.href='/perfil'">Siguiente</button>
+            </div>
+            
+        </div>
+        
+    </div>
+    {% endif %}
 <style>
   /* Estilos personalizados */
   .publicacion-item:hover {
