@@ -35,7 +35,6 @@
         </ul>
     </section>
 
-    <body>
         <div class="card">
             <div class="card-header">
                 <h5>Cargar Archivo</h5>
@@ -44,15 +43,10 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <div class="form-group">
-                        <label for="id_archivo">Selecciona un archivo:</label>
-                        <input type="file" name="archivo" id="id_archivo">
-                    </div>
                     <button type="submit" class="btn btn-primary">Subir Archivo</button>
                 </form>
             </div>
         </div>
-    </body>
     
    
 </div>

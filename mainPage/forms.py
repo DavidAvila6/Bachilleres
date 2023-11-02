@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from  mainPage.models import Comentario
-from .models import Archivo 
+from .models import Archivo
 
 
 
@@ -72,4 +72,4 @@ class ElegirInLineFormset(forms.BaseInlineFormSet):
 class ArchivoForm(forms.ModelForm):
     class Meta:
         model = Archivo
-        fields = ['archivo']
+        fields = ['nombre', 'archivo']

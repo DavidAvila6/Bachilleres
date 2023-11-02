@@ -42,3 +42,4 @@ admin.site.register(PreguntasRespondidas)
 admin.site.register(QuizUsuario)
 admin.site.register(Archivo)
 
+
