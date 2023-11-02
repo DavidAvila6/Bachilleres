@@ -528,12 +528,4 @@ def lista_archivos(request):
     archivos = Archivo.objects.all()
     return render(request, 'lista_archivos.html', {'archivos': archivos})
 
-def Archivo(request):
-    if request.method == 'POST':
-        form = ArchivoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_archivos')  # Redirigir a la vista de lista de archivos
-    else:
-        form = ArchivoForm()
-    return render(request, 'Archivo.html', {'form': form})
+

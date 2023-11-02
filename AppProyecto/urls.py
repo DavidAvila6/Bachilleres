@@ -32,7 +32,7 @@ urlpatterns = [
     path('faq/', views.faq),
     path('accounts/', include('django.contrib.auth.urls')),
     path('Secciones/', views.Secciones ),
-    path('Archivo/', views.Archivo ),
+    path('lista_archivos/', views.lista_archivos ),
     path('perfil/', views.perfil ),
     path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
     #becas fav en perfil--------------------------------------------------------
@@ -72,6 +72,7 @@ urlpatterns = [
     #Quices y TEST----------------------------------------------------------------------------------------------------------------------------------
     path('quiz/', views.quiz ,name='quices'),
     path('cargar-archivo/', views.cargar_archivo, name='cargar_archivo'),
+    path('lista-archivos/', views.lista_archivos, name='lista_archivos'),
     
 ]
 if settings.DEBUG:
