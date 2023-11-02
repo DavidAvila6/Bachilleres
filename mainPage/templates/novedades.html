@@ -47,6 +47,7 @@
 
     </div>
 </div>
+{% if user.is_authenticated  %}
 </section>
 
 <section class="calificacion">
@@ -98,7 +99,7 @@
         
     </script>
 </section>
-
+{% endif %}
 <br>
 </html>
 {% load static %}
