@@ -454,6 +454,7 @@ def eliminar_comentario(request, comentario_id):
     # Redirigir a la página de la publicación a la que pertenece el comentario
     return redirect('/foro', publicacion_id=comentario.publicacion.id)
 
+@login_required   
 def crear_publicacion(request):
     if request.method == 'POST':
         form = PublicacionForm(request.POST)
@@ -476,6 +477,7 @@ def crear_publicacion(request):
     
     return render(request, 'crear_publicacion.html', {'form': form})
 
+@login_required   
 def eliminar_publicacion(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
     
@@ -507,7 +509,7 @@ def quiz(request):
     return render(request, 'quiz.html', context)
 
 
-
+@login_required   
 def cargar_archivo(request):
     if request.method == 'POST':
         form = ArchivoForm(request.POST, request.FILES)
@@ -523,7 +525,7 @@ def cargar_archivo(request):
         form = ArchivoForm()
     return render(request, 'cargar_archivo.html', {'form': form})
 
-
+@login_required   
 def lista_archivos(request):
     archivos = Archivo.objects.all()
     return render(request, 'lista_archivos.html', {'archivos': archivos})
