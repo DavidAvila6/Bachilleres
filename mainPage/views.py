@@ -375,6 +375,8 @@ def agregar_comentario(request, publicacion_id):
     return render(request, 'agregar_comentario.html', {'publicacion': publicacion})
 
 
+
+
 def eliminar_comentario(request, comentario_id):
     comentario = get_object_or_404(Comentario, pk=comentario_id)
     
@@ -385,7 +387,7 @@ def eliminar_comentario(request, comentario_id):
     # Redirigir a la página de la publicación a la que pertenece el comentario
     return redirect('/foro', publicacion_id=comentario.publicacion.id)
 
-def crear_publicacion(request, facultad_id):
+def crear_publicacion(request, facultad_id):    
     if request.method == 'POST':
         form = PublicacionForm(request.POST)
         if form.is_valid():
@@ -393,7 +395,8 @@ def crear_publicacion(request, facultad_id):
             nueva_publicacion.autor = request.user  # Asigna el autor de la publicación
             nueva_publicacion.facultad_id = facultad_id
             nueva_publicacion.save()
-            return redirect('lista_publicaciones')  # Redirige a la lista de publicaciones
+            print(facultad_id)
+            return redirect(f'/foro/facultad/{facultad_id}/')
     else:
         form = PublicacionForm()
     
