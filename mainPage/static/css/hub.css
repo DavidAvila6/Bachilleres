@@ -9,6 +9,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: all 300ms ease;
+    
 }
 #btn-modal{
     display: none;
@@ -31,15 +32,18 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
+    display: flex;
+    
+    
 }
+
 .content-modal {
     width: 100%;
-    
     max-width: 400px;
-    
     padding: 20px;
     background-color:#6D6656;;
     border-radius: 4px;
+
 }
 .content-modal h2{
     margin-bottom: 20px;
@@ -56,12 +60,15 @@
 }
 
 .content-modal .btn-cerrar{
-    width: 100px;
+    width: 50px;
     margin-top: 15px;
-    display: flex;
+    
     justify-content: flex-end;
+    display: inline-block
+    
 }
 .content-modal .btn-cerrar label{
+    margin-right: 10px;
     padding: 7px 10px;
     background-color: green;
     color: beige;
@@ -80,5 +87,26 @@
     top: 0; left: 0;
     z-index: -1;
 }
+.container-modal .button-redireccionar {
+    margin-left: 200px;
+    width: 90px;
+    margin-top: 15px;
+    display: inline-block;
+    justify-content: flex-end;
+    padding: 7px 10px;
+    background-color: green;
+    color: beige;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 300ms ease;
+   
+}
 
-
+.content-modal .button-redireccionar:hover {
+    
+    background-color: black;
+}
+.content-modal .btn-siguiente {
+    display: inline-block;
+    
+}
