@@ -32,6 +32,7 @@ urlpatterns = [
     path('faq/', views.faq),
     path('accounts/', include('django.contrib.auth.urls')),
     path('Secciones/', views.Secciones ),
+    path('lista_archivos/', views.lista_archivos ),
     path('perfil/', views.perfil ),
     path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
     #becas fav en perfil--------------------------------------------------------
@@ -69,7 +70,10 @@ urlpatterns = [
     path('foro/publicacion/<int:publicacion_id>/eliminar/', views.eliminar_publicacion, name='eliminar_publicacion'),
     path('foro/forosFacultades/', views.forosEspecificos,name='foros_especificos'),
     #Quices y TEST----------------------------------------------------------------------------------------------------------------------------------
-    path('quiz/', views.quiz ,name='quices')
+    path('quiz/', views.quiz ,name='quices'),
+    path('cargar-archivo/', views.cargar_archivo, name='cargar_archivo'),
+    path('lista-archivos/', views.lista_archivos, name='lista_archivos'),
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

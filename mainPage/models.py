@@ -202,3 +202,10 @@ class Calificacion(models.Model):
 
 
 
+class Archivo(models.Model):
+    nombre = models.CharField(max_length=255, default='ValorPredeterminado')
+    archivo = models.FileField(upload_to='recursos/')
+    fecha_subida = models.DateTimeField(auto_now_add=True)
+
+
+

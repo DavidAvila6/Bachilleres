@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from  mainPage.models import Comentario
+from .models import Archivo
+
+
 
 from mainPage.models import Beca, Publicacion, Pregunta, ElegirRespuesta, PreguntasRespondidas
 
@@ -65,3 +68,8 @@ class ElegirInLineFormset(forms.BaseInlineFormSet):
             assert respuesta_correcta == Pregunta.NUMERO_DE_RESPUESTAS_PERMITIDAS           
         except AssertionError:
             raise forms.ValidationError('Exactamente solo una respuesta es permitida')
+        
+class ArchivoForm(forms.ModelForm):
+    class Meta:
+        model = Archivo
+        fields = ['nombre', 'archivo']

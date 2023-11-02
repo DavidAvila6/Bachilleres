@@ -14,6 +14,7 @@ from .forms import EmailForm
 from .forms import EmailFormHTML
 from .forms import EmailUsername
 from .forms import FormularioContacto
+from .forms import ArchivoForm
 from django.core.mail import send_mail, EmailMessage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -25,6 +26,10 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
+from .forms import ArchivoForm
+from .models import Archivo
+
 
 from .models import Calificacion
 # Create your views here.
@@ -43,7 +48,14 @@ def about(request):
     return render(request, 'about.html')
 
 def recursos(request):
-    return render(request, 'recursos.html')
+    if request.method == 'POST':
+        form = ArchivoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_archivos')  # Redirigir a la vista de lista de archivos
+    else:
+        form = ArchivoForm()
+    return render(request, 'recursos.html', {'form': form})
 def novedades(request):
     return render(request, 'novedades.html')
 def becasFAV(request):
@@ -442,6 +454,7 @@ def eliminar_comentario(request, comentario_id):
     # Redirigir a la página de la publicación a la que pertenece el comentario
     return redirect('/foro', publicacion_id=comentario.publicacion.id)
 
+@login_required   
 def crear_publicacion(request):
     if request.method == 'POST':
         form = PublicacionForm(request.POST)
@@ -464,6 +477,7 @@ def crear_publicacion(request):
     
     return render(request, 'crear_publicacion.html', {'form': form})
 
+@login_required   
 def eliminar_publicacion(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
     
@@ -493,3 +507,27 @@ def quiz(request):
             'pregunta': pregunta
         }
     return render(request, 'quiz.html', context)
+
+
+@login_required   
+def cargar_archivo(request):
+    if request.method == 'POST':
+        form = ArchivoForm(request.POST, request.FILES)
+        if form.is_valid():
+            archivo = form.cleaned_data['id_archivo']
+            form = Form(archivo=arhivo)
+            print("El formulario es válido. Guardando archivo en la base de datos.")
+            form.save()
+            return redirect('lista_archivos')
+        else:
+            print("El formulario no es válido. No se guardará el archivo en la base de datos.")
+    else:
+        form = ArchivoForm()
+    return render(request, 'cargar_archivo.html', {'form': form})
+
+@login_required   
+def lista_archivos(request):
+    archivos = Archivo.objects.all()
+    return render(request, 'lista_archivos.html', {'archivos': archivos})
+
+
