@@ -2,9 +2,7 @@
 
 /* Estilo para las secciones */
 body {
-  background: linear-gradient(to bottom, #6D6656, #E4DBC5);
-  color: #fff;
-  font-family: Tahoma, sans-serif;
+  
   background-image: url('../img/perfil.jpg');
   background-size: cover;
   background-repeat: no-repeat;
