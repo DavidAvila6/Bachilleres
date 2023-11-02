@@ -6,6 +6,7 @@ body {
   background-image: url('../img/perfil.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  color: white;
 }
 body.cambiado {
   background-image: url('../img/perfil2.jpg');
@@ -20,6 +21,7 @@ section {
   background-color: #46443F;
   padding: 80px;
   margin-bottom: 20px;
+  color: white;
 }
 
 

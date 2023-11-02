@@ -19,7 +19,7 @@
     ;
 }
 .boton-modal label:hover{
-    background-color: #6D6656;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .container-modal {
@@ -27,7 +27,7 @@
     height: 100vh;
     position: fixed;
     top: 0; left: 0;
-    background-color: rgba(144, 148, 150, 0.8);
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,7 @@
     width: 100%;
     max-width: 400px;
     padding: 20px;
-    background-color:#6D6656;;
+    background-color: rgba(119, 22, 22, 0.9);
     border-radius: 4px;
 
 }
