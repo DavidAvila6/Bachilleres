@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from AppProyecto import settings
-from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
+from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
@@ -26,12 +26,16 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from .forms import ArchivoForm
 from .models import Archivo
 
 
+=======
+>>>>>>> 745b2b099633a7d28afedb3100ed876500852387
 from .models import Calificacion
+from django.urls import reverse
 # Create your views here.
 
 @login_required
@@ -410,39 +414,23 @@ class PublicacionListView(ListView):
         # Devolver el queryset con los comentarios precargados
         return queryset.prefetch_related(prefetch)
 
-@login_required   
+@login_required
 def agregar_comentario(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
 
     if request.method == 'POST':
-        form = ComentarioForm(request.POST)
-        if form.is_valid():
-            comentario = form.save(commit=False)
-            comentario.autor = request.user
-            comentario.publicacion = publicacion
-            comentario.save()
+        contenido = request.POST['contenido']
+        comentario = Comentario(contenido=contenido, autor=request.user, publicacion=publicacion)
+        comentario.save()
 
-            # Envía un correo electrónico al autor de la publicación
-            subject = 'Nuevo comentario en tu publicación'
-            message = f'Se ha agregado un nuevo comentario en tu publicación "{publicacion.titulo}".'
-            from_email = settings.EMAIL_HOST_USER  # Usar tu dirección de correo electrónico configurada en settings
-            to_email = [publicacion.autor.email]  # El correo electrónico del autor de la publicación
-            context = {
-                'publicacion_titulo': publicacion.titulo,
-                'comentario_autor': comentario.autor.username,
-                'comentario_contenido': comentario.contenido,
-            }
-            html_content = render_to_string('correos/nuevo_comentario.html', context)
+        # Obtenemos la URL de la facultad a partir de la publicación
+        facultad_url = reverse('foro_por_facultad', args=[publicacion.facultad.pk])
+        return redirect(facultad_url)
 
-            # Envía el correo electrónico con contenido HTML
-            send_mail(subject, '', from_email, to_email, fail_silently=True, html_message=html_content)
+    return render(request, 'agregar_comentario.html', {'publicacion': publicacion})
 
-            return redirect('/foro') 
 
-    else:
-        form = ComentarioForm()
 
-    return render(request, 'agregar_comentario.html', {'publicacion': publicacion, 'form': form})
 
 def eliminar_comentario(request, comentario_id):
     comentario = get_object_or_404(Comentario, pk=comentario_id)
@@ -454,28 +442,25 @@ def eliminar_comentario(request, comentario_id):
     # Redirigir a la página de la publicación a la que pertenece el comentario
     return redirect('/foro', publicacion_id=comentario.publicacion.id)
 
+<<<<<<< HEAD
 @login_required   
 def crear_publicacion(request):
+=======
+def crear_publicacion(request, facultad_id):    
+>>>>>>> 745b2b099633a7d28afedb3100ed876500852387
     if request.method == 'POST':
         form = PublicacionForm(request.POST)
         if form.is_valid():
             nueva_publicacion = form.save(commit=False)
-            nueva_publicacion.autor = request.user
+            nueva_publicacion.autor = request.user  # Asigna el autor de la publicación
+            nueva_publicacion.facultad_id = facultad_id
             nueva_publicacion.save()
-
-            
-            subject = 'Nueva publicación creada en BCH'
-            message = 'Se ha creado una nueva publicación en el apartado de foro en BCH.'
-            from_email = settings.EMAIL_HOST_USER 
-            to_email = [request.user.email]  
-
-            send_mail(subject, message, from_email, to_email, fail_silently=True)
-
-            return redirect('lista_publicaciones')
+            print(facultad_id)
+            return redirect(f'/foro/facultad/{facultad_id}/')
     else:
         form = PublicacionForm()
     
-    return render(request, 'crear_publicacion.html', {'form': form})
+    return render(request, 'crear_publicacion.html', {'form': form, 'facultad_id': facultad_id})
 
 @login_required   
 def eliminar_publicacion(request, publicacion_id):
@@ -489,6 +474,12 @@ def eliminar_publicacion(request, publicacion_id):
 
 def forosEspecificos(request):
     return render(request, 'foros.html')
+
+def foro_por_facultad(request, facultad_id):
+    facultad = get_object_or_404(Facultad, pk=facultad_id)
+    publicaciones = Publicacion.objects.filter(facultad=facultad).prefetch_related('comentario_set')
+    return render(request, 'foro_por_facultad.html', {'facultad': facultad, 'publicaciones': publicaciones})
+
 
 #QUIZ Y TEST--------------------------------------------------------------------------------------------------------
 

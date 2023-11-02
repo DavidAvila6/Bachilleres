@@ -66,9 +66,10 @@ urlpatterns = [
     path('foro/', views.PublicacionListView.as_view(), name='lista_publicaciones'),
     path('foro/<int:publicacion_id>/agregar_comentario/', views.agregar_comentario, name='agregar_comentario'),
     path('foro/comentario/<int:comentario_id>/eliminar/', views.eliminar_comentario, name='eliminar_comentario'),
-    path('foro/crear_publicacion/', views.crear_publicacion, name='crear_publicacion'),
+    path('foro/crear_publicacion/<int:facultad_id>/', views.crear_publicacion, name='crear_publicacion'),
     path('foro/publicacion/<int:publicacion_id>/eliminar/', views.eliminar_publicacion, name='eliminar_publicacion'),
     path('foro/forosFacultades/', views.forosEspecificos,name='foros_especificos'),
+    path('foro/facultad/<int:facultad_id>/', views.foro_por_facultad, name='foro_por_facultad'),
     #Quices y TEST----------------------------------------------------------------------------------------------------------------------------------
     path('quiz/', views.quiz ,name='quices'),
     path('cargar-archivo/', views.cargar_archivo, name='cargar_archivo'),
