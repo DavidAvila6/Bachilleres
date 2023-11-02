@@ -26,14 +26,11 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
-<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from .forms import ArchivoForm
 from .models import Archivo
 
 
-=======
->>>>>>> 745b2b099633a7d28afedb3100ed876500852387
 from .models import Calificacion
 from django.urls import reverse
 # Create your views here.
@@ -442,12 +439,7 @@ def eliminar_comentario(request, comentario_id):
     # Redirigir a la página de la publicación a la que pertenece el comentario
     return redirect('/foro', publicacion_id=comentario.publicacion.id)
 
-<<<<<<< HEAD
-@login_required   
-def crear_publicacion(request):
-=======
 def crear_publicacion(request, facultad_id):    
->>>>>>> 745b2b099633a7d28afedb3100ed876500852387
     if request.method == 'POST':
         form = PublicacionForm(request.POST)
         if form.is_valid():
