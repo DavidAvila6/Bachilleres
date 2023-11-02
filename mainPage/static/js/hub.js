@@ -1,28 +1,12 @@
 window.addEventListener('load', function() {
-    var modal = document.getElementById('container-modal');
-    var btnModal = document.getElementById('btn-modal');
-
-    // Verificar si la cookie 'modalMostrado' está presente
-    var modalMostrado = localStorage.getItem('modalMostrado');
-
-    if (!modalMostrado) {
-        // Si la cookie no está presente, mostrar el modal
-        modal.style.display = 'block';
-    }
-
-    // Asignar un evento al botón de cerrar
-    document.getElementById('btn-cerrar').addEventListener('click', function() {
-        modal.style.display = 'none';
-        
-        // Al cerrar el modal, establecer la cookie 'modalMostrado' para evitar que se muestre nuevamente
+    // Verificar si el modal ya ha sido mostrado
+    if (!localStorage.getItem('modalMostrado')) {
+        // Si no ha sido mostrado, mostrar el modal
+        document.getElementById('container-modal').style.display = 'block';
+        // Marcar el modal como mostrado en el almacenamiento local
         localStorage.setItem('modalMostrado', 'true');
-    });
-
-    // Asignar un evento al botón de siguiente
-    document.getElementById('btn-siguiente').addEventListener('click', function() {
-        window.location.href = 'recursos';
-    });
-});
+    }
+})
 
 /* window.addEventListener('load', function() {
     document.getElementById('container-modal').style.display = 'block';
