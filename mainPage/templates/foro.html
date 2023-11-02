@@ -4,58 +4,20 @@
 <div class="container mt-4">
   <h1 class="text-center">Foro de Usuarios</h1>
 
-  <!-- Reglas del Foro -->
+  <!-- Cuadro de texto explicativo -->
   <div class="alert alert-info">
-    <h3>Reglas del Foro General</h3>
+    <h3>Bienvenido al Foro General</h3>
+    <p>Este foro es un lugar para compartir dudas, respuestas y discusiones relacionadas con diversas facultades.</p>
+    <p>Aquí encontrarás varios foros específicos, cada uno relacionado con una facultad en particular. Puedes publicar y comentar en los foros correspondientes a tu área de interés.</p>
+    <p>Por favor, sé respetuoso y cortés con los demás miembros del foro y sigue las siguientes reglas generales:</p>
     <ul>
-      <li>Se respetuoso y cortés con los demás miembros del foro.</li>
       <li>No se permite contenido ofensivo, difamatorio o ilegal.</li>
       <li>No hagas spam o publiques enlaces no relacionados.</li>
       <li>Mantén las discusiones en los temas apropiados.</li>
     </ul>
   </div>
 
-
-  <ul class="list-group">
-    {% for publicacion in publicaciones %}
-    <li class="list-group-item mb-3 publicacion-item">
-      <div>
-        <h2 class="h4">{{ publicacion.titulo }}</h2>
-        <div class="publicacion-content">
-          <p>{{ publicacion.contenido }}</p>
-        </div>
-        <p class="mb-2">Publicado por: {{ publicacion.autor.username }} el {{ publicacion.fecha_creacion }}</p>
-        {% if request.user == publicacion.autor %}
-        <a href="{% url 'eliminar_publicacion' publicacion.id %}" class="btn btn-danger btn-sm">Eliminar Publicación</a>
-        {% endif %}
-        <!-- Mostrar la cantidad de comentarios -->
-        <p class="mb-1">Comentarios ({{ publicacion.num_comentarios }})</p>
-        
-        <!-- Iterar sobre los comentarios -->
-        <ul class="list-group comentarios-list">
-          {% for comentario in publicacion.comentarios %}
-          <li class="list-group-item mb-2 comentario-item">
-            <p>{{ comentario.contenido }}</p>
-            <p class="mb-1">Comentado por: {{ comentario.autor.username }} el {{ comentario.fecha_creacion }}</p>
-            {% if request.user == comentario.autor %}
-            <a href="{% url 'eliminar_comentario' comentario.id %}" class="btn btn-danger btn-sm">Eliminar Comentario</a>
-            {% endif %}
-          </li>
-          {% empty %}
-          <li class="list-group-item">No hay comentarios disponibles.</li>
-          {% endfor %}
-        </ul>
-        
-        <!-- Enlace para agregar un comentario -->
-        <a href="{% url 'agregar_comentario' publicacion.id %}" class="btn btn-primary btn-sm mt-2">Agregar Comentario</a>
-      </div>
-    </li>
-    {% empty %}
-    <li class="list-group-item">No hay publicaciones disponibles.</li>
-    {% endfor %}
-  </ul>
-  
-  <a href="forosFacultades/">Foros Específicos</a> - Aquí puedes encontrar discusiones y temas relacionados con facultades específicas.
+  <p> Foros Específicos - Aquí puedes encontrar discusiones y temas relacionados con facultades específicas</p>
 </div>
 
 <div class="container text-center">
@@ -98,25 +60,3 @@
   }
 </style>
 {% endblock %}
-
-<script>
-  // Obtenemos todos los botones de "Mostrar Comentarios"
-  const toggleButtons = document.querySelectorAll(".toggle-comments");
-
-  // Agregamos un manejador de eventos para cada botón
-  toggleButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      // Encuentra la lista de comentarios asociada a este botón
-      const comentariosList = event.target.nextElementSibling;
-
-      // Alternar la visibilidad de los comentarios
-      if (comentariosList.style.display === "none" || comentariosList.style.display === "") {
-        comentariosList.style.display = "block";
-        event.target.textContent = "Ocultar Comentarios";
-      } else {
-        comentariosList.style.display = "none";
-        event.target.textContent = "Mostrar Comentarios";
-      }
-    });
-  });
-</script>

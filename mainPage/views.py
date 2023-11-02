@@ -25,6 +25,7 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse
 # Create your views here.
 
 def principalHub(request):
@@ -358,7 +359,7 @@ class PublicacionListView(ListView):
         # Devolver el queryset con los comentarios precargados
         return queryset.prefetch_related(prefetch)
 
-@login_required   
+@login_required
 def agregar_comentario(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
 
@@ -366,9 +367,13 @@ def agregar_comentario(request, publicacion_id):
         contenido = request.POST['contenido']
         comentario = Comentario(contenido=contenido, autor=request.user, publicacion=publicacion)
         comentario.save()
-        return redirect('/foro', pk=publicacion_id)
+
+        # Obtenemos la URL de la facultad a partir de la publicación
+        facultad_url = reverse('foro_por_facultad', args=[publicacion.facultad.pk])
+        return redirect(facultad_url)
 
     return render(request, 'agregar_comentario.html', {'publicacion': publicacion})
+
 
 def eliminar_comentario(request, comentario_id):
     comentario = get_object_or_404(Comentario, pk=comentario_id)
@@ -408,7 +413,7 @@ def forosEspecificos(request):
 
 def foro_por_facultad(request, facultad_id):
     facultad = get_object_or_404(Facultad, pk=facultad_id)
-    publicaciones = Publicacion.objects.filter(facultad=facultad)
+    publicaciones = Publicacion.objects.filter(facultad=facultad).prefetch_related('comentario_set')
     return render(request, 'foro_por_facultad.html', {'facultad': facultad, 'publicaciones': publicaciones})
 
 

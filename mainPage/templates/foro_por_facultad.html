@@ -1,20 +1,76 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="text-center">{{ facultad.nombre }}</h1>
+<div class="container mt-4">
+  <h1 class="text-center">{{ facultad.nombre }}</h1>
 
-<ul>
-  {% for publicacion in publicaciones %}
-    <li>
+  <!-- Mensaje de Bienvenida y Reglas -->
+  <div class="alert alert-info">
+    <h3>Bienvenido al Foro de {{ facultad.nombre }}</h3>
+    <p>Este foro es un lugar para compartir dudas, respuestas y discusiones relacionadas con {{ facultad.nombre }}.</p>
+    <p>Por favor, sé respetuoso y cortés con los demás miembros del foro y sigue las siguientes reglas:</p>
+    <ul>
+      <li>No se permite contenido ofensivo, difamatorio o ilegal.</li>
+      <li>No hagas spam ni publiques enlaces no relacionados.</li>
+      <li>Mantén las discusiones en los temas apropiados.</li>
+      <li>Ten en cuenta que todas las publicaciones están siendo supervisadas por la administración.</li>
+    </ul>
+  </div>
+
+  <br>
+  <a href="{% url 'crear_publicacion' facultad.id %}" class="btn btn-primary btn-lg mt-3">Crear Nueva Publicación</a>
+  <br>
+  <br>
+  <ul class="list-group">
+    {% for publicacion in publicaciones %}
+    <li class="list-group-item mb-3 publicacion-item">
       <div>
-        <h2>{{ publicacion.titulo }}</h2>
+        <h2 class="h4">{{ publicacion.titulo }}</h2>
         <p>{{ publicacion.contenido }}</p>
-        <p>Publicado por: {{ publicacion.autor.username }} el {{ publicacion.fecha_creacion }}</p>
+        <p class="mb-2 publicado-por">
+          Publicado por: <span class="nombre-usuario">{{ publicacion.autor.username }}</span> el {{ publicacion.fecha_creacion }}
+        </p>
+        {% if request.user == publicacion.autor %}
+        <a href="{% url 'eliminar_publicacion' publicacion.id %}" class="btn btn-danger btn-sm">Eliminar Publicación</a>
+        {% endif %}
+        <!-- Mostrar la cantidad de comentarios -->
+        <p class="mb-1">Comentarios ({{ publicacion.num_comentarios }})</p>
+        
+        <!-- Iterar sobre los comentarios -->
+        <ul class="list-group comentarios-list">
+          {% for comentario in publicacion.comentario_set.all %}
+            <li class="list-group-item mb-2 comentario-item">
+              <p>{{ comentario.contenido }}</p>
+              <p class="mb-1 comentado-por">
+                Comentado por: <span class="nombre-usuario">{{ comentario.autor.username }}</span> el {{ comentario.fecha_creacion }}
+              </p>
+              {% if request.user == comentario.autor %}
+              <a href="{% url 'eliminar_comentario' comentario.id %}" class="btn btn-danger btn-sm">Eliminar Comentario</a>
+              {% endif %}
+            </li>
+          {% empty %}
+            <li class="list-group-item">No hay comentarios disponibles.</li>
+          {% endfor %}
+        </ul>
+        
+        <!-- Enlace para agregar un comentario -->
+        <a href="{% url 'agregar_comentario' publicacion.id %}" class="btn btn-primary btn-sm mt-2">Agregar Comentario</a>
       </div>
-      <br>
     </li>
-  {% empty %}
-    <li>No hay publicaciones disponibles para esta facultad.</li>
-  {% endfor %}
-</ul>
+    {% empty %}
+    <li class="list-group-item">No hay publicaciones disponibles para esta facultad.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<style>
+  .publicado-por {
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    color: #888; /* Color de letra tenue */
+  }
+  .nombre-usuario {
+    font-weight: bold; /* Hace que el nombre de usuario sea negrita */
+  }
+</style>
+
 {% endblock %}
