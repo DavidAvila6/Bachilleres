@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div class="text-center mt-5" >
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="hidden" name="facultad" value="{{ facultad_id }}">
     <button type="submit">Crear Publicación</button>
 </form>
-
+</div>
 {% endblock %}
