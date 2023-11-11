@@ -498,7 +498,7 @@ def cargar_archivo(request):
         form = ArchivoForm(request.POST, request.FILES)
         if form.is_valid():
             archivo = form.cleaned_data['id_archivo']
-            form = Form(archivo=arhivo)
+            form = form(archivo=arhivo)
             print("El formulario es válido. Guardando archivo en la base de datos.")
             form.save()
             return redirect('lista_archivos')
@@ -529,6 +529,10 @@ def crear_oportunidad(request):
     else:
         form = OportunidadForm()
     return render(request, 'oportunidades/crear_oportunidad.html', {'form': form})
+
+def cargar_mas_oportunidades(request):
+    oportunidades = Oportunidad.objects.all().order_by('?')[:5]  # Obtén 5 oportunidades aleatorias
+    return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
 
 
 

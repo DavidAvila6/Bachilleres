@@ -76,7 +76,8 @@ urlpatterns = [
     path('lista-archivos/', views.lista_archivos, name='lista_archivos'),
     #Oportunidades--------------------
     path('oportunidades/', views.oportunidades, name='oportunidades'),
-    path('crear_oportunidad/', views.crear_oportunidad, name='crear_oportunidad')
+    path('crear_oportunidad/', views.crear_oportunidad, name='crear_oportunidad'),
+    path('cargar_mas_oportunidades/', views.cargar_mas_oportunidades, name='cargar_mas_oportunidades'),
     
 ]
 if settings.DEBUG:

@@ -1,0 +1,25 @@
+<!-- oportunidades/oportunidades_ajax.html -->
+{% for oportunidad in oportunidades %}
+  <div class="oportunidad">
+    <h2>{{ oportunidad.titulo }}</h2>
+    {% if oportunidad.imagen %}
+      <img src="{{ oportunidad.imagen.url }}" alt="{{ oportunidad.titulo }}">
+    {% endif %}<br><br>
+    <p>{{ oportunidad.contenido }}</p><br>
+    
+    <p>Empresa: {{ oportunidad.autor.username }} el {{ oportunidad.fecha_creacion }}</p>
+  </div>
+{% endfor %}
+<!-- Div lateral izquierdo -->
+<div class="informacion-lateral izquierda">
+    <h2>Busqueda y Filtros</h2>
+    <p>Contenido de la búsqueda y filtros...</p>
+  </div>
+  
+  <!-- Div lateral derecho -->
+  <div class="informacion-lateral derecha">
+    <h2>Sugerencias de Usuarios</h2>
+    <p>Contenido de las sugerencias...</p>
+    <a href="/crear_oportunidad" class="btn btn-success float-right">CREAR OPORTUNIDAD</a>
+  </div>
+

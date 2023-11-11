@@ -26,3 +26,73 @@
     border-radius: 5px; /* Bordes redondos para la imagen */
     margin-top: 10px; /* Espaciado superior para la imagen */
 }
+
+
+/* oportunidad.css */
+.informacion-lateral {
+    width: 400px; /* Ancho fijo */
+    height: 600px; /* Altura fija */
+    position: fixed;
+    top: 50%; /* Coloca el div en el centro vertical */
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+    padding: 20px; /* Ajusta el relleno según tus necesidades */
+    color: black; /* Color de la letra en negro */
+    border-radius: 10px; /* Bordes circulares */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  }
+  
+  .informacion-lateral.izquierda {
+    left: 10px; /* Ajusta la posición izquierda según tus necesidades */
+  }
+  
+  .informacion-lateral.derecha {
+    right: 10px; /* Ajusta la posición derecha según tus necesidades */
+  }
+  
+  
+  .card-oportunidad {
+    width: 600px; /* Ancho máximo */
+    margin: auto; /* Centra horizontalmente */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-oportunidad h2 {
+    font-size: 28px;
+    color: #333;
+    font-weight: bold;
+}
+
+.card-oportunidad hr {
+    border-color: #ddd;
+}
+
+.card-oportunidad button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card-oportunidad p {
+    font-size: 16px;
+    color: #555;
+}
+
+.card-oportunidad a {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+  
+  

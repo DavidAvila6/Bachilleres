@@ -2,12 +2,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% load static %} 
-  <h1>Crear Oportunidad</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Publicar</button>
-  </form>
-  <a href="{% url 'oportunidades' %}">Volver a Oportunidades</a>
+  {% load crispy_forms_tags %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/oportunidad.css' %}" />
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 col-md-6 offset-md-3">
+        <div class="card card-oportunidad">
+          <div class="card-body">
+            <h2 class="text-center">!Crea Tu Oportunidad!</h2>
+            <hr />
+            <form action="" method="post" enctype="multipart/form-data">
+              <p>Añade detalles sobre la oportunidad que estás ofreciendo. Cuanta más información proporciones, más útil será para otros.</p>
+              <p>
+                Si aún no estás registrado, puedes volver a la página de
+                <a href="{% url 'oportunidades' %}">Oportunidades</a>.
+              </p><br>
+
+              {% csrf_token %}
+              {{ form|crispy }}
+              <br /><center>
+              <button type="submit">Publicar</button>
+              <br /></center>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
