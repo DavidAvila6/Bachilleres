@@ -27,8 +27,8 @@ from django.views.generic import ListView
 from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
-from .forms import ArchivoForm
-from .models import Archivo
+from .forms import ArchivoForm,OportunidadForm
+from .models import Archivo,Oportunidad
 
 
 from .models import Calificacion
@@ -512,5 +512,23 @@ def cargar_archivo(request):
 def lista_archivos(request):
     archivos = Archivo.objects.all()
     return render(request, 'lista_archivos.html', {'archivos': archivos})
+
+
+def oportunidades(request):
+    oportunidades = Oportunidad.objects.all().order_by('-fecha_creacion')
+    return render(request, 'oportunidades/oportunidades.html', {'oportunidades': oportunidades})
+@login_required  # Agrega este decorador para asegurarte de que el usuario esté autenticado
+def crear_oportunidad(request):
+    if request.method == 'POST':
+        form = OportunidadForm(request.POST, request.FILES)
+        if form.is_valid():
+            oportunidad = form.save(commit=False)
+            oportunidad.autor = request.user
+            oportunidad.save()
+            return redirect('oportunidades')
+    else:
+        form = OportunidadForm()
+    return render(request, 'oportunidades/crear_oportunidad.html', {'form': form})
+
 
 

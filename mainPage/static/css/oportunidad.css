@@ -1,0 +1,28 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.oportunidad {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 5px solid #fff; /* Anchos bordes blancos */
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.7); /* Negro medio transparente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.oportunidad h2 {
+    color: #fff; /* Texto blanco */
+}
+
+.oportunidad p {
+    color: #eee; /* Texto gris claro */
+}
+.oportunidad img {
+    max-width: 100%; /* La imagen no superará el ancho del contenedor */
+    height: auto; /* La altura se ajustará proporcionalmente */
+    border-radius: 5px; /* Bordes redondos para la imagen */
+    margin-top: 10px; /* Espaciado superior para la imagen */
+}

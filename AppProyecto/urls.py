@@ -74,7 +74,11 @@ urlpatterns = [
     path('quiz/', views.quiz ,name='quices'),
     path('cargar-archivo/', views.cargar_archivo, name='cargar_archivo'),
     path('lista-archivos/', views.lista_archivos, name='lista_archivos'),
+    #Oportunidades--------------------
+    path('oportunidades/', views.oportunidades, name='oportunidades'),
+    path('crear_oportunidad/', views.crear_oportunidad, name='crear_oportunidad')
     
 ]
 if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

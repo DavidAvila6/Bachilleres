@@ -210,3 +210,12 @@ class Archivo(models.Model):
 
 
 
+class Oportunidad(models.Model):
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=255)
+    contenido = models.TextField()
+    imagen = models.ImageField(upload_to='oportunidades/', blank=True, null=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titulo

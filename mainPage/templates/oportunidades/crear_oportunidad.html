@@ -1,0 +1,13 @@
+<!-- oportunidades/crear_oportunidad.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %} 
+  <h1>Crear Oportunidad</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Publicar</button>
+  </form>
+  <a href="{% url 'oportunidades' %}">Volver a Oportunidades</a>
+{% endblock %}

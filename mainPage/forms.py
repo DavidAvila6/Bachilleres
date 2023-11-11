@@ -6,7 +6,7 @@ from .models import Archivo
 
 
 
-from mainPage.models import Beca, Publicacion, Pregunta, ElegirRespuesta, PreguntasRespondidas
+from mainPage.models import Beca, Publicacion, Pregunta, ElegirRespuesta, PreguntasRespondidas,Oportunidad
 
 class customUserCreationForm(UserCreationForm):
     
@@ -73,3 +73,9 @@ class ArchivoForm(forms.ModelForm):
     class Meta:
         model = Archivo
         fields = ['nombre', 'archivo']
+
+
+class OportunidadForm(forms.ModelForm):
+    class Meta:
+        model = Oportunidad
+        fields = ['titulo', 'contenido', 'imagen']
