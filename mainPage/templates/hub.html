@@ -1,70 +1,74 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <head>
     <link type="text/css" href="../static/css/img.css" rel="stylesheet">
-    <link type="text/css" href="../static/css/base.css" rel="stylesheet">
     <script src="../static/js/img.js"></script>
     <script src="../static/js/grafico.js"></script>
     {% load static %}
     <link rel="stylesheet" href="../static/css/hub.css ">
     <script src="../static/js/hub.js"></script>
-    
-  </head>
-  <br><br><br><br><br><br>
 
-  <div class="welcome-container">
+</head>
+<br><br><br><br><br><br>
+
+<div class="welcome-container">
     <h1 class="welcome-heading">
         <span class="animated-letter" style="animation-delay: 0.1s;">B</span>
         <span class="animated-letter" style="animation-delay: 0.2s;">C</span>
         <span class="animated-letter" style="animation-delay: 0.3s;">H</span>
     </h1>
     <p>
-        Somos una empresa comprometida con la excelencia y la satisfacción del cliente. 
-        Nuestra misión es proporcionar soluciones de alta calidad y mejorar la vida de las personas a través de nuestros productos y servicios. Con años de experiencia y un equipo dedicado, estamos aquí para satisfacer todas tus necesidades. ¡Bienvenidos a BCH!
+        Somos una empresa comprometida con la excelencia y la satisfacción del cliente.
+        Nuestra misión es proporcionar soluciones de alta calidad y mejorar la vida de las personas a través de nuestros
+        productos y servicios. Con años de experiencia y un equipo dedicado, estamos aquí para satisfacer todas tus
+        necesidades. ¡Bienvenidos a BCH!
     </p>
     <div>
-        <a href="/registro" class="btn btn-outline-success">RESGISTRATE AQUI</a>           
-    </div>    
+        <a href="/registro" class="btn btn-outline-success">RESGISTRATE AQUI</a>
+    </div>
 </div>
 
 
 <br><br><br><br><br><br><br>
 
 
-<div class="row">
-<div class="col-md-6 circle">
-    <br>
-    <h3>¿Quiénes somos?</h3>
-    <p style="text-align: center;">
-        Nuestra misión es combatir la deserción escolar y promover el éxito académico y profesional. Ofrecemos:
-    
-        <br><br>
+<div class="row justify-content-around">
+    <div class="col-md-6 circle">
+        <br>
+        <h3>¿Quiénes somos?</h3>
+        <p style="text-align: center;">
+            Nuestra misión es combatir la deserción escolar y promover el éxito académico y profesional. Ofrecemos:
+
+            <br><br>
             Tutorías personalizadas.
             <br>Asesoramiento vocacional.
             <br>Mentoría para estudiantes.
             <br>Talleres y recursos educativos.
             <br>Conexiones con instituciones y oportunidades profesionales.
+            <br>
+
+            Únete a nosotros en esta lucha por el éxito educativo.
+        </p>
+        <img src="https://cdn-icons-png.flaticon.com/512/5833/5833290.png" alt="Ícono de libro"
+            style="width: 100px; height: 100px;">
+    </div>
+    <div class="col-md-6 circle align-top">
         <br>
-    
-        Únete a nosotros en esta lucha por el éxito educativo.
-    </p>
-    <img src="https://cdn-icons-png.flaticon.com/512/5833/5833290.png" alt="Ícono de libro" style="width: 100px; height: 100px;">
-</div>
-<div class="col-md-6 circle align-top">
-    <br>
-    <h3>Estadísticas de Deserción Escolar</h3>
-    <p style="text-align: center;">
-        Nuestra misión es reducir la deserción y promover la educación. Aquí hay algunas estadísticas clave:
-   
-    <br>
-    <br>Deserción escolar anual: 10%
-    <br>Niños en riesgo de deserción: 15%
-    <br>Éxito en la prevención: 90%
-    <br>
-    </p>
-    <img src="https://delfos.minhacienda.gov.co/img/estadisticas.png" alt="Ícono de libro" style="width: 250px; height: 200px;">
-</div>
+        <h3>Estadísticas de Deserción Escolar</h3>
+        <p style="text-align: center;">
+            Nuestra misión es reducir la deserción y promover la educación. Aquí hay algunas estadísticas clave:
+
+            <br>
+            <br>Deserción escolar anual: 10%
+            <br>Niños en riesgo de deserción: 15%
+            <br>Éxito en la prevención: 90%
+            <br>
+        </p>
+        <img src="https://delfos.minhacienda.gov.co/img/estadisticas.png" alt="Ícono de libro"
+            style="width: 250px; height: 200px;">
+    </div>
 </div>
 
 <br><br><br>
@@ -73,32 +77,33 @@
 </header>
 <br>
 
-<div class="chart-container" style="max-width: 50%;
+<div class="" style="
+max-width: 50%;
 margin: 0 auto;
-rgba(111, 109, 109, 0.7);
+background-color: rgba(255, 255, 255, 0.9);
 border: 1px solid #fff;
 border-radius: 5px;
-padding: 20px;"
->
-    <img src="https://pbs.twimg.com/media/Bx2IGjvCQAAI-yz.png" alt="Ícono de libro" style="width: 800px; height: 540px;">
+padding: 20px;">
+    <img src="https://pbs.twimg.com/media/Bx2IGjvCQAAI-yz.png" alt="Ícono de libro"
+        style="width: 800px; height: 540px;">
 </div>
 
-    </div>
-    {% if user.is_authenticated %}
-    <br>
-    {% else %}
-    <div class="Contactanos row g-0 my-5 justify-content-center">
-        <div class="texto_contacto col-md-4 text-center my-auto">          
-            <div>
-                <a href="/registro" class="btn btn-outline-success">RESGISTRATE AQUI</a>           
-            </div>       
+</div>
+{% if user.is_authenticated %}
+<br>
+{% else %}
+<div class="Contactanos row g-0 my-5 justify-content-center">
+    <div class="texto_contacto col-md-4 text-center my-auto">
+        <div>
+            <a href="/registro" class="btn btn-outline-success">RESGISTRATE AQUI</a>
+        </div>
         </form>
     </div>
 
-  
+
 
     {% endif %}
-    {% if user.is_authenticated  %}
+    {% if user.is_authenticated %}
     <!--boton-modal
     <div class="boton-modal">
         <label for="btn-modal">
@@ -109,7 +114,7 @@ padding: 20px;"
     -->
     <!--modal-->
     <input type="checkbox" id="btn-modal">
-    <div class="container-modal" >
+    <div class="container-modal">
         <div class="content-modal">
             <h2> Bienvenido a BCH.</h2>
             <p> Con nosotros encontraras oportunidades de estudio y recibiras orientación vocacional para impulsar tu
@@ -121,13 +126,13 @@ padding: 20px;"
             <div class="btn-cerrar">
                 <label for="btn-modal">cerrar</label>
             </div>
-            
+
             <div class="btn-siguiente">
 
-            <button class="button-redireccionar" onclick="window.location.href='recursos'">Siguiente</button>
+                <button class="button-redireccionar" onclick="window.location.href='recursos'">Siguiente</button>
             </div>
         </div>
-        
+
     </div>
     {% endif %}
-{% endblock %}
+    {% endblock %}

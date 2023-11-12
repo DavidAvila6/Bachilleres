@@ -148,6 +148,7 @@ class Universidad_fav(models.Model):
         return "Universidad: "+str(self.Universidad)+" / Estudiante: "+str(self.Estudiante)
 
 class Publicacion(models.Model):
+    facultad = models.ForeignKey(Facultad, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=255)
     contenido = models.TextField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
@@ -202,3 +203,19 @@ class Calificacion(models.Model):
 
 
 
+class Archivo(models.Model):
+    nombre = models.CharField(max_length=255, default='ValorPredeterminado')
+    archivo = models.FileField(upload_to='recursos/')
+    fecha_subida = models.DateTimeField(auto_now_add=True)
+
+
+
+class Oportunidad(models.Model):
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=255)
+    contenido = models.TextField()
+    imagen = models.ImageField(upload_to='oportunidades/', blank=True, null=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titulo

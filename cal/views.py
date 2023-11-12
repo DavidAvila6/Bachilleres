@@ -11,6 +11,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from cal.forms import EventForm
 
+
+
 from .models import *
 from .utils import Calendar
 
@@ -81,15 +83,3 @@ def event(request, event_id=None):
 def nuevo_evento(request):
     # Lógica para la vista nuevo_evento, si es necesaria
     return render(request, 'cal/nuevo_evento.html')
-def cargar_archivo(request):
-    if request.method == 'POST':
-        form = ArchivoForm(request.POST, request.FILES)
-        if form.is_valid():
-            nuevo_archivo = form.save(commit=False)
-            nuevo_archivo.usuario = request.user
-            nuevo_archivo.save()
-            return redirect('\login.html')  
-    else:
-        form = ArchivoForm()
-    
-    return render(request, '\recursos.html', {'form': form})

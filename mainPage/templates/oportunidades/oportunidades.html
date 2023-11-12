@@ -1,0 +1,53 @@
+<!-- Oportunidades.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/oportunidad.css' %}" />
+  <h1>Oportunidades</h1>
+  <div id="oportunidades-container">
+    {% include 'oportunidades/oportunidades_ajax.html' %}
+  </div>
+  <center>
+    <img src="{% static 'img/loading2.gif' %}" width="50" height="50">
+  </center>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    // JavaScript
+    var cargando = false;
+    var pagina = 2; // La próxima página a cargar
+
+    function cargarMasOportunidades() {
+      if (!cargando) {
+        cargando = true;
+        fetch(`/cargar_mas_oportunidades/?pagina=${pagina}`)
+          .then(response => response.text())
+          .then(data => {
+            if (data.trim() !== '') {
+              $('#oportunidades-container').append(data);
+              cargando = false;
+              pagina++;
+            } else {
+              // No hay más oportunidades para cargar
+            }
+          })
+          .catch(error => {
+            console.log('Error al cargar más oportunidades:', error);
+            cargando = false;
+          });
+      }
+    }
+
+    $(window).scroll(function () {
+      if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+        cargarMasOportunidades();
+      }
+    });
+
+    // Cargar más oportunidades al cargar la página
+    $(document).ready(function () {
+      cargarMasOportunidades();
+    });
+  </script>
+{% endblock %}
