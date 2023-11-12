@@ -101,18 +101,10 @@ padding: 20px;">
 
 
     {% endif %}
-    {% if user.is_authenticated %}
     {% load static %}
     <link rel="stylesheet" href="../static/css/hub.css ">
     <script src="../static/js/hub.js"></script>
-    <!--boton-modal
-    <div class="boton-modal">
-        <label for="btn-modal">
-            guia
-        </label>
-
-    </div>
-    -->
+    {% if user.is_authenticated %}
     {% if not request.COOKIES.modal_shown %}
     <!--modal-->
     
