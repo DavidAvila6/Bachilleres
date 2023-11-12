@@ -57,6 +57,7 @@
 </div>
 {% endif  %}
 {% if user.is_authenticated  %}
+{% if not request.COOKIES.modal_shown %}
 <!--modal-->
 <input type="checkbox" id="btn-modal">
 <div class="container-modal" >
@@ -74,6 +75,11 @@
     </div>
     
 </div>
+<script>
+    // Set a cookie to mark that the modal has been shown
+    document.cookie = "modal_shown=true; path=/";
+</script>
+{% endif  %}
 {% endif %}
 <br>
 {% endblock %}

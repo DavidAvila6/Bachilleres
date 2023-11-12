@@ -6,9 +6,7 @@
     <link type="text/css" href="../static/css/img.css" rel="stylesheet">
     <script src="../static/js/img.js"></script>
     <script src="../static/js/grafico.js"></script>
-    {% load static %}
-    <link rel="stylesheet" href="../static/css/hub.css ">
-    <script src="../static/js/hub.js"></script>
+    
 
 </head>
 <br><br><br><br><br><br>
@@ -104,6 +102,9 @@ padding: 20px;">
 
     {% endif %}
     {% if user.is_authenticated %}
+    {% load static %}
+    <link rel="stylesheet" href="../static/css/hub.css ">
+    <script src="../static/js/hub.js"></script>
     <!--boton-modal
     <div class="boton-modal">
         <label for="btn-modal">
@@ -112,7 +113,9 @@ padding: 20px;">
 
     </div>
     -->
+    {% if not request.COOKIES.modal_shown %}
     <!--modal-->
+    
     <input type="checkbox" id="btn-modal">
     <div class="container-modal">
         <div class="content-modal">
@@ -133,6 +136,12 @@ padding: 20px;">
             </div>
         </div>
 
-    </div>
+    </div>   
+    <script>
+        // Set a cookie to mark that the modal has been shown
+        document.cookie = "modal_shown=true; path=/";
+    </script>
+    
+    {% endif %}
     {% endif %}
     {% endblock %}
