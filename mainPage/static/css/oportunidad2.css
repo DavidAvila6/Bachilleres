@@ -100,9 +100,9 @@
   max-width: 300px;
   margin: 20px auto;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #a2a2a2;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: rgba(225, 218, 218, 0.8);
 }
 
 label {
@@ -115,6 +115,7 @@ select {
   padding: 8px;
   margin-bottom: 15px;
   box-sizing: border-box;
+  
 }
 
 button {

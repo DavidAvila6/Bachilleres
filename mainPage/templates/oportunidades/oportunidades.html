@@ -4,14 +4,50 @@
 
 {% block content %}
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/oportunidad.css' %}" />
-  <h1>Oportunidades</h1>
+  <link rel="stylesheet" href="{% static 'css/oportunidad2.css' %}" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  
   <div id="oportunidades-container">
     {% include 'oportunidades/oportunidades_ajax.html' %}
   </div>
   <center>
     <img src="{% static 'img/loading2.gif' %}" width="50" height="50">
   </center>
+  <!-- Div lateral izquierdo -->
+  <div class="informacion-lateral izquierda">
+    <h2>Busqueda y Filtros</h2>
+    <p>Contenido de la búsqueda y filtros...</p>
+    <form id="filtro-form">
+      <label for="materias">Filtrar por Materias:</label>
+      <select id="materias" name="materias">
+        <option value="medicina">Medicina</option>
+        <option value="matematicas">Matemáticas</option>
+        <option value="economia">Economía</option>
+        <option value="otro">Otro</option>
+        <!-- Agrega más opciones según sea necesario -->
+      </select>
+      <br>
+      <label for="tipo">Filtrar por Tipo:</label>
+      <select id="tipo" name="tipo">
+        <option value="carrera">Carrera</option>
+        <option value="beca">Beca</option>
+        <option value="pasantia">Pasantia</option>
+        <option value="otro">Otro</option>
+        <!-- Agrega más opciones según sea necesario -->
+      </select>
+      <br>
+      <button type="button" onclick="filtrarOportunidades()">Filtrar</button>
+    </form>
+    
+    
+  </div>
+  
+  <!-- Div lateral derecho -->
+  <div class="informacion-lateral derecha">
+    <h2>Sugerencias de Usuarios</h2>
+    <p>Contenido de las sugerencias...</p>
+    <a href="/crear_oportunidad" class="btn btn-success float-right">CREAR OPORTUNIDAD</a>
+  </div>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script>
     // JavaScript
@@ -49,5 +85,24 @@
     $(document).ready(function () {
       cargarMasOportunidades();
     });
+
+    function filtrarOportunidades() {
+      const materias = document.getElementById('materias').value;
+      const tipo = document.getElementById('tipo').value;
+    
+      // Enviar las selecciones al servidor usando AJAX
+      fetch(`/filtrar_oportunidades/?materias=${materias}&tipo=${tipo}`)
+        .then(response => response.text())
+        .then(data => {
+          // Actualizar el contenedor de oportunidades con los resultados filtrados
+          document.getElementById('oportunidades-container').innerHTML = data;
+    
+          // Desplazar la página hacia la parte superior
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        })
+        .catch(error => {
+          console.log('Error al filtrar oportunidades:', error);
+        });
+    }
   </script>
 {% endblock %}

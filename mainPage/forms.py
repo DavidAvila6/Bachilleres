@@ -76,6 +76,37 @@ class ArchivoForm(forms.ModelForm):
 
 
 class OportunidadForm(forms.ModelForm):
+    etiquetas_materias = forms.MultipleChoiceField(
+        choices=[
+            ('matematicas', 'Matemáticas'),
+            ('medicina', 'Medicina'),
+            ('economia', 'Economía'),
+            ('otro', 'Otro'),
+            # Añade más etiquetas según sea necesario
+        ],
+        widget=forms.CheckboxSelectMultiple,
+        required=False,  # Permitir etiquetas vacías
+    )
+    etiquetas_tipo = forms.MultipleChoiceField(
+        choices=[
+            ('carrera', 'Carrera'),
+            ('beca', 'Beca'),
+            ('pasantia', 'Pasantia'),
+            ('trabajo', 'Trabajo'),
+            ('otro', 'Otro'),
+            # Añade más etiquetas según sea necesario
+        ],
+        widget=forms.CheckboxSelectMultiple,
+        required=False,  # Permitir etiquetas vacías
+    )
+    def clean_etiquetas_materias(self):
+        etiquetas_materias = self.cleaned_data.get('etiquetas_materias')
+        return ','.join(etiquetas_materias) if etiquetas_materias else None
+
+    def clean_etiquetas_tipo(self):
+        etiquetas_tipo = self.cleaned_data.get('etiquetas_tipo')
+        return ','.join(etiquetas_tipo) if etiquetas_tipo else None    
+
     class Meta:
         model = Oportunidad
-        fields = ['titulo', 'contenido', 'imagen']
+        fields = ['titulo', 'contenido','etiquetas_materias', 'etiquetas_tipo', 'imagen']  # Ajusta según tus campos

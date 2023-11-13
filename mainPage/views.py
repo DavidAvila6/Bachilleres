@@ -1,5 +1,6 @@
 import mimetypes
 import os
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -534,5 +535,22 @@ def cargar_mas_oportunidades(request):
     oportunidades = Oportunidad.objects.all().order_by('?')[:5]  # Obtén 5 oportunidades aleatorias
     return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
 
+def filtrar_oportunidades(request):
+    materias = request.GET.get('materias', None)
+    tipo = request.GET.get('tipo', None)
+
+    oportunidades_exactas = Oportunidad.objects.filter(
+        etiquetas_materias__contains=materias,
+        etiquetas_tipo__contains=tipo
+    )
+
+    if oportunidades_exactas.exists():
+        oportunidades = oportunidades_exactas
+    else:
+        oportunidades = Oportunidad.objects.filter(
+            Q(etiquetas_materias__contains=materias) | Q(etiquetas_tipo__contains=tipo)
+        )
+
+    return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
 
 

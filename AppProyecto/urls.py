@@ -78,6 +78,7 @@ urlpatterns = [
     path('oportunidades/', views.oportunidades, name='oportunidades'),
     path('crear_oportunidad/', views.crear_oportunidad, name='crear_oportunidad'),
     path('cargar_mas_oportunidades/', views.cargar_mas_oportunidades, name='cargar_mas_oportunidades'),
+    path('filtrar_oportunidades/', views.filtrar_oportunidades, name='filtrar_oportunidades'),
     
 ]
 if settings.DEBUG:
