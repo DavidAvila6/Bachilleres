@@ -78,11 +78,18 @@ class ArchivoForm(forms.ModelForm):
 class OportunidadForm(forms.ModelForm):
     etiquetas_materias = forms.MultipleChoiceField(
         choices=[
-            ('matematicas', 'Matemáticas'),
-            ('medicina', 'Medicina'),
-            ('economia', 'Economía'),
-            ('otro', 'Otro'),
-            # Añade más etiquetas según sea necesario
+        ('matematicas', 'Matemáticas'),
+        ('medicina', 'Medicina'),
+        ('economia', 'Economía'),
+        ('ingenieria', 'Ingeniería'),  # Nueva materia
+        ('historia', 'Historia'),      # Nueva materia
+        ('quimica', 'Química'),        # Nueva materia
+        ('biologia', 'Biología'),      # Nueva materia
+        ('informatica', 'Informática'),  # Nueva materia
+        ('literatura', 'Literatura'),  # Nueva materia
+        ('psicologia', 'Psicología'),  # Nueva materia
+        ('otro', 'Otro'),
+        # Añade más etiquetas según sea necesario
         ],
         widget=forms.CheckboxSelectMultiple,
         required=False,  # Permitir etiquetas vacías
