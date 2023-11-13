@@ -109,4 +109,12 @@ class OportunidadForm(forms.ModelForm):
 
     class Meta:
         model = Oportunidad
-        fields = ['titulo', 'contenido','etiquetas_materias', 'etiquetas_tipo', 'imagen']  # Ajusta según tus campos
+        fields = ['titulo', 'contenido', 'etiquetas_materias', 'etiquetas_tipo', 'imagen']
+
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'container-ui'}),
+            'contenido': forms.Textarea(attrs={'class': 'container-ui'}),
+            'etiquetas_materias': forms.CheckboxSelectMultiple(attrs={'class': 'mi-clase-estilo'}),
+            'etiquetas_tipo': forms.CheckboxSelectMultiple(attrs={'class': 'mi-clase-estilo'}),
+            'imagen': forms.ClearableFileInput(attrs={'class': 'mi-clase-estilo'}),
+        }
