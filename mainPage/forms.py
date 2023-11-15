@@ -106,6 +106,10 @@ class OportunidadForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         required=False,  # Permitir etiquetas vacías
     )
+    fecha_inicio = forms.DateTimeField(
+        widget=forms.TextInput(attrs={'class': 'mi-clase-estilo'}),
+        required=True,  # Opcional, dependiendo de tus requisitos
+    )
     def clean_etiquetas_materias(self):
         etiquetas_materias = self.cleaned_data.get('etiquetas_materias')
         return ','.join(etiquetas_materias) if etiquetas_materias else None
@@ -116,7 +120,7 @@ class OportunidadForm(forms.ModelForm):
 
     class Meta:
         model = Oportunidad
-        fields = ['titulo', 'contenido', 'etiquetas_materias', 'etiquetas_tipo', 'imagen']
+        fields = ['titulo', 'contenido', 'fecha_inicio','etiquetas_materias', 'etiquetas_tipo', 'imagen']
 
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'container-ui'}),

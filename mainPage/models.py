@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 
@@ -218,6 +219,7 @@ class Oportunidad(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     etiquetas_materias = models.CharField(max_length=200, blank=True, null=True)
     etiquetas_tipo = models.CharField(max_length=200, blank=True, null=True)
+    fecha_inicio = models.DateTimeField(default=timezone.now) 
 
     def obtener_etiquetas_materias(self):
         etiquetas_materias = self.etiquetas_materias.strip(" []").replace("'", "").split(",") if self.etiquetas_materias else []

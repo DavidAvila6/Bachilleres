@@ -20,6 +20,7 @@
     {% endfor %}
   </p>
   <br><br>
+  <p>Fecha de inicio: {{ oportunidad.fecha_inicio }} </p>
   <p>Empresa: {{ oportunidad.autor.username }} el {{ oportunidad.fecha_creacion }}</p>
   <div class="cover">
     {% if oportunidad.imagen %}
