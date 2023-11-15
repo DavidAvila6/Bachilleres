@@ -1,28 +1,32 @@
 <!-- oportunidades/oportunidades_ajax_partial.html -->
+{% load static %}
 {% for oportunidad in oportunidades %}
-  <div class="oportunidad">
-    <h2>{{ oportunidad.titulo }}</h2>
+<center>
+<link rel="stylesheet" href="{% static 'css/archivo.css' %}" />
+<div class="book">
+  <center><h2>{{ oportunidad.titulo }}</h2><center><br>
+
+  <p>{{ oportunidad.contenido }}</p><br>
+  <p>Materias:<br>
+    {% for etiqueta in oportunidad.obtener_etiquetas_materias %}
+      <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
+    {% endfor %}
+  </p><br>
+
+  <!-- Mostrar etiquetas de tipo -->
+  <p>Tipo:<br>
+    {% for etiqueta in oportunidad.obtener_etiquetas_tipo %}
+      <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
+    {% endfor %}
+  </p>
+  <br><br>
+  <p>Empresa: {{ oportunidad.autor.username }} el {{ oportunidad.fecha_creacion }}</p>
+  <div class="cover">
     {% if oportunidad.imagen %}
-      <center>
-        <img src="{{ oportunidad.imagen.url }}" alt="{{ oportunidad.titulo }}">
-      </center>
-    {% endif %}<br><br>
-    <p>{{ oportunidad.contenido }}</p>
-
-    <!-- Mostrar etiquetas de materias -->
-    <p>Materias:
-      {% for etiqueta in oportunidad.obtener_etiquetas_materias %}
-        <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
-      {% endfor %}
-    </p>
-
-    <!-- Mostrar etiquetas de tipo -->
-    <p>Tipo:
-      {% for etiqueta in oportunidad.obtener_etiquetas_tipo %}
-        <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
-      {% endfor %}
-    </p>
-
-    <p>Empresa: {{ oportunidad.autor.username }} el {{ oportunidad.fecha_creacion }}</p>
+      <img src="{{ oportunidad.imagen.url }}" alt="{{ oportunidad.titulo }}">
+    
+  {% endif %}<br><br>
   </div>
+ </div>
+  <br><br><br>
 {% endfor %}

@@ -4,7 +4,7 @@
 
 {% block content %}
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/oportunidad2.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/oportunidad3.css' %}" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   
   <div id="oportunidades-container">
@@ -23,12 +23,21 @@
         <option value="medicina">Medicina</option>
         <option value="matematicas">Matemáticas</option>
         <option value="economia">Economía</option>
+        <option value="ingenieria">Ingeniería</option>
+        <option value="historia">Historia</option>
+        <option value="quimica">Química</option>
+        <option value="biologia">Biología</option>
+        <option value="informatica">Informática</option>
+        <option value="literatura">Literatura</option>
+        <option value="psicologia">Psicología</option>
         <option value="otro">Otro</option>
         <!-- Agrega más opciones según sea necesario -->
-      </select>
+    </select>
+    
       <br>
       <label for="tipo">Filtrar por Tipo:</label>
       <select id="tipo" name="tipo">
+        <option value="trabajo">Trabajo</option>
         <option value="carrera">Carrera</option>
         <option value="beca">Beca</option>
         <option value="pasantia">Pasantia</option>

@@ -78,11 +78,18 @@ class ArchivoForm(forms.ModelForm):
 class OportunidadForm(forms.ModelForm):
     etiquetas_materias = forms.MultipleChoiceField(
         choices=[
-            ('matematicas', 'Matemáticas'),
-            ('medicina', 'Medicina'),
-            ('economia', 'Economía'),
-            ('otro', 'Otro'),
-            # Añade más etiquetas según sea necesario
+        ('matematicas', 'Matemáticas'),
+        ('medicina', 'Medicina'),
+        ('economia', 'Economía'),
+        ('ingenieria', 'Ingeniería'),  # Nueva materia
+        ('historia', 'Historia'),      # Nueva materia
+        ('quimica', 'Química'),        # Nueva materia
+        ('biologia', 'Biología'),      # Nueva materia
+        ('informatica', 'Informática'),  # Nueva materia
+        ('literatura', 'Literatura'),  # Nueva materia
+        ('psicologia', 'Psicología'),  # Nueva materia
+        ('otro', 'Otro'),
+        # Añade más etiquetas según sea necesario
         ],
         widget=forms.CheckboxSelectMultiple,
         required=False,  # Permitir etiquetas vacías
@@ -109,4 +116,12 @@ class OportunidadForm(forms.ModelForm):
 
     class Meta:
         model = Oportunidad
-        fields = ['titulo', 'contenido','etiquetas_materias', 'etiquetas_tipo', 'imagen']  # Ajusta según tus campos
+        fields = ['titulo', 'contenido', 'etiquetas_materias', 'etiquetas_tipo', 'imagen']
+
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'container-ui'}),
+            'contenido': forms.Textarea(attrs={'class': 'container-ui'}),
+            'etiquetas_materias': forms.CheckboxSelectMultiple(attrs={'class': 'mi-clase-estilo'}),
+            'etiquetas_tipo': forms.CheckboxSelectMultiple(attrs={'class': 'mi-clase-estilo'}),
+            'imagen': forms.ClearableFileInput(attrs={'class': 'mi-clase-estilo'}),
+        }
