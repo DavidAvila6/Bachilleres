@@ -148,6 +148,7 @@ class Universidad_fav(models.Model):
         return "Universidad: "+str(self.Universidad)+" / Estudiante: "+str(self.Estudiante)
 
 class Publicacion(models.Model):
+    facultad = models.ForeignKey(Facultad, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=255)
     contenido = models.TextField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
@@ -202,3 +203,35 @@ class Calificacion(models.Model):
 
 
 
+class Archivo(models.Model):
+    nombre = models.CharField(max_length=255, default='ValorPredeterminado')
+    archivo = models.FileField(upload_to='recursos/')
+    fecha_subida = models.DateTimeField(auto_now_add=True)
+
+
+
+class Oportunidad(models.Model):
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=255)
+    contenido = models.TextField()
+    imagen = models.ImageField(upload_to='oportunidades/', blank=True, null=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    etiquetas_materias = models.CharField(max_length=200, blank=True, null=True)
+    etiquetas_tipo = models.CharField(max_length=200, blank=True, null=True)
+
+    def obtener_etiquetas_materias(self):
+        etiquetas_materias = self.etiquetas_materias.strip(" []").replace("'", "").split(",") if self.etiquetas_materias else []
+        return self.etiquetas_materias.split(',') if self.etiquetas_materias else []
+
+    def establecer_etiquetas_materias(self, etiquetas_materias):
+        self.etiquetas_materias = ','.join(etiquetas_materias)
+
+    def obtener_etiquetas_tipo(self):
+        etiquetas_materias = self.etiquetas_tipo.strip(" []").replace("'", "").split(",") if self.etiquetas_tipo else []
+        return self.etiquetas_tipo.split(',') if self.etiquetas_tipo else []
+
+    def establecer_etiquetas_tipo(self, etiquetas_tipo):
+        self.etiquetas_tipo = ','.join(etiquetas_tipo)    
+
+    def __str__(self):
+        return self.titulo 

@@ -1,0 +1,178 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+    url("https://photos.collectednotes.com/photos/8819/eadaa056-b09c-48ef-8c8e-aba1980308db");
+    background-size: cover; /* Hace que la imagen de fondo cubra toda la pantalla */
+    background-attachment: fixed; /* Fija la imagen de fondo mientras se desplaza la página */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen de fondo */
+    margin: 0;
+    padding: 0;
+    color : #fff;
+}
+.cards {
+    /* Estilos para el elemento con la clase "card" */
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    /* Otros estilos personalizados */
+}
+
+header {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+}
+div {
+    margin-bottom: 10px; /* Agrega un margen inferior para separar los divs */
+}
+
+.welcome-container {
+    text-align: justify; /* Justificar el texto */
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    text-align: center; /* Centra el texto horizontalmente */
+    padding: 20px; /* Espaciado alrededor del contenido */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    color: #ffffff; 
+}
+
+.welcome-heading {
+    border-bottom: 6px solid rgb(255, 255, 255); /* Línea roja de 2 píxeles de grosor */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center;
+    font-size: 100px; /* Tamaño de fuente grande para el título */
+    color: #ffffff; /* Color de texto personalizado */
+    font-weight: bold; /* Texto en negrita */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+    
+}
+.animated-letter {
+    animation: bounce 1s alternate infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+
+#image-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+
+#image-slider {
+    width: 200%;
+    display: flex;
+    transition: transform 1s ease-in-out;
+}
+
+.slide {
+    width: 50%;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+}
+
+.slide:nth-child(1) {
+    background-image: url('https://psicologiamonzo.com/wp-content/uploads/2019/03/multiracial-grupo-joven-gente-toma-selfie_1139-1032.jpg');
+}
+
+.slide:nth-child(2) {
+    background-image: url('https://media.istockphoto.com/id/1346125184/es/foto/grupo-de-exitoso-equipo-empresarial-multiétnico.jpg?s=612x612&w=0&k=20&c=kdEKN1Pb99EVoEZEz6c4IGr1k9pooeCskSUZRccInko=');
+}
+
+
+
+.navigation {
+    text-align: center;
+}
+
+.prev, .next {
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.prev {
+    margin-right: 20px;
+}
+
+
+/* Estilos para la sección de contenido */
+.col-8, .col-4 {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color : #fff;
+}
+
+.col-8 h3, .col-4 h3 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.col-8 p, .col-4 p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.col-4 ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+/* Estilos para la sección de contenido */
+.col-8, .col-4 {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 4px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.circle {
+    max-width: 600px;
+    max-height: 500px;
+    width: 600px; /* Ancho igual a la altura para formar un círculo */
+    height: 500px;
+    border-radius: 30%; /* Borde redondeado al 50% del ancho/altura */
+    background-color: rgba(0, 0, 0, 0.7); /* Color de fondo (puedes personalizarlo) */
+    text-align: center; /* Centra el contenido dentro del círculo */
+}
+
+.col-8 h3, .col-4 h3 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.col-8 p, .col-4 p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.col-4 ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+

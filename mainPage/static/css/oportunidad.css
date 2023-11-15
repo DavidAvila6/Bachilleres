@@ -1,0 +1,186 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.oportunidad {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 5px solid #fff; /* Anchos bordes blancos */
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.7); /* Negro medio transparente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.oportunidad h2 {
+    color: #fff; /* Texto blanco */
+}
+
+.oportunidad p {
+    color: #eee; /* Texto gris claro */
+}
+.oportunidad img {
+    max-width: 100%; /* La imagen no superará el ancho del contenedor */
+    height: auto; /* La altura se ajustará proporcionalmente */
+    border-radius: 5px; /* Bordes redondos para la imagen */
+    margin-top: 10px; /* Espaciado superior para la imagen */
+}
+
+
+/* oportunidad.css */
+.informacion-lateral {
+    width: 400px; /* Ancho fijo */
+    height: 600px; /* Altura fija */
+    position: fixed;
+    top: 50%; /* Coloca el div en el centro vertical */
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+    padding: 20px; /* Ajusta el relleno según tus necesidades */
+    color: black; /* Color de la letra en negro */
+    border-radius: 10px; /* Bordes circulares */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  }
+  
+  .informacion-lateral.izquierda {
+    left: 10px; /* Ajusta la posición izquierda según tus necesidades */
+  }
+  
+  .informacion-lateral.derecha {
+    right: 10px; /* Ajusta la posición derecha según tus necesidades */
+  }
+  
+  
+  .card-oportunidad {
+    width: 600px; /* Ancho máximo */
+    margin: auto; /* Centra horizontalmente */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-oportunidad h2 {
+    font-size: 28px;
+    color: #333;
+    font-weight: bold;
+}
+
+.card-oportunidad hr {
+    border-color: #ddd;
+}
+
+.card-oportunidad button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card-oportunidad p {
+    font-size: 16px;
+    color: #555;
+}
+
+.card-oportunidad a {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+#filtro-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #af5b4c;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a098;
+}
+  
+.container-ui {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  color: white;
+}
+
+.container-ui .label {
+  font-size: 15px;
+  padding-left: 10px;
+  position: absolute;
+  top: 13px;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.input {
+  width: 200px;
+  height: 45px;
+  border: none;
+  outline: none;
+  padding: 0px 7px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+  background-color: transparent;
+  box-shadow: 3px 3px 10px rgba(0,0,0,1),
+  -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.input:focus {
+  border: 2px solid transparent;
+  color: #fff;
+  box-shadow: 3px 3px 10px rgba(0,0,0,1),
+  -1px -1px 6px rgba(255, 255, 255, 0.4),
+  inset 3px 3px 10px rgba(0,0,0,1),
+  inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.container-ui .input:valid ~ .label,
+.container-ui .input:focus ~ .label {
+  transition: 0.3s;
+  padding-left: 2px;
+  transform: translateY(-35px);
+}
+
+.container-ui .input:valid,
+.container-ui .input:focus {
+  box-shadow: 3px 3px 10px rgba(0,0,0,1),
+  -1px -1px 6px rgba(255, 255, 255, 0.4),
+  inset 3px 3px 10px rgba(0,0,0,1),
+  inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}

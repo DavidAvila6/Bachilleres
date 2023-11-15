@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="text-center mt-5" >
 <h1>Agregar comentario a "{{ publicacion.titulo }}"</h1>
 
 <form method="post">
@@ -9,5 +10,5 @@
     <br>
     <input type="submit" value="Agregar Comentario">
 </form>
-
+</div>
 {% endblock %}

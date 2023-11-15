@@ -1,0 +1,112 @@
+.boton-modal{
+    padding: 40px;
+    background-color: aliceblue;
+}
+.boton-modal label{
+    padding: 10px 15px;
+    background-color: rgb(225, 215, 250);
+    color: beige;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    
+}
+#btn-modal{
+    display: none;
+}
+#btn-modal:checked ~ .container-modal{
+    display: none
+    ;
+}
+.boton-modal label:hover{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.container-modal {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    display: flex;
+    
+    
+}
+
+.content-modal {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: rgba(119, 22, 22, 0.9);
+    border-radius: 4px;
+
+}
+.content-modal h2{
+    margin-bottom: 20px;
+    
+}
+.content-modal p{
+    padding: 15px 15px;
+    border-top: 1px solid beige;
+    border-bottom: 1px solid beige;
+}
+.content-modal p2{
+    padding: 15px 15px;
+    
+}
+
+.content-modal .btn-cerrar{
+    width: 50px;
+    margin-top: 15px;
+    
+    justify-content: flex-end;
+    display: inline-block
+    
+}
+.content-modal .btn-cerrar label{
+    margin-right: 10px;
+    padding: 7px 10px;
+    background-color: green;
+    color: beige;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 300ms ease;
+
+}
+.content-modal .btn-cerrar label:hover{
+    background-color: black;
+}
+.cerrar-modal{
+    width: 100px;
+    height: 100vh;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: -1;
+}
+.container-modal .button-redireccionar {
+    margin-left: 200px;
+    width: 90px;
+    margin-top: 15px;
+    display: inline-block;
+    justify-content: flex-end;
+    padding: 7px 10px;
+    background-color: green;
+    color: beige;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 300ms ease;
+   
+}
+
+.content-modal .button-redireccionar:hover {
+    
+    background-color: black;
+}
+.content-modal .btn-siguiente {
+    display: inline-block;
+    
+}

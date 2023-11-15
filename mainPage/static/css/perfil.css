@@ -2,12 +2,11 @@
 
 /* Estilo para las secciones */
 body {
-  background: linear-gradient(to bottom, #6D6656, #E4DBC5);
-  color: #fff;
-  font-family: Tahoma, sans-serif;
+  
   background-image: url('../img/perfil.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  color: white;
 }
 body.cambiado {
   background-image: url('../img/perfil2.jpg');
@@ -22,6 +21,7 @@ section {
   background-color: #46443F;
   padding: 80px;
   margin-bottom: 20px;
+  color: white;
 }
 
 

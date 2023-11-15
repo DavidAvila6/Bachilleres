@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+<link rel="stylesheet" href="../static/css/hub.css ">
+    <script src="../static/js/hub.js"></script>
+<head>
+    <link href="{% static "css/img.css" %}" rel="stylesheet">
+</head>
+<style>
+   
+
+   
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        background-color: #050000;
+    }
+
+</style>
+    <h1>Lista de Archivos</h1>
+    <ul>
+        {% for archivo in archivos %}
+        <li>
+            Nombre: {{ archivo.nombre }} <br>
+            Archivo: <a href="{{ archivo.archivo.url }}" download>Descargar Archivo</a> <br>
+            Fecha: {{ archivo.fecha_subida }} <br>
+        </li>
+    {% endfor %}
+    
+    </ul>
+    <br><br><br>
+    {% endblock %}

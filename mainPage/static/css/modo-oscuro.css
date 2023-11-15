@@ -1,6 +1,6 @@
 /* Estilos específicos para el modo oscuro */
 body.modo-oscuro {
-    background: linear-gradient(to bottom, #333, #555); /* Colores de fondo oscuro */
+    background: linear-gradient(to bottom, #0d0202, #16c0fe); /* Colores de fondo oscuro */
     color: #fff; /* Color del texto en el cuerpo */
 }
 

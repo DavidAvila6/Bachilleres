@@ -1,5 +1,6 @@
 import mimetypes
 import os
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -8,12 +9,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from AppProyecto import settings
-from mainPage.models import Becas_Fav, Configuracion_Becas, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
+from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
 from .forms import EmailUsername
 from .forms import FormularioContacto
+from .forms import ArchivoForm
 from django.core.mail import send_mail, EmailMessage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -25,8 +27,13 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
+from .forms import ArchivoForm,OportunidadForm
+from .models import Archivo,Oportunidad
+
 
 from .models import Calificacion
+from django.urls import reverse
 # Create your views here.
 
 @login_required
@@ -43,7 +50,14 @@ def about(request):
     return render(request, 'about.html')
 
 def recursos(request):
-    return render(request, 'recursos.html')
+    if request.method == 'POST':
+        form = ArchivoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_archivos')  # Redirigir a la vista de lista de archivos
+    else:
+        form = ArchivoForm()
+    return render(request, 'recursos.html', {'form': form})
 def novedades(request):
     return render(request, 'novedades.html')
 def becasFAV(request):
@@ -398,39 +412,23 @@ class PublicacionListView(ListView):
         # Devolver el queryset con los comentarios precargados
         return queryset.prefetch_related(prefetch)
 
-@login_required   
+@login_required
 def agregar_comentario(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
 
     if request.method == 'POST':
-        form = ComentarioForm(request.POST)
-        if form.is_valid():
-            comentario = form.save(commit=False)
-            comentario.autor = request.user
-            comentario.publicacion = publicacion
-            comentario.save()
+        contenido = request.POST['contenido']
+        comentario = Comentario(contenido=contenido, autor=request.user, publicacion=publicacion)
+        comentario.save()
 
-            # Envía un correo electrónico al autor de la publicación
-            subject = 'Nuevo comentario en tu publicación'
-            message = f'Se ha agregado un nuevo comentario en tu publicación "{publicacion.titulo}".'
-            from_email = settings.EMAIL_HOST_USER  # Usar tu dirección de correo electrónico configurada en settings
-            to_email = [publicacion.autor.email]  # El correo electrónico del autor de la publicación
-            context = {
-                'publicacion_titulo': publicacion.titulo,
-                'comentario_autor': comentario.autor.username,
-                'comentario_contenido': comentario.contenido,
-            }
-            html_content = render_to_string('correos/nuevo_comentario.html', context)
+        # Obtenemos la URL de la facultad a partir de la publicación
+        facultad_url = reverse('foro_por_facultad', args=[publicacion.facultad.pk])
+        return redirect(facultad_url)
 
-            # Envía el correo electrónico con contenido HTML
-            send_mail(subject, '', from_email, to_email, fail_silently=True, html_message=html_content)
+    return render(request, 'agregar_comentario.html', {'publicacion': publicacion})
 
-            return redirect('/foro') 
 
-    else:
-        form = ComentarioForm()
 
-    return render(request, 'agregar_comentario.html', {'publicacion': publicacion, 'form': form})
 
 def eliminar_comentario(request, comentario_id):
     comentario = get_object_or_404(Comentario, pk=comentario_id)
@@ -442,28 +440,22 @@ def eliminar_comentario(request, comentario_id):
     # Redirigir a la página de la publicación a la que pertenece el comentario
     return redirect('/foro', publicacion_id=comentario.publicacion.id)
 
-def crear_publicacion(request):
+def crear_publicacion(request, facultad_id):    
     if request.method == 'POST':
         form = PublicacionForm(request.POST)
         if form.is_valid():
             nueva_publicacion = form.save(commit=False)
-            nueva_publicacion.autor = request.user
+            nueva_publicacion.autor = request.user  # Asigna el autor de la publicación
+            nueva_publicacion.facultad_id = facultad_id
             nueva_publicacion.save()
-
-            
-            subject = 'Nueva publicación creada en BCH'
-            message = 'Se ha creado una nueva publicación en el apartado de foro en BCH.'
-            from_email = settings.EMAIL_HOST_USER 
-            to_email = [request.user.email]  
-
-            send_mail(subject, message, from_email, to_email, fail_silently=True)
-
-            return redirect('lista_publicaciones')
+            print(facultad_id)
+            return redirect(f'/foro/facultad/{facultad_id}/')
     else:
         form = PublicacionForm()
     
-    return render(request, 'crear_publicacion.html', {'form': form})
+    return render(request, 'crear_publicacion.html', {'form': form, 'facultad_id': facultad_id})
 
+@login_required   
 def eliminar_publicacion(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, pk=publicacion_id)
     
@@ -475,6 +467,12 @@ def eliminar_publicacion(request, publicacion_id):
 
 def forosEspecificos(request):
     return render(request, 'foros.html')
+
+def foro_por_facultad(request, facultad_id):
+    facultad = get_object_or_404(Facultad, pk=facultad_id)
+    publicaciones = Publicacion.objects.filter(facultad=facultad).prefetch_related('comentario_set')
+    return render(request, 'foro_por_facultad.html', {'facultad': facultad, 'publicaciones': publicaciones})
+
 
 #QUIZ Y TEST--------------------------------------------------------------------------------------------------------
 
@@ -493,3 +491,66 @@ def quiz(request):
             'pregunta': pregunta
         }
     return render(request, 'quiz.html', context)
+
+
+@login_required   
+def cargar_archivo(request):
+    if request.method == 'POST':
+        form = ArchivoForm(request.POST, request.FILES)
+        if form.is_valid():
+            archivo = form.cleaned_data['id_archivo']
+            form = form(archivo=arhivo)
+            print("El formulario es válido. Guardando archivo en la base de datos.")
+            form.save()
+            return redirect('lista_archivos')
+        else:
+            print("El formulario no es válido. No se guardará el archivo en la base de datos.")
+    else:
+        form = ArchivoForm()
+    return render(request, 'cargar_archivo.html', {'form': form})
+
+@login_required   
+def lista_archivos(request):
+    archivos = Archivo.objects.all()
+    return render(request, 'lista_archivos.html', {'archivos': archivos})
+
+
+def oportunidades(request):
+    oportunidades = Oportunidad.objects.all().order_by('-fecha_creacion')
+    return render(request, 'oportunidades/oportunidades.html', {'oportunidades': oportunidades})
+@login_required  # Agrega este decorador para asegurarte de que el usuario esté autenticado
+def crear_oportunidad(request):
+    if request.method == 'POST':
+        form = OportunidadForm(request.POST, request.FILES)
+        if form.is_valid():
+            oportunidad = form.save(commit=False)
+            oportunidad.autor = request.user
+            oportunidad.save()
+            return redirect('oportunidades')
+    else:
+        form = OportunidadForm()
+    return render(request, 'oportunidades/crear_oportunidad.html', {'form': form})
+
+def cargar_mas_oportunidades(request):
+    oportunidades = Oportunidad.objects.all().order_by('?')[:5]  # Obtén 5 oportunidades aleatorias
+    return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
+
+def filtrar_oportunidades(request):
+    materias = request.GET.get('materias', None)
+    tipo = request.GET.get('tipo', None)
+
+    oportunidades_exactas = Oportunidad.objects.filter(
+        etiquetas_materias__contains=materias,
+        etiquetas_tipo__contains=tipo
+    )
+
+    if oportunidades_exactas.exists():
+        oportunidades = oportunidades_exactas
+    else:
+        oportunidades = Oportunidad.objects.filter(
+            Q(etiquetas_materias__contains=materias) | Q(etiquetas_tipo__contains=tipo)
+        )
+
+    return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
+
+
