@@ -32,6 +32,7 @@ urlpatterns = [
     path('faq/', views.faq),
     path('accounts/', include('django.contrib.auth.urls')),
     path('Secciones/', views.Secciones ),
+    path('lista_archivos/', views.lista_archivos ),
     path('perfil/', views.perfil ),
     path('edit_perfil/', views.edit_perfil, name='edit_perfil'),
     #becas fav en perfil--------------------------------------------------------
@@ -70,7 +71,16 @@ urlpatterns = [
     path('foro/forosFacultades/', views.forosEspecificos,name='foros_especificos'),
     path('foro/facultad/<int:facultad_id>/', views.foro_por_facultad, name='foro_por_facultad'),
     #Quices y TEST----------------------------------------------------------------------------------------------------------------------------------
-    path('quiz/', views.quiz ,name='quices')
+    path('quiz/', views.quiz ,name='quices'),
+    path('cargar-archivo/', views.cargar_archivo, name='cargar_archivo'),
+    path('lista-archivos/', views.lista_archivos, name='lista_archivos'),
+    #Oportunidades--------------------
+    path('oportunidades/', views.oportunidades, name='oportunidades'),
+    path('crear_oportunidad/', views.crear_oportunidad, name='crear_oportunidad'),
+    path('cargar_mas_oportunidades/', views.cargar_mas_oportunidades, name='cargar_mas_oportunidades'),
+    path('filtrar_oportunidades/', views.filtrar_oportunidades, name='filtrar_oportunidades'),
+    
 ]
 if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

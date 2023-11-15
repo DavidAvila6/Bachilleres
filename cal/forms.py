@@ -25,4 +25,8 @@ class EventForm(ModelForm):
 
         if start_time and end_time and start_time >= end_time:
             raise forms.ValidationError("La fecha de finalización debe ser posterior a la fecha de inicio.")
+
+
+
+
     

@@ -1,0 +1,133 @@
+.custum-file-upload {
+    height: 200px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    gap: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #cacaca;
+    background-color: rgb(138, 138, 138);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 48px 35px -48px rgba(146, 81, 81, 0.1);
+  }
+  
+  .custum-file-upload .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custum-file-upload .icon svg {
+    height: 80px;
+    fill: rgba(75, 85, 99, 1);
+  }
+  
+  .custum-file-upload .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custum-file-upload .text span {
+    font-weight: 400;
+    color: rgba(75, 85, 99, 1);
+  }
+  
+  .custum-file-upload input {
+    display: none;
+  }
+
+
+  .book {
+    position: relative;
+    border-radius: 10px;
+    width: 600px;
+    height: 900px;
+    background-color: rgb(95, 94, 94);
+    color:white;
+    -webkit-box-shadow: 1px 1px 12px #000;
+    box-shadow: 1px 1px 12px #000;
+    -webkit-transform: preserve-3d;
+    -ms-transform: preserve-3d;
+    transform: preserve-3d;
+    -webkit-perspective: 2000px;
+    perspective: 2000px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #000;
+  }
+  
+  .cover {
+    top: 0;
+    position: absolute;
+    background-color: rgb(101, 101, 101);
+    
+    color:white;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-transform-origin: 0;
+    -ms-transform-origin: 0;
+    transform-origin: 0;
+    -webkit-box-shadow: 1px 1px 12px #000;
+    box-shadow: 1px 1px 12px #000;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  
+  .book:hover .cover {
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-transform: rotatey(-80deg);
+    -ms-transform: rotatey(-80deg);
+    transform: rotatey(-80deg);
+  }
+  .book .cover img {
+    /* Estilos para la imagen dentro del contenedor */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para cubrir el contenedor */
+    display: block;
+    margin: 0 auto; /* Centrar la imagen dentro del contenedor */
+}
+
+  
+.book  p {
+    /* Estilos para el texto dentro del contenedor */
+    text-align: center; /* Alinea el texto al centro */
+    color: white; /* Cambia el color del texto a blanco */
+    font-size: 20px;
+    font-weight: bolder;
+    max-width: 65%; /* Ancho máximo del texto, ajusta según sea necesario */
+    margin: 0 auto; /* Centra el texto horizontalmente */
+}
+.book  h2 {
+    /* Estilos para el encabezado (h2) dentro del contenedor */
+    text-align: center; /* Alinea el encabezado al centro */
+    color: white; /* Cambia el color del encabezado a blanco */
+    font-size: 24px; /* Ajusta el tamaño de la fuente según sea necesario */
+    font-weight: bolder;
+    max-width: 65%; /* Ancho máximo del encabezado, ajusta según sea necesario */
+    margin: 0 auto; /* Centra el encabezado horizontalmente */
+}
