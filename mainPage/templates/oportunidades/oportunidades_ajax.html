@@ -1,32 +1,42 @@
-<!-- oportunidades/oportunidades_ajax_partial.html -->
 {% load static %}
+
 {% for oportunidad in oportunidades %}
-<center>
-<link rel="stylesheet" href="{% static 'css/archivo.css' %}" />
-<div class="book">
-  <center><h2>{{ oportunidad.titulo }}</h2><center><br>
+  <center>
+    <link rel="stylesheet" href="{% static 'css/archivo.css' %}" />
+    <div class="book">
+      <center><h2>{{ oportunidad.titulo }}</h2><center><br>
 
-  <p>{{ oportunidad.contenido }}</p><br>
-  <p>Materias:<br>
-    {% for etiqueta in oportunidad.obtener_etiquetas_materias %}
-      <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
-    {% endfor %}
-  </p><br>
+      <p>{{ oportunidad.contenido }}</p><br>
+      <p>Materias:<br>
+        {% for etiqueta in oportunidad.obtener_etiquetas_materias %}
+          <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
+        {% endfor %}
+      </p><br>
 
-  <!-- Mostrar etiquetas de tipo -->
-  <p>Tipo:<br>
-    {% for etiqueta in oportunidad.obtener_etiquetas_tipo %}
-      <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
-    {% endfor %}
-  </p>
-  <br><br>
-  <p>Empresa: {{ oportunidad.autor.username }} el {{ oportunidad.fecha_creacion }}</p>
-  <div class="cover">
-    {% if oportunidad.imagen %}
-      <img src="{{ oportunidad.imagen.url }}" alt="{{ oportunidad.titulo }}">
-    
-  {% endif %}<br><br>
-  </div>
- </div>
-  <br><br><br>
+      <!-- Mostrar etiquetas de tipo -->
+      <p>Tipo:<br>
+        {% for etiqueta in oportunidad.obtener_etiquetas_tipo %}
+          <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
+        {% endfor %}
+      </p>
+      <br><br>
+      <p>Fecha de inicio: {{ oportunidad.fecha_inicio }} </p>
+      <h1>Guarda Tu oportunidad!!</h1>
+
+      <!-- Botón para guardar oportunidad -->
+      <form method="post" action="{% url 'guardar_oportunidad' %}">
+        {% csrf_token %}
+        <input type="hidden" name="oportunidad_id" value="{{ oportunidad.id }}">
+        <button type="submit" class="btn btn-primary">Guardar Oportunidad</button>
+      </form>
+
+      <p>Empresa: {{ oportunidad.autor.username }} el {{ oportunidad.fecha_creacion }}</p>
+      <div class="cover">
+        {% if oportunidad.imagen %}
+          <img src="{{ oportunidad.imagen.url }}" alt="{{ oportunidad.titulo }}">
+        {% endif %}
+      </div>
+    </div>
+    <br><br><br>
+  </center>
 {% endfor %}

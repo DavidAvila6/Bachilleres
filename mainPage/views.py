@@ -30,6 +30,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from .forms import ArchivoForm,OportunidadForm
 from .models import Archivo,Oportunidad
+from .models import UsuarioOportunidad
 
 
 from .models import Calificacion
@@ -554,3 +555,19 @@ def filtrar_oportunidades(request):
     return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
 
 
+@login_required
+def guardar_oportunidad(request):
+    if request.method == 'POST':
+        oportunidad_id = request.POST.get('oportunidad_id')
+        if oportunidad_id:
+            # Aquí obtienes el objeto de oportunidad basado en su ID
+            # Puedes personalizar esto según tu modelo y lógica
+            oportunidad = Oportunidad.objects.get(pk=oportunidad_id)
+
+            # Aquí creas la relación UsuarioOportunidad
+            UsuarioOportunidad.objects.create(usuario=request.user, oportunidad=oportunidad)
+
+            return HttpResponse('Oportunidad guardada exitosamente')  # Puedes cambiar esto según tus necesidades
+    return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
+
+    #return redirect('/oportunidades_ajax/')  # Puedes redirigir a la página que desees después de guardar la oportunidad

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 
@@ -218,6 +219,7 @@ class Oportunidad(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     etiquetas_materias = models.CharField(max_length=200, blank=True, null=True)
     etiquetas_tipo = models.CharField(max_length=200, blank=True, null=True)
+    fecha_inicio = models.DateTimeField(default=timezone.now) 
 
     def obtener_etiquetas_materias(self):
         etiquetas_materias = self.etiquetas_materias.strip(" []").replace("'", "").split(",") if self.etiquetas_materias else []
@@ -235,3 +237,13 @@ class Oportunidad(models.Model):
 
     def __str__(self):
         return self.titulo 
+    
+
+class UsuarioOportunidad(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    oportunidad = models.ForeignKey(Oportunidad, on_delete=models.CASCADE)
+    # Other fields...
+    nuevo_campo = models.CharField(max_length=255, default='tu_valor_predeterminado')
+
+    def __str__(self):
+        return f"{self.usuario} - {self.oportunidad}"

@@ -20,6 +20,8 @@ from django.contrib import admin
 from django.urls import path, include
 from mainPage import views
 from AppProyecto.settings import BASE_DIR
+from django.urls import path
+from mainPage .views import guardar_oportunidad
 
 
 urlpatterns = [
@@ -79,6 +81,7 @@ urlpatterns = [
     path('crear_oportunidad/', views.crear_oportunidad, name='crear_oportunidad'),
     path('cargar_mas_oportunidades/', views.cargar_mas_oportunidades, name='cargar_mas_oportunidades'),
     path('filtrar_oportunidades/', views.filtrar_oportunidades, name='filtrar_oportunidades'),
+    path('guardar_oportunidad/', views.guardar_oportunidad, name='guardar_oportunidad'),
     
 ]
 if settings.DEBUG:
