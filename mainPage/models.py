@@ -242,7 +242,6 @@ class Oportunidad(models.Model):
 class UsuarioOportunidad(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     oportunidad = models.ForeignKey(Oportunidad, on_delete=models.CASCADE)
-    nuevo_campo = models.CharField(max_length=255, default='valor_predeterminado')
 
     def __str__(self):
         return f"{self.usuario} - {self.oportunidad}"

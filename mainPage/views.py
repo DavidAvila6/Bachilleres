@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from AppProyecto import settings
-from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
+from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas,UsuarioOportunidad
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
@@ -98,7 +98,8 @@ def faq(request):
     return render(request, 'faq.html')
 
 def perfil(request):
-    return render(request, 'perfil.html')
+    oportunidades = UsuarioOportunidad.objects.all()
+    return render(request, 'perfil.html', {'oportunidades': oportunidades})
 
 def Secciones(request):
     return render(request, 'Secciones.html')

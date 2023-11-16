@@ -2,7 +2,6 @@
 
 {% block content %}
 {% load static %} 
-
 <head>
     <link href="{% static "../static/css/img.css" %}" rel="stylesheet">
     <link href="{% static "../static/css/perfil.css" %}" rel="stylesheet">
@@ -71,6 +70,43 @@
         </ul>
     </section>
 
+    <section class="oportunidades">
+        <h2 class="my-3"> Mis oportunidades</h2>
+
+        {% for oportunidad in oportunidades %}
+  <center>
+    <link rel="stylesheet" href="{% static 'css/archivo.css' %}" />
+    <div class="book">
+      <center><h2>{{ oportunidad.oportunidad.titulo }}</h2><center><br>
+
+      <p>{{ oportunidad.oportunidad.contenido }}</p><br>
+      <p>Materias:<br>
+        {% for etiqueta in oportunidad.oportunidad.obtener_etiquetas_materias %}
+          <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
+        {% endfor %}
+      </p><br>
+
+      <!-- Mostrar etiquetas de tipo -->
+      <p>Tipo:<br>
+        {% for etiqueta in oportunidad.oportunidad.obtener_etiquetas_tipo %}
+          <button type="button" class="btn btn-secondary">{{ etiqueta }}</button>
+        {% endfor %}
+      </p>
+      <br><br>
+      <p>Fecha de inicio: {{ oportunidad.oportunidad.fecha_inicio }} </p>
+      
+      <p>Empresa: {{ oportunidad.autor.username }} el {{ oportunidad.fecha_creacion }}</p>
+      <div class="cover">
+        {% if oportunidad.oportunidad.imagen %}
+          <img src="{{ oportunidad.oportunidad.imagen.url }}" alt="{{ oportunidad.titulo }}">
+        {% endif %}
+      </div>
+    </div>
+    <br><br><br>
+  </center>
+{% endfor %}
+    </section>
+
     <section class="amigos">
         <h2>Mis Universidades Cercanas</h2>
         <ul>
@@ -85,20 +121,8 @@
     </section>
 </div>
 <br>
-<script src="../static/js/perfil.js"></script>
-
-{% if oportunidad %}
-    <h2>Detalles de la oportunidad:</h2>
-    <p>Nombre: {{ oportunidad.nombre }}</p>
-    <p>Descripción: {{ oportunidad.descripcion }}</p>
-   
-{% else %}
-    <p>No hay oportunidad disponible.</p>
-{% endif %}
 
 
-
-{% load static %}
     <link rel="stylesheet" href="../static/css/hub.css ">
     <script src="../static/js/hub.js"></script>
     {% if user.is_authenticated  %}
@@ -132,6 +156,7 @@
         </div>
         
     </div>
+    <script src="../static/js/perfil.js"></script>
     <script>
         // Set a cookie to mark that the modal has been shown
         document.cookie = "modal_shown=true; path=/";
