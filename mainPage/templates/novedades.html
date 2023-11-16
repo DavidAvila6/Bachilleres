@@ -47,6 +47,7 @@
 
     </div>
 </div>
+
 </section>
 {% if user.is_authenticated  %}
 <section class="calificacion">
@@ -105,6 +106,7 @@
     <link rel="stylesheet" href="../static/css/hub.css ">
     <script src="../static/js/hub.js"></script>
     {% if user.is_authenticated  %}
+    {% if not request.COOKIES.modal_shown %}
 <input type="checkbox" id="btn-modal">
     <div class="container-modal" >
         <div class="content-modal">
@@ -129,6 +131,11 @@
         </div>
         
     </div>
+    <script>
+        // Set a cookie to mark that the modal has been shown
+        document.cookie = "modal_shown=true; path=/";
+    </script>
+    {% endif %}
     {% endif %}
 
 {% endblock %}
