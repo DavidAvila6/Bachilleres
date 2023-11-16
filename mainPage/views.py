@@ -567,7 +567,4 @@ def guardar_oportunidad(request):
             # Aquí creas la relación UsuarioOportunidad
             UsuarioOportunidad.objects.create(usuario=request.user, oportunidad=oportunidad)
 
-            return HttpResponse('Oportunidad guardada exitosamente')  # Puedes cambiar esto según tus necesidades
-    return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
-
-    #return redirect('/oportunidades_ajax/')  # Puedes redirigir a la página que desees después de guardar la oportunidad
+        return redirect('/oportunidades/')  # Puedes redirigir a la página que desees después de guardar la oportunidad

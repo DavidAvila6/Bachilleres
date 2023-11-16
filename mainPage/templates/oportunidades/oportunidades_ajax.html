@@ -26,8 +26,12 @@
       <!-- Botón para guardar oportunidad -->
       <form method="post" action="{% url 'guardar_oportunidad' %}">
         {% csrf_token %}
+        
         <input type="hidden" name="oportunidad_id" value="{{ oportunidad.id }}">
-        <button type="submit" class="btn btn-primary">Guardar Oportunidad</button>
+        <button type="submit" class="btn btn-primary" onclick="Mensaje()" >Guardar Oportunidad</button>
+        <script> function Mensaje(){
+          alert("Gracias por calificar nuestra página con  " + contador + " estrellas. ¡Ten un buen día!");
+      }</script>
       </form>
 
       <p>Empresa: {{ oportunidad.autor.username }} el {{ oportunidad.fecha_creacion }}</p>
