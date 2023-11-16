@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from  mainPage.models import Comentario
-from .models import Archivo
+from .models import Archivo, Empresas
 from .models import Oportunidad
 
 
@@ -133,7 +133,11 @@ class OportunidadForm(forms.ModelForm):
             'etiquetas_tipo': forms.CheckboxSelectMultiple(attrs={'class': 'mi-clase-estilo'}),
             'imagen': forms.ClearableFileInput(attrs={'class': 'mi-clase-estilo'}),
         }
-        
+
+class EmpresasForm(forms.ModelForm):
+    class Meta:
+        model = Empresas
+        fields = ['usuario', 'nombre_empresa'] 
 
 class Oportunidad_Fav(forms.ModelForm):
     class Meta:
