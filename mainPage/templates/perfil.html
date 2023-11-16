@@ -51,6 +51,7 @@
         </ul>
         
     </section>
+
     {% endif  %}
     <section class="actividades">
         <h2>Mis Herramientas</h2>
@@ -85,6 +86,18 @@
 </div>
 <br>
 <script src="../static/js/perfil.js"></script>
+
+{% if oportunidad %}
+    <h2>Detalles de la oportunidad:</h2>
+    <p>Nombre: {{ oportunidad.nombre }}</p>
+    <p>Descripción: {{ oportunidad.descripcion }}</p>
+   
+{% else %}
+    <p>No hay oportunidad disponible.</p>
+{% endif %}
+
+
+
 {% load static %}
     <link rel="stylesheet" href="../static/css/hub.css ">
     <script src="../static/js/hub.js"></script>
