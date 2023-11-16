@@ -9,8 +9,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from AppProyecto import settings
+<<<<<<< HEAD
 from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas,UsuarioOportunidad
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
+=======
+from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
+from .forms import BecaForm, EmpresasForm, PublicacionForm, customUserCreationForm
+>>>>>>> 07d28cdac10a8f7611c4d5041aa401c9419d2bec
 from .forms import EmailForm
 from .forms import EmailFormHTML
 from .forms import EmailUsername
@@ -29,7 +34,7 @@ from django.db.models import Count, Prefetch
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from .forms import ArchivoForm,OportunidadForm
-from .models import Archivo,Oportunidad
+from .models import Archivo, Empresas,Oportunidad
 from .models import UsuarioOportunidad
 
 
@@ -517,9 +522,12 @@ def lista_archivos(request):
     return render(request, 'lista_archivos.html', {'archivos': archivos})
 
 
+@login_required
 def oportunidades(request):
-    oportunidades = Oportunidad.objects.all().order_by('-fecha_creacion')
-    return render(request, 'oportunidades/oportunidades.html', {'oportunidades': oportunidades})
+    usuario_tiene_empresa = Empresas.objects.filter(usuario=request.user).exists()
+
+    return render(request, 'oportunidades/oportunidades.html', {'usuario_tiene_empresa': usuario_tiene_empresa})
+
 @login_required  # Agrega este decorador para asegurarte de que el usuario esté autenticado
 def crear_oportunidad(request):
     if request.method == 'POST':
@@ -554,6 +562,22 @@ def filtrar_oportunidades(request):
         )
 
     return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
+
+
+@login_required
+def crear_empresa(request):
+    if not request.user.is_superuser:
+        return redirect('oportunidades')  # Reemplaza 'index' con la URL a la que deseas redirigir a los no superusuarios
+
+    if request.method == 'POST':
+        form = EmpresasForm(request.POST)
+        if form.is_valid():
+            empresa = form.save()
+            return redirect('oportunidades')  # Reemplaza 'index' con la URL a la que deseas redirigir después de guardar
+    else:
+        form = EmpresasForm()
+
+    return render(request, 'crear_empresa.html', {'form': form})
 
 
 @login_required

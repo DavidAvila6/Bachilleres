@@ -1,0 +1,10 @@
+{% extends 'base.html' %}  <!-- Reemplaza 'base.html' con la plantilla base de tu proyecto -->
+
+{% block content %}
+  <h2>Crear Empresa</h2>
+  <form method="post" action="{% url 'crear_empresa' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+  </form>
+{% endblock %}

@@ -55,7 +55,12 @@
   <div class="informacion-lateral derecha">
     <h2>Sugerencias de Usuarios</h2>
     <p>Contenido de las sugerencias...</p>
-    <a href="/crear_oportunidad" class="btn btn-success float-right">CREAR OPORTUNIDAD</a>
+    {% if usuario_tiene_empresa or user.is_superuser %}
+      <a href="/crear_oportunidad" class="btn btn-success float-right">CREAR OPORTUNIDAD</a>
+    {% else %}
+    <p>Quieres crear una oportunidad, Escribenos!!...</p>
+    <a href='/correo' class="button btn btn-info btn-lg">Enviar Correo A Empresa</a>
+    {% endif %}
   </div>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script>

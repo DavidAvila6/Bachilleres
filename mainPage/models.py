@@ -237,6 +237,14 @@ class Oportunidad(models.Model):
 
     def __str__(self):
         return self.titulo 
+
+class Empresas(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    nombre_empresa = models.CharField(max_length=255)
+    # Agrega otros campos según sea necesario
+
+    def __str__(self):
+        return self.nombre_empresa
     
 
 class UsuarioOportunidad(models.Model):
@@ -245,3 +253,4 @@ class UsuarioOportunidad(models.Model):
 
     def __str__(self):
         return f"{self.usuario} - {self.oportunidad}"
+

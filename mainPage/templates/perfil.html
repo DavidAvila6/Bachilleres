@@ -28,7 +28,7 @@
         <h3>Correos:</h3><br>
         <ul class="button-list">
             <li>
-                <a href='/correo' class="button btn btn-info btn-lg">Enviar Correo A Empresa</a>
+                <a href='/correo' class="button btn btn-info btn-lg">Enviar Correo A Empresa</a><a href='/correo' class="button btn btn-info btn-lg">Enviar Correo A Empresa</a>
                 
             </li><br>
             <li>
@@ -40,12 +40,16 @@
             <li>
                 <a href='/correodirecto' class="button btn btn-info btn-lg">Correo directo a Usuario</a>
             </li><br>
+            <li>
+                <a href="{% url 'crear_empresa' %}" class="button btn btn-info btn-lg">Crear Empresa</a>
+            </li><br>
             <h3>Universidad/becas/facultad:</h3><br>
             <li>
                 <div class="buttonCalendar">
                     <a class="button btn btn-info btn-lg" href="{% url 'agregar_beca' %}">Agregar Beca</a>
-                </div
+                </div>
             </li><br>
+                
  
         </ul>
         
