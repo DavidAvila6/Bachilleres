@@ -10,6 +10,10 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from cal.forms import EventForm
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from mainPage.models import Oportunidad  # Asegúrate de importar tu modelo Oportunidad
+from .models import Event
 
 
 
@@ -83,3 +87,4 @@ def event(request, event_id=None):
 def nuevo_evento(request):
     # Lógica para la vista nuevo_evento, si es necesaria
     return render(request, 'cal/nuevo_evento.html')
+

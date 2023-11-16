@@ -235,3 +235,10 @@ class Oportunidad(models.Model):
 
     def __str__(self):
         return self.titulo 
+
+class OportunidadAsocidada(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    oportunidad = models.ForeignKey(Oportunidad, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.usuario.username} - {self.oportunidad.titulo}"

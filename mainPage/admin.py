@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Beca,Facultad,Universidad,Union_U_F,Fundacion,Configuracion_Becas,Becas_Fav,Facultad_fav,Documentos,Requisitos,Universidad_fav, Publicacion, Comentario, ElegirRespuesta, Pregunta, PreguntasRespondidas, QuizUsuario, Archivo,Oportunidad
+from .models import *
 from .forms import ElegirInLineFormset
 # Register your models here.
 
@@ -42,5 +42,6 @@ admin.site.register(ElegirRespuesta)
 admin.site.register(PreguntasRespondidas)
 admin.site.register(QuizUsuario)
 admin.site.register(Archivo)
+admin.site.register(OportunidadAsocidada)
 
 

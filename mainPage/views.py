@@ -554,3 +554,14 @@ def filtrar_oportunidades(request):
     return render(request, 'oportunidades/oportunidades_ajax.html', {'oportunidades': oportunidades})
 
 
+def guardar_relacion_usuario_oportunidad(request):
+    if request.method == 'POST':
+        oportunidad_id = request.POST.get('oportunidad_id')
+        usuario_id = request.POST.get('usuario_id')
+
+        # Realizar la lógica para guardar la relación en tu modelo UsuarioOportunidad
+        # ...
+
+        return JsonResponse({'status': 'OK'})
+    else:
+        return JsonResponse({'status': 'Error', 'message': 'Método no permitido'})
