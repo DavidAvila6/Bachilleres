@@ -103,7 +103,7 @@ def perfil(request):
 
 def Secciones(request):
     return render(request, 'Secciones.html')
-
+#arreglo xd 
 
 @login_required
 def edit_perfil(request):
