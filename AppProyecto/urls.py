@@ -22,6 +22,7 @@ from mainPage import views
 from AppProyecto.settings import BASE_DIR
 from django.urls import path
 from mainPage .views import guardar_oportunidad
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -85,6 +86,7 @@ urlpatterns = [
     path('crear_empresa/', views.crear_empresa, name='crear_empresa'),
     
 ]
+urlpatterns += staticfiles_urlpatterns()
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
