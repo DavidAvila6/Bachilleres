@@ -1,6 +1,11 @@
 {% extends 'base.html' %}  <!-- Reemplaza 'base.html' con la plantilla base de tu proyecto -->
 
 {% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+<head>
+  <link href="{% static "css/correo.css" %}" rel="stylesheet">
+</head>
   <h2>Crear Empresa</h2>
   <form method="post" action="{% url 'crear_empresa' %}">
     {% csrf_token %}

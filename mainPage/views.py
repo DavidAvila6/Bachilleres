@@ -9,13 +9,10 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from AppProyecto import settings
-<<<<<<< HEAD
 from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas,UsuarioOportunidad
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
-=======
-from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
+from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas,UsuarioOportunidad
 from .forms import BecaForm, EmpresasForm, PublicacionForm, customUserCreationForm
->>>>>>> 07d28cdac10a8f7611c4d5041aa401c9419d2bec
 from .forms import EmailForm
 from .forms import EmailFormHTML
 from .forms import EmailUsername
