@@ -154,3 +154,5 @@ EMAIL_USE_TLS=True
 EMAIL_PORT=587
 EMAIL_HOST_USER='bachilleresbch@gmail.com'
 EMAIL_HOST_PASSWORD='qpcu ybch elbk kihu'
+
+ALLOWED_HOSTS=["*"]
