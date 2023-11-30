@@ -12,6 +12,7 @@ from AppProyecto import settings
 from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas,UsuarioOportunidad
 from .forms import BecaForm, PublicacionForm, customUserCreationForm
 from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas,UsuarioOportunidad
+from mainPage.models import Becas_Fav, Configuracion_Becas, Facultad, Publicacion, Comentario, QuizUsuario, Pregunta, PreguntasRespondidas
 from .forms import BecaForm, EmpresasForm, PublicacionForm, customUserCreationForm
 from .forms import EmailForm
 from .forms import EmailFormHTML
